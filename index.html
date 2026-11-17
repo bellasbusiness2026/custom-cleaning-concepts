@@ -3,27 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Custom Cleaning Concepts serves Houston and nearby suburbs. Cleanouts, make-ready deep cleans, Airbnb turnovers, after-hours commercial cleaning, handyman and painting, and lawn care. Request a written quote.">
+  <meta name="description" content="Custom Cleaning Concepts serves Houston and nearby suburbs. Pick your services, choose a date, and send. Cleanouts, make-ready deep cleans, Airbnb turnovers, after-hours commercial cleaning, handyman and painting, and lawn care. Owner-run. Free walkthrough, then a written quote good for 14 days. Simple jobs need no walkthrough.">
   <title>Custom Cleaning Concepts — Houston and nearby suburbs</title>
+  <meta name="theme-color" content="#14362c">
   <link rel="stylesheet" href="styles.css">
-  <!--
-    FORM CONFIG — one value controls where booking requests go:
-      In the script at the bottom, set FORM_ACTION (and FORM_METHOD if needed).
-
-    Options:
-      1) mailto fallback:
-         FORM_ACTION = "mailto:ccc.htx.ownerop.lucy@gmail.com"
-         FORM_METHOD = "post"
-         Opens the visitor's email app with a prefilled message. Works offline,
-         but depends on the device having a mail app, and very long messages
-         can be cut off by the mail URL length limit.
-      2) A form service such as Formspree:
-         FORM_ACTION = "https://formspree.io/f/YOUR_FORM_ID"
-         FORM_METHOD = "post"
-         Then add the service's required hidden fields if any.
-
-    Current target: ccc.htx.ownerop.lucy@gmail.com
-  -->
+  <script>document.documentElement.className += " js";</script>
+  
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -42,250 +27,457 @@
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="#services">Services</a>
+        <a href="#quiz">Not sure?</a>
+        <a href="#request">Book now</a>
         <a href="#how-it-works">How booking works</a>
-        <a href="#request">Request a booking</a>
+        <a href="#reviews">Reviews</a>
         <a href="#terms">Terms</a>
       </nav>
-      <a class="header-phone" href="tel:+13464004656">346-400-4656</a>
+      <a class="header-phone" href="tel:+13464004656" aria-label="Call 346-400-4656">346-400-4656</a>
     </div>
   </header>
 
   <main id="main">
     <section class="hero" id="top">
-      <p class="eyebrow">Houston and nearby suburbs</p>
-      <h1>Cleaning and property care, quoted in writing before the work begins.</h1>
-      <p class="lede">Custom Cleaning Concepts handles cleanouts, make-ready deep cleans, Airbnb turnovers, after-hours commercial cleaning, handyman and painting, and lawn care.</p>
+      <p class="eyebrow">Owner-run · Houston and nearby suburbs</p>
+      <h1>Cleaning and property care in Houston. Price agreed first, work second.</h1>
+      <p class="lede">Cleanouts, make-ready deep cleans, Airbnb turnovers, after-hours commercial cleaning, handyman and painting, and lawn care. For real estate agents, property managers, attorneys, Airbnb hosts, offices, med spas, and homeowners in Houston and nearby suburbs.</p>
       <div class="hero-actions">
-        <a class="btn" href="#request">Request a booking</a>
-        <a class="btn-secondary" href="#services">See starting prices</a>
+        <a class="btn" href="#services">Pick your services</a>
+        <a class="btn-secondary" href="tel:+13464004656">Call 346-400-4656</a>
       </div>
-      <p class="hero-note">This site never asks for payment. Posted prices are starting points; the starting price is not the final job price.</p>
+      <p class="hero-direct">Not sure what you need? <a href="#quiz">Take the 20-second quiz.</a></p>
+      <ul class="trust" aria-label="How we work">
+        <li>Tap the services you want, then choose a date</li>
+        <li>Free walkthrough, then a written quote</li>
+        <li>Simple jobs: no walkthrough needed</li>
+        <li>Same-day reply to requests received by 5 PM</li>
+      </ul>
     </section>
 
-    <section class="services" id="services">
-      <div class="section-head">
-        <h2>Services and starting prices</h2>
-        <p>These are posted starting prices. After a free walkthrough, you receive a written quote to agree to before work begins.</p>
+    <section class="quiz" id="quiz" aria-labelledby="quiz-h">
+      <div class="quiz-card reveal">
+        <div class="quiz-intro">
+          <h2 id="quiz-h">Not sure what to pick?</h2>
+          <p>Answer a few quick taps and we&rsquo;ll pick the matching services for you. You can change them afterward.</p>
+          <button type="button" class="btn" id="quiz-start" aria-expanded="false" aria-controls="quiz-body">Find my services</button>
+        </div>
+        <div class="quiz-body" id="quiz-body" hidden></div>
+      </div>
+    </section>
+
+    <div class="pick-layout">
+      <div class="pick-main">
+
+        <section class="services" id="services" aria-labelledby="services-h">
+          <div class="section-head">
+            <h2 id="services-h" tabindex="-1">Pick your services</h2>
+            <p>Tap <strong>Add</strong> on everything you need. Your picks collect in <strong>Your selections</strong> and go straight into the booking form, along with the date you&rsquo;d like. Prices are starting prices, not the final job price. For most jobs a free walkthrough comes first, then a written quote, and nothing starts until you agree to it in writing. Jobs marked <span class="tag">No walkthrough needed</span> can skip it.</p>
+          </div>
+      <details class="service reveal" open>
+        <summary><span class="svc-title">Cleanouts</span><span class="svc-from">from $95<small> per item</small></span><span class="svc-count" hidden></span><span class="chev" aria-hidden="true"></span></summary>
+        <ul class="rates">
+          <li class="group-label">How much stuff is there? Choose one.</li>
+          <li class="rate" data-id="co-single" data-code="CO-ITEM" data-label="Cleanouts: single item pickup" data-price="from $95" data-unit="per item" data-section="Cleanouts" data-group="cleanout" data-direct="1"><span class="rate-name">Single item pickup <span class="tag">No walkthrough needed</span></span><span class="rate-price">from $95</span><span class="rate-unit">per item</span></li>
+          <li class="rate" data-id="co-quarter" data-code="CO-QTR" data-label="Cleanouts: quarter load" data-price="from $175" data-unit="per load, up to 1.5 hrs labor" data-section="Cleanouts" data-group="cleanout"><span class="rate-name">Quarter load</span><span class="rate-price">from $175</span><span class="rate-unit">per load, up to 1.5 hrs labor</span></li>
+          <li class="rate" data-id="co-half" data-code="CO-HALF" data-label="Cleanouts: half load" data-price="from $325" data-unit="per load, up to 2.5 hrs" data-section="Cleanouts" data-group="cleanout"><span class="rate-name">Half load</span><span class="rate-price">from $325</span><span class="rate-unit">per load, up to 2.5 hrs</span></li>
+          <li class="rate" data-id="co-full" data-code="CO-FULL" data-label="Cleanouts: full load" data-price="from $600" data-unit="per load, up to 4 hrs" data-section="Cleanouts" data-group="cleanout"><span class="rate-name">Full load</span><span class="rate-price">from $600</span><span class="rate-unit">per load, up to 4 hrs</span></li>
+          <li class="group-label">Also available</li>
+          <li class="rate" data-id="co-sort" data-code="CO-SORT" data-label="Cleanouts: white-glove estate and valuables sorting" data-price="from $65" data-unit="per hour" data-section="Cleanouts"><span class="rate-name">White-glove estate and valuables sorting</span><span class="rate-price">from $65</span><span class="rate-unit">per hour</span></li>
+          <li class="rate rate-info" data-code="CO-DUMP"><span class="rate-name">Dump fee pass-through</span><span class="rate-price">Match receipt + 10%</span><span class="rate-unit">charged at the dump receipt plus 10%</span></li>
+        </ul>
+      </details>
+      <details class="service reveal" open>
+        <summary><span class="svc-title">Make-ready deep cleans</span><span class="svc-from">from $0.30<small> per sq ft</small></span><span class="svc-count" hidden></span><span class="chev" aria-hidden="true"></span></summary>
+        <ul class="rates">
+          <li class="rate" data-id="mr-clean" data-code="MR-SQFT" data-label="Make-ready deep clean (vacant)" data-price="from $0.30" data-unit="per sq ft" data-section="Make-ready"><span class="rate-name">Make-ready deep clean, vacant</span><span class="rate-price">from $0.30</span><span class="rate-unit">per sq ft</span></li>
+          <li class="rate" data-id="mr-app" data-code="MR-APPL" data-label="Extra appliance deep clean" data-price="from $45" data-unit="each" data-section="Make-ready"><span class="rate-name">Extra appliance deep clean</span><span class="rate-price">from $45</span><span class="rate-unit">each</span></li>
+          <li class="rate rate-info" data-code="MR-SURC"><span class="rate-name">Heavy debris or excessive condition</span><span class="rate-price">$150</span><span class="rate-unit">flat, when it applies</span></li>
+          <li class="rate rate-info" data-code="HZ-HAND"><span class="rate-name">Hazard we can safely handle</span><span class="rate-price">$150</span><span class="rate-unit">per hazard, found at the walkthrough</span></li>
+        </ul>
+      </details>
+      <details class="service reveal" open>
+        <summary><span class="svc-title">Airbnb turnovers</span><span class="svc-from">from $135<small> per turn</small></span><span class="svc-count" hidden></span><span class="chev" aria-hidden="true"></span></summary>
+        <ul class="rates">
+          <li class="group-label">How many bedrooms? Choose one.</li>
+          <li class="rate" data-id="ab-1" data-code="AB-1BR" data-label="Airbnb turnover: 1 bed / 1 bath" data-price="from $135" data-unit="per turn" data-section="Airbnb turnover" data-group="airbnb" data-direct="1"><span class="rate-name">1 bedroom / 1 bathroom <span class="tag">No walkthrough needed</span></span><span class="rate-price">from $135</span><span class="rate-unit">per turn</span></li>
+          <li class="rate" data-id="ab-2" data-code="AB-2BR" data-label="Airbnb turnover: 2 bed / 2 bath" data-price="from $185" data-unit="per turn" data-section="Airbnb turnover" data-group="airbnb" data-direct="1"><span class="rate-name">2 bedroom / 2 bathroom <span class="tag">No walkthrough needed</span></span><span class="rate-price">from $185</span><span class="rate-unit">per turn</span></li>
+          <li class="rate" data-id="ab-3" data-code="AB-3BR" data-label="Airbnb turnover: 3 or more bedrooms" data-price="from $235" data-unit="per turn" data-section="Airbnb turnover" data-group="airbnb" data-direct="1"><span class="rate-name">3 or more bedrooms <span class="tag">No walkthrough needed</span></span><span class="rate-price">from $235</span><span class="rate-unit">per turn</span></li>
+          <li class="group-label">Also available</li>
+          <li class="rate" data-id="ab-linen" data-code="AB-LIN" data-label="Airbnb off-site linen" data-price="from $35" data-unit="per turn" data-section="Airbnb turnover"><span class="rate-name">Off-site linen</span><span class="rate-price">from $35</span><span class="rate-unit">per turn</span></li>
+        </ul>
+      </details>
+      <details class="service reveal" open>
+        <summary><span class="svc-title">After-hours commercial cleaning</span><span class="svc-from">from $450<small> per month</small></span><span class="svc-count" hidden></span><span class="chev" aria-hidden="true"></span></summary>
+        <ul class="rates">
+          <li class="group-label">What kind of space? Choose one.</li>
+          <li class="rate" data-id="cm-office" data-code="CM-OFF" data-label="After-hours commercial: office or salon" data-price="from $450" data-unit="per month" data-section="Commercial" data-group="commercial"><span class="rate-name">Office or salon</span><span class="rate-price">from $450</span><span class="rate-unit">per month</span></li>
+          <li class="rate" data-id="cm-med" data-code="CM-MED" data-label="After-hours commercial: med spa or clinic" data-price="from $900" data-unit="per month" data-section="Commercial" data-group="commercial"><span class="rate-name">Med spa or clinic</span><span class="rate-price">from $900</span><span class="rate-unit">per month</span></li>
+        </ul>
+      </details>
+      <details class="service reveal" open>
+        <summary><span class="svc-title">Handyman and painting</span><span class="svc-from">from $75<small> per hour</small></span><span class="svc-count" hidden></span><span class="chev" aria-hidden="true"></span></summary>
+        <ul class="rates">
+          <li class="rate" data-id="hm-repair" data-code="HM-REP" data-label="Handyman repair (2-hour minimum)" data-price="from $75" data-unit="per hour, 2-hour minimum" data-section="Handyman and painting" data-direct="1"><span class="rate-name">Handyman repair <span class="tag">No walkthrough needed</span></span><span class="rate-price">from $75</span><span class="rate-unit">per hour, 2-hour minimum</span></li>
+          <li class="rate" data-id="hm-paint" data-code="PT-WALL" data-label="Interior wall painting" data-price="from $0.30" data-unit="per wall sq ft" data-section="Handyman and painting"><span class="rate-name">Interior wall painting</span><span class="rate-price">from $0.30</span><span class="rate-unit">per wall sq ft</span></li>
+        </ul>
+      </details>
+      <details class="service reveal" open>
+        <summary><span class="svc-title">Lawn care</span><span class="svc-from">from $50<small> per visit</small></span><span class="svc-count" hidden></span><span class="chev" aria-hidden="true"></span></summary>
+        <ul class="rates">
+          <li class="rate" data-id="ln-base" data-code="LN-BASE" data-label="Lawn base visit" data-price="from $50" data-unit="per visit, up to 3,000 sq ft" data-section="Lawn care" data-direct="1"><span class="rate-name">Lawn base visit <span class="tag">No walkthrough needed</span></span><span class="rate-price">from $50</span><span class="rate-unit">per visit, up to 3,000 sq ft</span></li>
+          <li class="rate" data-id="ln-over" data-code="LN-OVER" data-label="Lawn overgrowth (added to the base visit)" data-price="from $0.03" data-unit="per lawn sq ft, added to the base visit" data-section="Lawn care"><span class="rate-name">Lawn overgrowth</span><span class="rate-price">from $0.03</span><span class="rate-unit">per lawn sq ft, added to the base visit</span></li>
+        </ul>
+      </details>
+        </section>
+
+        <section class="request" id="request" aria-labelledby="request-h">
+          <div class="section-head">
+            <h2 id="request-h" tabindex="-1">Book your services</h2>
+            <p>Your picks are at the top. Choose the date you&rsquo;d like, add your contact details, and send. We reply the same day to requests received by 5 PM.</p>
+          </div>
+          <noscript><p class="form-alert">The booking form needs JavaScript. Please turn it on, or call <a href="tel:+13464004656">346-400-4656</a> and tell us what you need.</p></noscript>
+
+          <div class="form-done" id="form-done" tabindex="-1" hidden></div>
+
+          <form id="booking-form" class="booking-form" method="post" action="https://formspree.io/f/moedjzqr" novalidate>
+            <input type="hidden" name="_subject" value="New booking request - Custom Cleaning Concepts">
+            <input type="text" name="_gotcha" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div id="synced-fields" hidden></div>
+
+            <fieldset class="f-services" id="f-services">
+              <legend>1. Your services <span class="req" aria-hidden="true">*</span></legend>
+              <p class="form-alert" id="services-error" role="alert" hidden></p>
+              <ul class="form-sel-list" id="form-sel-list"></ul>
+              <p class="form-empty" id="form-sel-empty">You haven&rsquo;t picked any services yet. <a href="#services">Pick your services</a> or <a href="#quiz">take the quick quiz</a>.</p>
+              <div class="add-more">
+                <label for="add-select">Add a service</label>
+                <div class="add-more-row">
+                  <select id="add-select"><option value="">Choose a service</option></select>
+                  <button type="button" class="btn-secondary" id="add-select-btn">Add</button>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="f-date" id="f-date">
+              <legend>2. Date you&rsquo;d like <span class="req" aria-hidden="true">*</span></legend>
+              <div class="date-grid">
+                <div class="cal" id="cal">
+                  <div class="cal-head">
+                    <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month"><span aria-hidden="true">&lsaquo;</span></button>
+                    <p class="cal-title" id="cal-title" aria-live="polite"></p>
+                    <button type="button" class="cal-nav" id="cal-next" aria-label="Next month"><span aria-hidden="true">&rsaquo;</span></button>
+                  </div>
+                  <table class="cal-table" aria-labelledby="cal-title">
+                    <thead><tr>
+                      <th scope="col"><abbr title="Sunday">Sun</abbr></th><th scope="col"><abbr title="Monday">Mon</abbr></th><th scope="col"><abbr title="Tuesday">Tue</abbr></th><th scope="col"><abbr title="Wednesday">Wed</abbr></th><th scope="col"><abbr title="Thursday">Thu</abbr></th><th scope="col"><abbr title="Friday">Fri</abbr></th><th scope="col"><abbr title="Saturday">Sat</abbr></th>
+                    </tr></thead>
+                    <tbody id="cal-body"></tbody>
+                  </table>
+                  <p class="hint cal-key">Past days and Sundays can&rsquo;t be picked. Use the arrow keys to move between days.</p>
+                </div>
+                <div class="date-side">
+                  <p class="field">
+                    <label for="req-date">Requested date <span class="req" aria-hidden="true">*</span></label>
+                    <input id="req-date" name="Requested date" type="text" readonly aria-required="true" aria-describedby="date-small date-error" placeholder="Pick a day on the calendar">
+                  </p>
+                  <p class="form-alert" id="date-error" role="alert" hidden></p>
+                  <p class="field">
+                    <label for="time-window">Time window</label>
+                    <select id="time-window" name="Time window">
+                      <option>Flexible, any time</option>
+                      <option>Morning</option>
+                      <option>Midday</option>
+                      <option>Afternoon</option>
+                      <option>Evening</option>
+                    </select>
+                  </p>
+                  <p class="hint small-print" id="date-small">This is a requested date, not a confirmed time. We confirm your date with you, and it&rsquo;s held once your deposit is received.</p>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="quick" id="f-contact">
+              <legend>3. How to reach you</legend>
+              <p class="field">
+                <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+                <input id="name" name="Name" type="text" autocomplete="name" required>
+              </p>
+              <p class="field">
+                <label for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                <input id="phone" name="Phone" type="tel" autocomplete="tel" required>
+              </p>
+              <p class="field">
+                <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input id="email" name="Email" type="email" autocomplete="email" required>
+              </p>
+              <p class="field">
+                <label for="address">Property address <span class="req" aria-hidden="true">*</span></label>
+                <input id="address" name="Address" type="text" autocomplete="street-address" required>
+              </p>
+              <p class="field">
+                <label for="city">City <span class="req" aria-hidden="true">*</span></label>
+                <input id="city" name="City" type="text" autocomplete="address-level2" required>
+              </p>
+              <p class="field field-span">
+                <label for="job-notes">Anything we should know?</label>
+                <textarea id="job-notes" name="Job details" rows="3"></textarea>
+                <span class="hint">Optional. A sentence or two is plenty.</span>
+              </p>
+            </fieldset>
+
+            <fieldset class="service-details" id="service-details" hidden>
+              <legend>About your job (optional)</legend>
+              <p class="hint details-note">These match the services you picked. Answer what you know and skip the rest.</p>
+
+              <p class="field" data-for="ab-1 ab-2 ab-3 ab-linen">
+                <label for="checkout">Airbnb: guest checkout time</label>
+                <input id="checkout" name="Airbnb checkout time" type="text" autocomplete="off">
+              </p>
+              <p class="field" data-for="ab-1 ab-2 ab-3 ab-linen">
+                <label for="checkin">Airbnb: next check-in time</label>
+                <input id="checkin" name="Airbnb next check-in" type="text" autocomplete="off">
+              </p>
+              <p class="field" data-for="ab-1 ab-2 ab-3 ab-linen">
+                <label for="linens">Airbnb: should we wash linens?</label>
+                <select id="linens" name="Airbnb linens">
+                  <option value="">Choose one</option>
+                  <option>Yes, wash linens</option>
+                  <option>No, linens are handled</option>
+                  <option>Not sure</option>
+                </select>
+              </p>
+
+              <p class="field" data-for="co-single co-quarter co-half co-full co-sort">
+                <label for="dump">Cleanout: do you need a dump run?</label>
+                <select id="dump" name="Dump run">
+                  <option value="">Choose one</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                  <option>Not sure</option>
+                </select>
+              </p>
+              <p class="field field-span" data-for="co-single co-quarter co-half co-full co-sort">
+                <label for="valuables">Cleanout: any valuables or papers we should set aside and log?</label>
+                <input id="valuables" name="Valuables or papers to log" type="text" autocomplete="off">
+              </p>
+
+              <p class="field field-span" data-for="hm-repair">
+                <label for="repairs">Handyman: what needs fixing?</label>
+                <textarea id="repairs" name="Handyman repairs" rows="3"></textarea>
+              </p>
+              <p class="field" data-for="hm-repair">
+                <label for="hours">Handyman: about how many hours?</label>
+                <input id="hours" name="Handyman hours expected" type="text" autocomplete="off">
+              </p>
+              <p class="field" data-for="hm-paint">
+                <label for="walls">Painting: wall square footage</label>
+                <input id="walls" name="Painting wall sq ft" type="text" autocomplete="off">
+              </p>
+
+              <p class="field" data-for="ln-base ln-over">
+                <label for="lot">Lawn: lot size</label>
+                <input id="lot" name="Lawn lot size" type="text" autocomplete="off">
+                <span class="hint">For example, 6,000 sq ft or a quarter acre.</span>
+              </p>
+            </fieldset>
+
+            <details class="more">
+              <summary>Add more details (optional, helps us quote faster)</summary>
+              <div class="more-body">
+                <fieldset>
+                  <legend>The job</legend>
+                  <p class="field">
+                    <label for="call-time">Best time to reach you</label>
+                    <input id="call-time" name="Best time to reach" type="text" autocomplete="off">
+                    <span class="hint">For example, weekdays after 3 PM.</span>
+                  </p>
+                  <p class="field">
+                    <label for="frequency">How often</label>
+                    <input id="frequency" name="Frequency" type="text" autocomplete="off">
+                    <span class="hint">For example, one-time, weekly, or each turnover.</span>
+                  </p>
+                  <p class="field">
+                    <label for="deadline">Listing or move-out date, if any</label>
+                    <input id="deadline" name="Listing or move-out date" type="date">
+                  </p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>The property</legend>
+                  <p class="field">
+                    <label for="size">Square footage</label>
+                    <input id="size" name="Square footage" type="text" autocomplete="off" inputmode="numeric">
+                    <span class="hint">A rough number is fine.</span>
+                  </p>
+                  <p class="field">
+                    <label for="rooms">Bedrooms and bathrooms</label>
+                    <input id="rooms" name="Bedrooms and bathrooms" type="text" autocomplete="off">
+                    <span class="hint">For example, 3 bed / 2 bath.</span>
+                  </p>
+                  <p class="field">
+                    <label for="appliances">Appliances to clean</label>
+                    <input id="appliances" name="Appliances to clean" type="text" autocomplete="off">
+                    <span class="hint">For example, oven, fridge, dishwasher.</span>
+                  </p>
+                  <p class="field">
+                    <label for="condition">How empty or full is it?</label>
+                    <input id="condition" name="Condition" type="text" autocomplete="off">
+                    <span class="hint">For example, empty, lived-in, or heavy.</span>
+                  </p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Getting in</legend>
+                  <p class="field field-span">
+                    <label for="access">Gate or door code, lockbox, and parking</label>
+                    <textarea id="access" name="Access and parking" rows="3"></textarea>
+                  </p>
+                  <p class="field">
+                    <label for="pets">Pets or alarms</label>
+                    <input id="pets" name="Pets or alarms" type="text" autocomplete="off">
+                  </p>
+                  <p class="field">
+                    <label for="present">Who will be there that day?</label>
+                    <input id="present" name="Who will be home" type="text" autocomplete="off">
+                  </p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Care notes</legend>
+                  <p class="field field-span">
+                    <label for="surfaces">Surfaces that need special care</label>
+                    <input id="surfaces" name="Special surfaces" type="text" autocomplete="off">
+                    <span class="hint">For example, marble, quartz, hardwood, or stainless steel.</span>
+                  </p>
+                  <p class="field field-span">
+                    <label for="priorities">Priority rooms, and anything we shouldn't touch</label>
+                    <textarea id="priorities" name="Priorities and do-not-touch" rows="3"></textarea>
+                  </p>
+                </fieldset>
+              </div>
+            </details>
+
+            <p class="form-alert" id="form-error" role="alert" hidden></p>
+            <p class="form-actions">
+              <button type="submit" class="btn" id="submit-btn">Send my booking request</button>
+            </p>
+            <p class="form-note">Your request goes straight to Custom Cleaning Concepts. We reply the same day to requests received by 5 PM. For most jobs, we then call to set up your free walkthrough, and the written quote comes from that walkthrough. Prefer to talk? Call <a href="tel:+13464004656">346-400-4656</a>.</p>
+          </form>
+        </section>
       </div>
 
-      <article class="service">
-        <h3>Cleanouts</h3>
-        <ul class="rates">
-          <li>
-            <span class="rate-name">Single item pickup</span>
-            <span class="rate-unit">per item</span>
-            <span class="rate-price">Starting at $95</span>
-          </li>
-          <li>
-            <span class="rate-name">Quarter load</span>
-            <span class="rate-unit">per load, up to 1.5 hrs labor</span>
-            <span class="rate-price">Starting at $175</span>
-          </li>
-          <li>
-            <span class="rate-name">Half load</span>
-            <span class="rate-unit">per load, up to 2.5 hrs</span>
-            <span class="rate-price">Starting at $325</span>
-          </li>
-          <li>
-            <span class="rate-name">Full load</span>
-            <span class="rate-unit">per load, up to 4 hrs</span>
-            <span class="rate-price">Starting at $600</span>
-          </li>
-          <li>
-            <span class="rate-name">White-glove estate and valuables sorting</span>
-            <span class="rate-unit">per hour</span>
-            <span class="rate-price">Starting at $65</span>
-          </li>
-          <li>
-            <span class="rate-name">Dump fee pass-through</span>
-            <span class="rate-unit">charged at the dump receipt plus 10%</span>
-            <span class="rate-price">Match receipt + 10%</span>
-          </li>
-        </ul>
-      </article>
-
-      <article class="service">
-        <h3>Make-ready deep cleans</h3>
-        <ul class="rates">
-          <li>
-            <span class="rate-name">Make-ready deep clean, vacant</span>
-            <span class="rate-unit">per sq ft</span>
-            <span class="rate-price">Starting at $0.30</span>
-          </li>
-          <li>
-            <span class="rate-name">Extra appliance deep clean</span>
-            <span class="rate-unit">each</span>
-            <span class="rate-price">Starting at $45</span>
-          </li>
-          <li>
-            <span class="rate-name">Heavy debris or excessive condition</span>
-            <span class="rate-unit">flat, when it applies</span>
-            <span class="rate-price">$150</span>
-          </li>
-        </ul>
-      </article>
-
-      <article class="service">
-        <h3>Airbnb turnovers</h3>
-        <ul class="rates">
-          <li>
-            <span class="rate-name">1 bedroom / 1 bathroom</span>
-            <span class="rate-unit">per turn</span>
-            <span class="rate-price">Starting at $135</span>
-          </li>
-          <li>
-            <span class="rate-name">2 bedroom / 2 bathroom</span>
-            <span class="rate-unit">per turn</span>
-            <span class="rate-price">Starting at $185</span>
-          </li>
-          <li>
-            <span class="rate-name">3 or more bedrooms</span>
-            <span class="rate-unit">per turn</span>
-            <span class="rate-price">Starting at $235</span>
-          </li>
-          <li>
-            <span class="rate-name">Off-site linen</span>
-            <span class="rate-unit">per turn</span>
-            <span class="rate-price">Starting at $35</span>
-          </li>
-        </ul>
-      </article>
-
-      <article class="service">
-        <h3>After-hours commercial</h3>
-        <ul class="rates">
-          <li>
-            <span class="rate-name">Office or salon</span>
-            <span class="rate-unit">per month</span>
-            <span class="rate-price">Starting at $450</span>
-          </li>
-          <li>
-            <span class="rate-name">Med spa or clinic</span>
-            <span class="rate-unit">per month</span>
-            <span class="rate-price">Starting at $900</span>
-          </li>
-        </ul>
-      </article>
-
-      <article class="service">
-        <h3>Handyman and painting</h3>
-        <ul class="rates">
-          <li>
-            <span class="rate-name">Handyman repair</span>
-            <span class="rate-unit">per hour</span>
-            <span class="rate-price">Starting at $75</span>
-          </li>
-          <li>
-            <span class="rate-name">Interior wall painting</span>
-            <span class="rate-unit">per wall sq ft</span>
-            <span class="rate-price">Starting at $0.30</span>
-          </li>
-        </ul>
-      </article>
-
-      <article class="service">
-        <h3>Lawn care</h3>
-        <ul class="rates">
-          <li>
-            <span class="rate-name">Lawn base visit</span>
-            <span class="rate-unit">per visit, up to 3,000 sq ft</span>
-            <span class="rate-price">Starting at $50</span>
-          </li>
-          <li>
-            <span class="rate-name">Lawn overgrowth</span>
-            <span class="rate-unit">per lawn sq ft, added to the base visit</span>
-            <span class="rate-price">Starting at $0.03</span>
-          </li>
-        </ul>
-      </article>
-    </section>
+      <aside class="selections" id="selections" aria-labelledby="sel-h">
+        <div class="sel-head">
+          <h2 id="sel-h">Your selections <span class="sel-count" id="sel-count">0</span></h2>
+          <button type="button" class="sel-close" id="sel-close" aria-label="Close your selections"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <p class="sel-empty" id="sel-empty">Nothing yet. Tap <strong>Add</strong> on any service and it shows up here.</p>
+        <ul class="sel-list" id="sel-list"></ul>
+        <p class="sel-note" id="sel-note" hidden>Starting prices, not final. Your price is agreed in your written quote or booking confirmation.</p>
+        <div class="sel-actions">
+          <a class="btn" href="#request" id="sel-book">Book these</a>
+          <button type="button" class="link-btn" id="sel-clear">Clear all</button>
+        </div>
+      </aside>
+    </div>
 
     <section class="how" id="how-it-works">
       <div class="section-head">
         <h2>How booking works</h2>
-        <p>The site is only for sending a request. This site never asks for payment.</p>
+        <p>Pick your services and a date you&rsquo;d like. Most jobs start with a free walkthrough and a written quote. Simple jobs need no walkthrough. Lucille sends the secure deposit link with your written quote or booking confirmation, and this site never takes payment.</p>
       </div>
+
+      <h3 class="path-h">Most jobs: walkthrough, then a written quote</h3>
       <ol class="steps">
-        <li>
+        <li class="reveal">
           <span class="step-num">1</span>
           <div>
-            <h3>Send a request</h3>
-            <p>Tell us about the property and the work you need using the form below, or call or email.</p>
+            <h3>Pick your services and a date</h3>
+            <p>Tap Add on what you need, choose the date you&rsquo;d like, and send the form. Or call or email. We reply the same day to requests received by 5 PM; later requests get a reply the following business day.</p>
           </div>
         </li>
-        <li>
+        <li class="reveal">
           <span class="step-num">2</span>
           <div>
-            <h3>Same-day reply</h3>
-            <p>We reply the same day to requests received by 5 PM; later requests get a reply the next morning.</p>
+            <h3>Free walkthrough</h3>
+            <p>The walkthrough is free, with no fee. Your quote comes from it, so the quote matches the actual work.</p>
           </div>
         </li>
-        <li>
+        <li class="reveal">
           <span class="step-num">3</span>
           <div>
-            <h3>Free walkthrough</h3>
-            <p>We walk through the property at no charge so the quote matches the actual work.</p>
+            <h3>Written quote and deposit</h3>
+            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. Lucille sends a secure link for the 20% booking deposit with your written quote. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
           </div>
         </li>
-        <li>
+        <li class="reveal">
           <span class="step-num">4</span>
           <div>
-            <h3>Written quote</h3>
-            <p>You receive a written quote and agree to it in writing before the work begins. Quotes are valid for 14 days.</p>
+            <h3>The work</h3>
+            <p>We do the work on the scheduled date. The balance is due when the work is done.</p>
           </div>
         </li>
-        <li>
-          <span class="step-num">5</span>
+      </ol>
+
+      <h3 class="path-h">Simple jobs: no walkthrough needed</h3>
+      <p class="path-note">Single-item pickup, Airbnb turnovers, a lawn base visit, and handyman work ($75 an hour, 2-hour minimum) have a posted rate, so we can book them without a walkthrough. Anything else starts with a free walkthrough and a written quote.</p>
+      <ol class="steps">
+        <li class="reveal">
+          <span class="step-num">1</span>
           <div>
-            <h3>Deposit and scheduling</h3>
-            <p>A 20% booking deposit is due after you agree to the quote. That deposit is non-refundable. We'll tell you how to pay the deposit with your written quote. Your date is held once the deposit is received. This site never asks for payment.</p>
+            <h3>Pick the job and send your request</h3>
+            <p>Tap Add on a job marked No walkthrough needed, choose the date you&rsquo;d like, and send the form. We reply the same day to requests received by 5 PM.</p>
           </div>
         </li>
-        <li>
-          <span class="step-num">6</span>
+        <li class="reveal">
+          <span class="step-num">2</span>
+          <div>
+            <h3>Booking confirmation and deposit</h3>
+            <p>Lucille sends your booking confirmation with a secure link for the 20% booking deposit. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">3</span>
           <div>
             <h3>The work</h3>
-            <p>The work happens as scheduled. The balance is due on completion.</p>
+            <p>We do the work on your booked date. The balance is due when the work is done.</p>
           </div>
         </li>
       </ol>
     </section>
 
-    <section class="request" id="request">
+    <section class="reviews" id="reviews" aria-labelledby="reviews-h">
       <div class="section-head">
-        <h2>Request a booking</h2>
-        <p>Share as much as you can. Required fields are marked with *. If something else is still unknown, leave it blank and we can sort it out on the walkthrough.</p>
+        <h2 id="reviews-h">What clients say</h2>
+        <p>Client reviews appear here after they&rsquo;re checked.</p>
       </div>
 
-      <form id="booking-form" class="booking-form" method="post" action="https://formspree.io/f/moedjzqr">
-        <input type="hidden" name="_subject" value="New booking request - Custom Cleaning Concepts">
+      <div class="review-list" id="review-list">
+      </div>
+      <p class="reviews-empty">Reviews are on the way. Worked with us? Tell us how it went below.</p>
 
-        <fieldset>
-          <legend>1. Your contact info</legend>
+      <form id="review-form" class="review-form" method="post" action="https://formspree.io/f/moedjzqr">
+        <input type="hidden" name="_subject" value="New review for approval - Custom Cleaning Concepts">
+        <input type="hidden" name="Form type" value="Review">
+        <input type="text" name="_gotcha" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <h3>Share how your job went</h3>
+        <p class="hint review-intro">Reviews appear after we read them.</p>
+        <fieldset class="review-fields">
+          <legend class="sr-only">Your review</legend>
           <p class="field">
-            <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
-            <input id="name" name="Name" type="text" autocomplete="name" required>
+            <label for="rv-name">Your name <span class="req" aria-hidden="true">*</span></label>
+            <input id="rv-name" name="Name" type="text" autocomplete="name" required>
+            <span class="hint">A first name and last initial is fine, like &ldquo;Sam T.&rdquo;</span>
           </p>
           <p class="field">
-            <label for="phone">Best callback number <span class="req" aria-hidden="true">*</span></label>
-            <input id="phone" name="Phone" type="tel" autocomplete="tel" required>
+            <label for="rv-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="rv-email" name="Email" type="email" autocomplete="email" required>
+            <span class="hint">Kept private, never shown with your review.</span>
           </p>
           <p class="field">
-            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input id="email" name="Email" type="email" autocomplete="email" required>
-          </p>
-          <p class="field">
-            <label for="call-time">Best time to reach you</label>
-            <input id="call-time" name="Best time to reach" type="text" autocomplete="off">
-            <span class="hint">For example, weekdays after 3 PM.</span>
-          </p>
-        </fieldset>
-
-        <fieldset>
-          <legend>2. The service</legend>
-          <p class="field">
-            <label for="service">Service <span class="req" aria-hidden="true">*</span></label>
-            <select id="service" name="Service" required>
+            <label for="rv-service">Service <span class="req" aria-hidden="true">*</span></label>
+            <select id="rv-service" name="Service" required>
               <option value="" selected disabled>Choose a service</option>
               <option>Cleanouts</option>
               <option>Make-ready deep clean</option>
@@ -293,169 +485,34 @@
               <option>After-hours commercial</option>
               <option>Handyman and painting</option>
               <option>Lawn care</option>
-              <option>More than one of these</option>
-              <option>Something else / not sure</option>
+              <option>Something else</option>
             </select>
           </p>
-          <p class="field">
-            <label for="frequency">How often</label>
-            <input id="frequency" name="Frequency" type="text" autocomplete="off">
-            <span class="hint">For example, one-time, weekly, or each turnover.</span>
-          </p>
-        </fieldset>
-
-        <fieldset>
-          <legend>3. The property</legend>
+          <div class="field field-span rating" role="radiogroup" aria-labelledby="rv-rating-l">
+            <span class="rating-l" id="rv-rating-l">Rating <span class="req" aria-hidden="true">*</span> <span class="hint">1 is lowest, 5 is best</span></span>
+            <div class="rating-opts">
+              <label><input type="radio" name="Star rating (1-5)" value="1" required><span>1 &#9733;</span></label>
+              <label><input type="radio" name="Star rating (1-5)" value="2"><span>2 &#9733;</span></label>
+              <label><input type="radio" name="Star rating (1-5)" value="3"><span>3 &#9733;</span></label>
+              <label><input type="radio" name="Star rating (1-5)" value="4"><span>4 &#9733;</span></label>
+              <label><input type="radio" name="Star rating (1-5)" value="5"><span>5 &#9733;</span></label>
+            </div>
+          </div>
           <p class="field field-span">
-            <label for="address">Property address <span class="req" aria-hidden="true">*</span></label>
-            <input id="address" name="Address" type="text" autocomplete="street-address" required>
+            <label for="rv-text">Your review <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="rv-text" name="Review" rows="4" maxlength="1500" required></textarea>
           </p>
           <p class="field">
-            <label for="city">City <span class="req" aria-hidden="true">*</span></label>
-            <input id="city" name="City" type="text" autocomplete="address-level2" required>
-          </p>
-          <p class="field">
-            <label for="size">Square footage</label>
-            <input id="size" name="Square footage" type="text" autocomplete="off" inputmode="numeric">
-            <span class="hint">A rough number is fine.</span>
-          </p>
-          <p class="field">
-            <label for="rooms">Bedrooms and bathrooms</label>
-            <input id="rooms" name="Bedrooms and bathrooms" type="text" autocomplete="off">
-            <span class="hint">For example, 3 bed / 2 bath.</span>
-          </p>
-          <p class="field">
-            <label for="appliances">Appliances to clean</label>
-            <input id="appliances" name="Appliances to clean" type="text" autocomplete="off">
-            <span class="hint">For example, oven, fridge, dishwasher.</span>
-          </p>
-          <p class="field">
-            <label for="condition">How empty or full is it?</label>
-            <input id="condition" name="Condition" type="text" autocomplete="off">
-            <span class="hint">For example, empty, lived-in, or heavy.</span>
+            <label for="rv-city">City</label>
+            <input id="rv-city" name="City" type="text" autocomplete="address-level2">
+            <span class="hint">Optional.</span>
           </p>
         </fieldset>
-
-        <fieldset class="service-details">
-          <legend>4. Service details</legend>
-          <p class="hint details-note">Answer the ones that fit your job and skip the rest.</p>
-
-          <p class="field" data-service="Airbnb turnover">
-            <label for="checkout">Airbnb: guest checkout time</label>
-            <input id="checkout" name="Airbnb checkout time" type="text" autocomplete="off">
-          </p>
-          <p class="field" data-service="Airbnb turnover">
-            <label for="checkin">Airbnb: next check-in time</label>
-            <input id="checkin" name="Airbnb next check-in" type="text" autocomplete="off">
-          </p>
-          <p class="field" data-service="Airbnb turnover">
-            <label for="linens">Airbnb: should we wash linens?</label>
-            <select id="linens" name="Airbnb linens">
-              <option value="">Choose one</option>
-              <option>Yes, wash linens</option>
-              <option>No, linens are handled</option>
-              <option>Not sure</option>
-            </select>
-          </p>
-
-          <p class="field" data-service="Cleanouts">
-            <label for="load">Cleanout: how much stuff is there?</label>
-            <select id="load" name="Cleanout load">
-              <option value="">Choose one</option>
-              <option>One item</option>
-              <option>About a quarter load</option>
-              <option>About half a load</option>
-              <option>A full load or more</option>
-            </select>
-          </p>
-          <p class="field" data-service="Cleanouts">
-            <label for="dump">Cleanout: do you need a dump run?</label>
-            <select id="dump" name="Dump run">
-              <option value="">Choose one</option>
-              <option>Yes</option>
-              <option>No</option>
-              <option>Not sure</option>
-            </select>
-          </p>
-          <p class="field field-span" data-service="Cleanouts">
-            <label for="valuables">Cleanout: any valuables or papers we should set aside and log?</label>
-            <input id="valuables" name="Valuables or papers to log" type="text" autocomplete="off">
-          </p>
-
-          <p class="field field-span" data-service="Handyman and painting">
-            <label for="repairs">Handyman: what needs fixing or painting?</label>
-            <textarea id="repairs" name="Handyman repairs" rows="3"></textarea>
-          </p>
-          <p class="field" data-service="Handyman and painting">
-            <label for="hours">Handyman: about how many hours?</label>
-            <input id="hours" name="Handyman hours expected" type="text" autocomplete="off">
-          </p>
-          <p class="field" data-service="Handyman and painting">
-            <label for="walls">Painting: wall square footage</label>
-            <input id="walls" name="Painting wall sq ft" type="text" autocomplete="off">
-          </p>
-
-          <p class="field" data-service="Lawn care">
-            <label for="lot">Lawn: lot size</label>
-            <input id="lot" name="Lawn lot size" type="text" autocomplete="off">
-            <span class="hint">For example, 6,000 sq ft or a quarter acre.</span>
-          </p>
-        </fieldset>
-
-        <fieldset>
-          <legend>5. Getting in</legend>
-          <p class="field field-span">
-            <label for="access">Gate or door code, lockbox, and parking</label>
-            <textarea id="access" name="Access and parking" rows="3"></textarea>
-          </p>
-          <p class="field">
-            <label for="pets">Pets or alarms</label>
-            <input id="pets" name="Pets or alarms" type="text" autocomplete="off">
-          </p>
-          <p class="field">
-            <label for="present">Who will be there that day?</label>
-            <input id="present" name="Who will be home" type="text" autocomplete="off">
-          </p>
-        </fieldset>
-
-        <fieldset>
-          <legend>6. Care notes</legend>
-          <p class="field field-span">
-            <label for="surfaces">Surfaces that need special care</label>
-            <input id="surfaces" name="Special surfaces" type="text" autocomplete="off">
-            <span class="hint">For example, marble, quartz, hardwood, or stainless steel.</span>
-          </p>
-          <p class="field field-span">
-            <label for="priorities">Priority rooms, and anything we shouldn't touch</label>
-            <textarea id="priorities" name="Priorities and do-not-touch" rows="3"></textarea>
-          </p>
-        </fieldset>
-
-        <fieldset>
-          <legend>7. Timing</legend>
-          <p class="field">
-            <label for="date1">First choice of date</label>
-            <input id="date1" name="First choice date" type="date">
-          </p>
-          <p class="field">
-            <label for="date2">Second choice of date</label>
-            <input id="date2" name="Second choice date" type="date">
-          </p>
-          <p class="field">
-            <label for="window">Time window</label>
-            <input id="window" name="Time window" type="text" autocomplete="off">
-            <span class="hint">For example, 11 AM to 4 PM.</span>
-          </p>
-          <p class="field">
-            <label for="deadline">Listing or move-out date, if any</label>
-            <input id="deadline" name="Listing or move-out date" type="date">
-          </p>
-        </fieldset>
-
-        <p class="form-note">Your request goes straight to Custom Cleaning Concepts. We reply the same day to requests received by 5 PM with a call to set up your free walkthrough and written quote. This site never asks for payment.</p>
         <p class="form-actions">
-          <button type="submit" class="btn">Send booking request</button>
+          <button type="submit" class="btn" id="review-btn">Send my review</button>
         </p>
+        <p class="form-note">Reviews are posted after they&rsquo;re checked, so yours won&rsquo;t show up right away.</p>
+        <p class="review-status" id="review-status" role="status" aria-live="polite" hidden></p>
       </form>
     </section>
 
@@ -463,91 +520,834 @@
       <div class="section-head">
         <h2>Terms and common questions</h2>
       </div>
-      <dl class="faq">
-        <div>
-          <dt>What area do you serve?</dt>
-          <dd>Houston and nearby suburbs.</dd>
-        </div>
-        <div>
-          <dt>Are the prices on this page the final job price?</dt>
-          <dd>No. Posted prices are starting points. The starting price is not the final job price. The written quote you agree to is the price for the job.</dd>
-        </div>
-        <div>
-          <dt>How do booking and payment work?</dt>
-          <dd>Send a request. We reply the same day to requests received by 5 PM; later requests get a reply the next morning. Then we do a free walkthrough. You receive a written quote and agree to it in writing before the work begins. A 20% booking deposit is due after you agree to the quote; that deposit is non-refundable. We'll tell you how to pay the deposit with your written quote. Your date is held once the deposit is received. This site never asks for payment. The balance is due on completion. 1.5% a month on balances unpaid 15 days after completion.</dd>
-        </div>
-        <div>
-          <dt>What work do you not take on?</dt>
-          <dd>If we find a hazard we can safely handle, it's $150 per hazard, added to your bill. We don't take on mold, sewage, needles, hoarding or chemical spills. If a hazard means we have to stop the job, the deposit is not refunded, and you'll be charged a prorated fee for the work already done.</dd>
-        </div>
-        <div>
-          <dt>How long is a quote valid?</dt>
-          <dd>Quotes are valid for 14 days.</dd>
-        </div>
-        <div>
-          <dt>How are dump fees billed on a cleanout?</dt>
-          <dd>Dump fees are a pass-through: the dump receipt plus 10%.</dd>
-        </div>
-      </dl>
+      <div class="faq" id="faq">
+        <details class="faq-item reveal">
+          <summary>What area do you serve?</summary>
+          <div class="faq-a">Houston, Pasadena, Webster, Clear Lake, Baybrook, Friendswood, the Heights, Downtown, Memorial, and Katy.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Are the prices on this page the final job price?</summary>
+          <div class="faq-a">No. Posted prices are starting points. The price you agree to is the price for the job: your written quote, or the posted rate for a simple job with no walkthrough. Handyman work is $75 an hour with a 2-hour minimum ($150).</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How do booking and payment work?</summary>
+          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a free walkthrough, with no fee. The quote comes from that walkthrough: you get it in writing and agree to it in writing before any work begins. Lucille sends a secure link for the 20% booking deposit with your written quote. Simple jobs can skip the walkthrough: she sends the deposit link with your booking confirmation instead. Either way, the deposit is non-refundable, and your date is held once we receive it. This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Is the date I pick on the form confirmed?</summary>
+          <div class="faq-a">No. It&rsquo;s the date you&rsquo;d like. We confirm your date with you, and it&rsquo;s held once your deposit is received.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Which jobs need no walkthrough?</summary>
+          <div class="faq-a">Single-item pickup, Airbnb turnovers, a lawn base visit (lots up to 3,000 sq ft), and handyman repair at $75 an hour with a 2-hour minimum ($150). These have a fixed posted rate. Everything else starts with a walkthrough and a written quote. For these, Lucille replies and sends your booking confirmation with the secure deposit link.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Is the walkthrough free?</summary>
+          <div class="faq-a">Yes. The walkthrough is free, with no fee. After it, you get a written quote that is good for 14 days.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What work do you not take on?</summary>
+          <div class="faq-a">Whether we take on mold, sewage, needles, hoarding, or chemical spills depends on what we see at the walkthrough. If we find a hazard we can safely handle, it's $150 per hazard, added to your bill. If a hazard means we have to stop the job, the deposit is not refunded, and you pay a prorated fee for the work already done.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How long is a quote valid?</summary>
+          <div class="faq-a">Quotes are valid for 14 days.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How are dump fees billed on a cleanout?</summary>
+          <div class="faq-a">Dump fees are a pass-through: the dump receipt plus 10%. We can&rsquo;t give a fixed dump price ahead of time because it comes from the receipt, so it&rsquo;s added to your bill after the dump run.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What if I cancel or you can&rsquo;t get in?</summary>
+          <div class="faq-a">If you cancel with less than 24 hours&rsquo; notice, the charge is 50% of the job. If our crew arrives and can&rsquo;t get in (a lockout), the charge is 100% of the job.</div>
+        </details>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer" id="contact">
     <div class="footer-inner">
       <p class="footer-name">Custom Cleaning Concepts</p>
+      <p class="footer-owner">Owner-run by Lucille</p>
       <p class="footer-area">Houston and nearby suburbs</p>
       <p class="footer-contact">
         <a href="tel:+13464004656">346-400-4656</a>
         <span class="footer-sep" aria-hidden="true"> · </span>
         <a class="footer-email" href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>
       </p>
-      <p class="footer-terms">20% non-refundable booking deposit. We'll tell you how to pay the deposit with your written quote. Your date is held once the deposit is received. This site never asks for payment. Balance due on completion. 1.5% a month on balances unpaid 15 days after completion. Quotes valid 14 days.</p>
+      <p class="footer-terms">Free walkthrough, then a written quote good for 14 days. Simple jobs need no walkthrough. 20% non-refundable booking deposit, paid through a secure link Lucille sends with your written quote or booking confirmation. Your date is held once we receive it. Balance due on completion. 1.5% a month on balances unpaid 15 days after completion. Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job. This site itself never takes your card details.</p>
     </div>
   </footer>
 
+  <p class="sr-only" id="live" role="status" aria-live="polite"></p>
+
+  <div class="sticky-bar" id="sticky-bar">
+    <a class="btn-secondary bar-call" href="tel:+13464004656" aria-label="Call 346-400-4656">Call</a>
+    <button type="button" class="btn-secondary bar-sel" id="bar-sel" aria-expanded="false" aria-controls="selections" hidden><span class="bar-count" id="bar-count">0</span><span class="bar-sel-t">selected</span><span aria-hidden="true" class="bar-up">&#9652;</span></button>
+    <a class="btn bar-book" id="bar-book" href="#services">Pick your services</a>
+  </div>
+
   <script>
-    (function () {
-      // Single config value for the form target. See the comment in <head>.
-      var FORM_ACTION = "https://formspree.io/f/moedjzqr";
-      var FORM_METHOD = "post";
+(function () {
+  "use strict";
+  // ---------------------------------------------------------------
+  // Where booking requests go. (Form service address.)
+  var FORM_ACTION = "https://formspree.io/f/moedjzqr";
+  // Saved picks survive a refresh.
+  var STORE_KEY = "ccc-booking-v1";
+  // Calendar: how far ahead a date can be requested (days).
+  var CAL_DAYS_AHEAD = 180;
+  // ---------------------------------------------------------------
 
-      var form = document.getElementById("booking-form");
-      if (!form) return;
-      form.setAttribute("action", FORM_ACTION);
-      form.setAttribute("method", FORM_METHOD);
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var behavior = reduceMotion ? "auto" : "smooth";
 
-      var service = document.getElementById("service");
-      function showDetails() {
-        var pick = service.value;
-        var showAll = !pick || pick === "More than one of these" || pick === "Something else / not sure";
-        var groups = form.querySelectorAll("[data-service]");
-        var any = false;
-        for (var i = 0; i < groups.length; i++) {
-          var on = showAll || groups[i].getAttribute("data-service") === pick;
-          groups[i].hidden = !on;
-          if (on) any = true;
-        }
-        form.querySelector(".service-details").hidden = !any;
+  var form = $("#booking-form");
+  if (!form) return;
+  form.setAttribute("action", FORM_ACTION);
+
+  // ===== Catalog, read from the service rows in the page =====
+  var items = {};
+  var order = [];
+  $$("li.rate[data-id]").forEach(function (li) {
+    var id = li.getAttribute("data-id");
+    var it = {
+      id: id,
+      code: li.getAttribute("data-code") || "",
+      label: li.getAttribute("data-label"),
+      price: li.getAttribute("data-price"),
+      unit: li.getAttribute("data-unit") || "",
+      group: li.getAttribute("data-group") || "",
+      section: li.getAttribute("data-section") || "",
+      deposit: li.getAttribute("data-deposit") ? Number(li.getAttribute("data-deposit")) : 0,
+      pay: li.getAttribute("data-pay") || "",
+      direct: li.getAttribute("data-direct") === "1" || !!li.getAttribute("data-pay"),
+      li: li, btn: null, card: li.closest("details.service")
+    };
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "rate-add";
+    btn.setAttribute("aria-pressed", "false");
+    btn.setAttribute("aria-label", "Add " + it.label);
+    btn.setAttribute("data-add", id);
+    btn.textContent = "Add";
+    li.appendChild(btn);
+    it.btn = btn;
+    items[id] = it;
+    order.push(id);
+  });
+
+  function priceLine(it) { return it.price + (it.unit ? " " + it.unit : ""); }
+  function itemText(it) { return it.label + " (" + priceLine(it) + ")"; }
+
+  // ===== State =====
+  var selected = [];          // service ids, in the order they were added
+  var dateISO = "";           // requested date, YYYY-MM-DD
+  var quizNote = "";          // what the quiz answers were, if the quiz was used
+
+  function save() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({ ids: selected, date: dateISO, win: $("#time-window").value, quiz: quizNote }));
+    } catch (e) { /* storage blocked: fine */ }
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (e) { return null; }
+  }
+  function clearSaved() { try { localStorage.removeItem(STORE_KEY); } catch (e) {} }
+
+  function isSel(id) { return selected.indexOf(id) !== -1; }
+
+  function say(msg) {
+    var live = $("#live");
+    live.textContent = "";
+    setTimeout(function () { live.textContent = msg; }, 30);
+  }
+
+  // add / remove / toggle. Options in the same group are "choose one".
+  function add(id, opts) {
+    opts = opts || {};
+    var it = items[id];
+    if (!it || isSel(id)) return false;
+    var swapped = null;
+    if (it.group) {
+      for (var i = selected.length - 1; i >= 0; i--) {
+        if (items[selected[i]].group === it.group) { swapped = items[selected[i]]; selected.splice(i, 1); }
       }
-      if (service) { service.addEventListener("change", showDetails); showDetails(); }
+    }
+    selected.push(id);
+    if (opts.openCard && it.card) it.card.open = true;
+    afterChange();
+    if (!opts.silent) {
+      say((swapped ? "Changed " + swapped.label + " to " : "Added ") + it.label + ". " + selected.length + " selected.");
+      celebrate(it.btn);
+    }
+    return true;
+  }
+  function remove(id, silent) {
+    var i = selected.indexOf(id);
+    if (i === -1) return;
+    selected.splice(i, 1);
+    afterChange();
+    if (!silent) say("Removed " + items[id].label + ". " + selected.length + " selected.");
+  }
+  function toggle(id) { if (isSel(id)) remove(id); else add(id); }
+  function clearAll() {
+    selected = [];
+    afterChange();
+    say("Cleared your selections.");
+  }
+  function afterChange() { render(); save(); }
 
-      form.addEventListener("submit", function (event) {
-        if (FORM_ACTION.indexOf("mailto:") !== 0) {
-          return;
+  // ===== A little celebration on Add =====
+  function celebrate(btn) {
+    if (reduceMotion || !btn) return;
+    btn.classList.remove("pop");
+    void btn.offsetWidth;
+    btn.classList.add("pop");
+    var host = btn.parentNode;
+    var colors = ["#8d4a30", "#215544", "#d9a441", "#6fa58e"];
+    var rect = btn.getBoundingClientRect();
+    var hostRect = host.getBoundingClientRect();
+    var cx = rect.left - hostRect.left + rect.width / 2;
+    var cy = rect.top - hostRect.top + rect.height / 2;
+    for (var i = 0; i < 10; i++) {
+      var d = document.createElement("span");
+      d.className = "confetti";
+      var ang = (Math.PI * 2 * i) / 10 + Math.random() * 0.5;
+      var dist = 26 + Math.random() * 26;
+      d.style.left = cx + "px";
+      d.style.top = cy + "px";
+      d.style.background = colors[i % colors.length];
+      d.style.setProperty("--dx", Math.cos(ang) * dist + "px");
+      d.style.setProperty("--dy", Math.sin(ang) * dist + "px");
+      host.appendChild(d);
+      (function (el) { setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 750); })(d);
+    }
+  }
+
+  // ===== Render everything that depends on the selection =====
+  var selList = $("#sel-list");
+  var formList = $("#form-sel-list");
+  var bar = $("#sticky-bar");
+  var barSel = $("#bar-sel");
+  var barBook = $("#bar-book");
+  var lastCount = 0;
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  }
+
+  function removeBtn(it) {
+    var b = el("button", "rm-btn");
+    b.type = "button";
+    b.setAttribute("data-remove", it.id);
+    b.setAttribute("aria-label", "Remove " + it.label);
+    b.innerHTML = '<span aria-hidden="true">&times;</span>';
+    return b;
+  }
+
+  function render() {
+    var n = selected.length;
+    // buttons on the service rows
+    order.forEach(function (id) {
+      var it = items[id], on = isSel(id);
+      it.btn.setAttribute("aria-pressed", on ? "true" : "false");
+      it.btn.textContent = on ? "Added \u2713" : "Add";
+      it.li.classList.toggle("is-selected", on);
+    });
+    // per-card badges
+    $$("details.service").forEach(function (card) {
+      var c = 0;
+      selected.forEach(function (id) { if (items[id].card === card) c++; });
+      var badge = $(".svc-count", card);
+      badge.hidden = c === 0;
+      badge.textContent = c + " selected";
+      card.classList.toggle("has-sel", c > 0);
+    });
+
+    // selections panel
+    selList.innerHTML = "";
+    selected.forEach(function (id) {
+      var it = items[id];
+      var li = el("li", "sel-item");
+      var t = el("div", "sel-text");
+      t.appendChild(el("span", "sel-name", it.label));
+      t.appendChild(el("span", "sel-price", priceLine(it)));
+      li.appendChild(t);
+      li.appendChild(removeBtn(it));
+      selList.appendChild(li);
+    });
+    $("#sel-count").textContent = n;
+    $("#sel-empty").hidden = n > 0;
+    $("#sel-note").hidden = n === 0;
+    $(".sel-actions").hidden = n === 0;
+    $("#sel-book").textContent = "Book " + (n === 1 ? "this" : "these");
+
+    // form list
+    formList.innerHTML = "";
+    selected.forEach(function (id) {
+      var it = items[id];
+      var li = el("li", "form-sel-item");
+      var t = el("div", "sel-text");
+      t.appendChild(el("span", "sel-name", it.label));
+      var p = el("span", "sel-price", priceLine(it));
+      t.appendChild(p);
+      if (it.pay) {
+        t.appendChild(el("span", "tag tag-block", "Book directly: deposit $" + it.deposit + " after you send"));
+      } else if (it.direct) {
+        t.appendChild(el("span", "tag tag-block", "No walkthrough needed"));
+      }
+      li.appendChild(t);
+      li.appendChild(removeBtn(it));
+      formList.appendChild(li);
+    });
+    $("#form-sel-empty").hidden = n > 0;
+    if (n > 0) $("#services-error").hidden = true;
+    fillAddSelect();
+
+    // sticky bar (phones and tablets)
+    barSel.hidden = n === 0;
+    $("#bar-count").textContent = n;
+    barBook.textContent = n === 0 ? "Pick your services" : "Book now";
+    barBook.setAttribute("href", n === 0 ? "#services" : "#request");
+    if (n !== lastCount && !reduceMotion) {
+      var bc = $("#bar-count");
+      bc.classList.remove("bump"); void bc.offsetWidth; bc.classList.add("bump");
+    }
+    lastCount = n;
+    if (n === 0) setSheet(false);
+
+    // job-detail questions: only those that match the picks
+    var any = false;
+    $$("#service-details [data-for]").forEach(function (f) {
+      var ids = f.getAttribute("data-for").split(/\s+/);
+      var on = ids.some(isSel);
+      f.hidden = !on;
+      if (on) any = true;
+    });
+    $("#service-details").hidden = !any;
+
+    syncHidden();
+  }
+
+  // The add-a-service dropdown lists everything not yet picked.
+  function fillAddSelect() {
+    var sel = $("#add-select");
+    var keep = sel.value;
+    sel.innerHTML = "";
+    var first = document.createElement("option");
+    first.value = ""; first.textContent = "Choose a service";
+    sel.appendChild(first);
+    var groupEl = null, lastTitle = "";
+    order.forEach(function (id) {
+      var it = items[id];
+      if (isSel(id)) return;
+      var title = $(".svc-title", it.card).textContent;
+      if (title !== lastTitle) { groupEl = document.createElement("optgroup"); groupEl.label = title; sel.appendChild(groupEl); lastTitle = title; }
+      var o = document.createElement("option");
+      o.value = id; o.textContent = it.label + " (" + priceLine(it) + ")";
+      groupEl.appendChild(o);
+    });
+    if (keep && items[keep] && !isSel(keep)) sel.value = keep;
+  }
+
+  // Readable list plus one hidden field per service, rebuilt on every change.
+  function directList() {
+    return selected.filter(function (id) { return !!items[id].direct; });
+  }
+  function requestType() {
+    var d = directList().length;
+    if (d === 0) return "Walkthrough and quote";
+    if (d === selected.length) return "Direct booking (simple jobs)";
+    return "Mixed: walkthrough and quote for most, direct booking for " + directList().map(function (id) { return items[id].label; }).join("; ");
+  }
+  function syncHidden() {
+    var box = $("#synced-fields");
+    box.innerHTML = "";
+    function hid(name, value) {
+      var i = document.createElement("input");
+      i.type = "hidden"; i.name = name; i.value = value;
+      box.appendChild(i);
+    }
+    var lines = selected.map(function (id, k) { return (k + 1) + ") " + itemText(items[id]); });
+    hid("Services selected", lines.join("; "));
+    hid("Number of services", String(selected.length));
+    selected.forEach(function (id, k) {
+      hid("Service " + (k + 1), itemText(items[id]));
+      if (items[id].code) hid("Service " + (k + 1) + " code", items[id].code);   // hidden service code from the Smart Code catalog
+    });
+    hid("Request type", selected.length ? requestType() : "");
+    if (dateISO) hid("Requested date (YYYY-MM-DD)", dateISO);
+    if (quizNote) hid("Quiz answers", quizNote);
+  }
+
+  // ===== Click handling for add / remove =====
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    if (!t.closest) return;
+    var addBtn = t.closest("[data-add]");
+    if (addBtn) { toggle(addBtn.getAttribute("data-add")); return; }
+    var rm = t.closest("[data-remove]");
+    if (rm) {
+      var inSheet = !!rm.closest("#sel-list");
+      remove(rm.getAttribute("data-remove"));
+      var f = $((inSheet ? "#sel-list" : "#form-sel-list") + " .rm-btn");
+      if (f) f.focus(); else if (!inSheet) $("#add-select").focus();
+      return;
+    }
+  });
+  $("#sel-clear").addEventListener("click", clearAll);
+  $("#add-select-btn").addEventListener("click", function () {
+    var v = $("#add-select").value;
+    if (!v) { say("Choose a service from the list first."); $("#add-select").focus(); return; }
+    add(v, { openCard: true });
+    $("#add-select").value = "";
+    $("#add-select").focus();
+  });
+
+  // ===== Selections sheet on phones / tablets =====
+  var panel = $("#selections");
+  function setSheet(open) {
+    panel.classList.toggle("open", open);
+    barSel.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  barSel.addEventListener("click", function () { setSheet(!panel.classList.contains("open")); });
+  $("#sel-close").addEventListener("click", function () { setSheet(false); barSel.focus(); });
+  $("#sel-book").addEventListener("click", function () { setSheet(false); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel.classList.contains("open")) { setSheet(false); barSel.focus(); }
+  });
+  // Hide the bar while the form is on screen.
+  var reqSection = $("#request");
+  if (bar && reqSection && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      var on = entries[0].isIntersecting;
+      bar.classList.toggle("is-hidden", on);
+      if (on) setSheet(false);
+    }, { threshold: 0.12 }).observe(reqSection);
+  }
+
+  function scrollToEl(node, focusNode) {
+    node.scrollIntoView({ behavior: behavior, block: "start" });
+    if (focusNode) setTimeout(function () { focusNode.focus({ preventScroll: true }); }, reduceMotion ? 0 : 450);
+  }
+
+  // ===== Calendar =====
+  var DOW = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function iso(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function parseISO(s) { var p = s.split("-"); return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2])); }
+  function longDate(d) { return DOW[d.getDay()] + ", " + MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); }
+  function startOfToday() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+  var today = startOfToday();
+  var maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + CAL_DAYS_AHEAD);
+  var viewY = today.getFullYear(), viewM = today.getMonth();
+  function pickable(d) { return d >= today && d <= maxDate && d.getDay() !== 0; }
+
+  var calBody = $("#cal-body");
+  function renderCal(focusISO) {
+    $("#cal-title").textContent = MONTHS[viewM] + " " + viewY;
+    $("#cal-prev").disabled = viewY === today.getFullYear() && viewM === today.getMonth();
+    $("#cal-next").disabled = viewY === maxDate.getFullYear() && viewM === maxDate.getMonth();
+    calBody.innerHTML = "";
+    var first = new Date(viewY, viewM, 1);
+    var cursor = new Date(viewY, viewM, 1 - first.getDay());
+    // which day holds the tab stop
+    var tabISO = focusISO || (dateISO && inView(parseISO(dateISO)) ? dateISO : "");
+    if (!tabISO) {
+      var probe = new Date(viewY, viewM, 1);
+      while (probe.getMonth() === viewM && !pickable(probe)) probe.setDate(probe.getDate() + 1);
+      if (probe.getMonth() === viewM) tabISO = iso(probe);
+    }
+    for (var w = 0; w < 6; w++) {
+      var tr = document.createElement("tr");
+      for (var d = 0; d < 7; d++) {
+        var td = document.createElement("td");
+        if (cursor.getMonth() === viewM) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "cal-day";
+          var key = iso(cursor);
+          b.setAttribute("data-date", key);
+          b.textContent = cursor.getDate();
+          var ok = pickable(cursor);
+          b.disabled = !ok;
+          var lab = longDate(cursor);
+          if (cursor.getDay() === 0) lab += ", not available";
+          else if (cursor < today) lab += ", past";
+          else if (!ok) lab += ", too far ahead";
+          b.setAttribute("aria-label", lab);
+          b.setAttribute("aria-pressed", key === dateISO ? "true" : "false");
+          if (key === dateISO) b.classList.add("is-picked");
+          if (cursor.getTime() === today.getTime()) b.classList.add("is-today");
+          b.tabIndex = key === tabISO ? 0 : -1;
+          td.appendChild(b);
         }
-        event.preventDefault();
-        var data = new FormData(form);
-        var lines = [];
-        data.forEach(function (value, key) {
-          lines.push(key + ": " + String(value).trim());
-        });
-        var subject = "Booking request — Custom Cleaning Concepts";
-        var href = FORM_ACTION
-          + "?subject=" + encodeURIComponent(subject)
-          + "&body=" + encodeURIComponent(lines.join("\n"));
-        window.location.href = href;
+        tr.appendChild(td);
+        cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate() + 1);
+      }
+      calBody.appendChild(tr);
+    }
+  }
+  function inView(d) { return d.getFullYear() === viewY && d.getMonth() === viewM; }
+
+  function setDate(key, opts) {
+    dateISO = key || "";
+    var inp = $("#req-date");
+    inp.value = key ? longDate(parseISO(key)) : "";
+    if (key) { $("#date-error").hidden = true; }
+    var d = key ? parseISO(key) : null;
+    if (d) { viewY = d.getFullYear(); viewM = d.getMonth(); }
+    renderCal(key || "");
+    syncHidden();
+    save();
+    if (key && !(opts && opts.silent)) say("Requested date: " + longDate(d));
+  }
+  function focusDay(key) {
+    var b = $('.cal-day[data-date="' + key + '"]', calBody);
+    if (b) b.focus();
+  }
+  function stepDate(fromISO, delta) {
+    var d = parseISO(fromISO);
+    for (var i = 0; i < 60; i++) {
+      d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + delta);
+      if (d > maxDate || d < today) return null;
+      if (pickable(d)) return iso(d);
+    }
+    return null;
+  }
+  calBody.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".cal-day");
+    if (!b || b.disabled) return;
+    setDate(b.getAttribute("data-date"));
+    focusDay(b.getAttribute("data-date"));
+  });
+  calBody.addEventListener("keydown", function (e) {
+    var b = e.target.closest && e.target.closest(".cal-day");
+    if (!b) return;
+    var key = b.getAttribute("data-date");
+    var delta = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
+    var next = null;
+    if (delta) { e.preventDefault(); next = stepDate(key, delta); }
+    else if (e.key === "PageDown" || e.key === "PageUp") {
+      e.preventDefault();
+      var d = parseISO(key);
+      var m = new Date(d.getFullYear(), d.getMonth() + (e.key === "PageDown" ? 1 : -1), 1);
+      var tm = m.getMonth();
+      for (var c = 0; c < 31 && m.getMonth() === tm && !pickable(m); c++) m.setDate(m.getDate() + 1);
+      if (m.getMonth() === tm && pickable(m)) next = iso(m);
+    } else return;
+    if (next) {
+      var nd = parseISO(next);
+      viewY = nd.getFullYear(); viewM = nd.getMonth();
+      renderCal(next);
+      focusDay(next);
+    }
+  });
+  $("#cal-prev").addEventListener("click", function () { viewM--; if (viewM < 0) { viewM = 11; viewY--; } renderCal(); });
+  $("#cal-next").addEventListener("click", function () { viewM++; if (viewM > 11) { viewM = 0; viewY++; } renderCal(); });
+  $("#time-window").addEventListener("change", save);
+
+  // ===== Quiz =====
+  var QUIZ_PLACES = [
+    { label: "My home", needs: ["clear", "deep", "repair", "lawn"] },
+    { label: "An Airbnb or short-term rental", needs: ["turnover", "clear", "repair", "lawn"] },
+    { label: "A vacant property, listing, or rental", needs: ["deep", "clear", "repair", "lawn"] },
+    { label: "An office, salon, or clinic", needs: ["commercial", "repair"] },
+    { label: "Just the yard", needs: ["lawn"] }
+  ];
+  var QUIZ_NEEDS = {
+    clear: { label: "Clear stuff out", q: "How much needs to go?", opts: [
+      { label: "A few items", ids: ["co-single"] }, { label: "About a quarter load", ids: ["co-quarter"] },
+      { label: "About half a load", ids: ["co-half"] }, { label: "A full load or more", ids: ["co-full"] }] },
+    deep: { label: "A deep clean of an empty place", q: "About how big is it?", opts: [
+      { label: "Under 1,000 sq ft", ids: ["mr-clean"] }, { label: "1,000 to 2,500 sq ft", ids: ["mr-clean"] },
+      { label: "Over 2,500 sq ft", ids: ["mr-clean"] }, { label: "Not sure", ids: ["mr-clean"] }] },
+    turnover: { label: "Cleaning between guests", q: "How many bedrooms?", opts: [
+      { label: "1 bedroom", ids: ["ab-1"] }, { label: "2 bedrooms", ids: ["ab-2"] }, { label: "3 or more", ids: ["ab-3"] }] },
+    commercial: { label: "Regular after-hours cleaning", q: "What kind of space is it?", opts: [
+      { label: "Office or salon", ids: ["cm-office"] }, { label: "Med spa or clinic", ids: ["cm-med"] }] },
+    repair: { label: "Repairs or painting", q: "What kind of work?", opts: [
+      { label: "Repairs", ids: ["hm-repair"] }, { label: "Painting walls", ids: ["hm-paint"] }, { label: "Both", ids: ["hm-repair", "hm-paint"] }] },
+    lawn: { label: "Lawn care", q: "How big is the lawn?", opts: [
+      { label: "Up to 3,000 sq ft", ids: ["ln-base"] }, { label: "Bigger or overgrown", ids: ["ln-base", "ln-over"] }, { label: "Not sure", ids: ["ln-base"] }] }
+  };
+
+  var quizBody = $("#quiz-body");
+  var quizStart = $("#quiz-start");
+  var qa = [];   // answers so far: [{q, a}]
+  var qState = { place: null, need: null };
+
+  function qHead(step, total, question, backable) {
+    var wrap = el("div", "q-step");
+    var top = el("div", "q-top");
+    top.appendChild(el("span", "q-prog", "Step " + step + " of " + total));
+    if (backable) {
+      var back = el("button", "link-btn", "Back"); back.type = "button"; back.setAttribute("data-q-back", "1");
+      top.appendChild(back);
+    }
+    wrap.appendChild(top);
+    var h = el("h3", "q-q", question);
+    h.tabIndex = -1; h.id = "q-focus";
+    wrap.appendChild(h);
+    return wrap;
+  }
+  function qOptions(wrap, labels, handler) {
+    var list = el("div", "q-opts");
+    labels.forEach(function (l, i) {
+      var b = el("button", "q-opt", l); b.type = "button";
+      b.addEventListener("click", function () { handler(i); });
+      list.appendChild(b);
+    });
+    wrap.appendChild(list);
+  }
+  function qShow(node) {
+    quizBody.innerHTML = "";
+    quizBody.appendChild(node);
+    var f = $("#q-focus", quizBody);
+    if (f) f.focus({ preventScroll: true });
+  }
+  function qStep1() {
+    qa = []; qState = { place: null, need: null };
+    var w = qHead(1, 3, "What kind of place is it?", false);
+    qOptions(w, QUIZ_PLACES.map(function (p) { return p.label; }), function (i) {
+      qState.place = QUIZ_PLACES[i];
+      qa.push("Place: " + qState.place.label);
+      if (qState.place.needs.length === 1) { qState.need = QUIZ_NEEDS[qState.place.needs[0]]; qa.push("Need: " + qState.need.label); qStep3(); }
+      else qStep2();
+    });
+    qShow(w);
+  }
+  function qStep2() {
+    var w = qHead(2, 3, "What do you need?", true);
+    qOptions(w, qState.place.needs.map(function (k) { return QUIZ_NEEDS[k].label; }), function (i) {
+      qState.need = QUIZ_NEEDS[qState.place.needs[i]];
+      qa.push("Need: " + qState.need.label);
+      qStep3();
+    });
+    qShow(w);
+  }
+  function qStep3() {
+    var total = qState.place.needs.length === 1 ? 2 : 3;
+    var w = qHead(total === 2 ? 2 : 3, total, qState.need.q, true);
+    qOptions(w, qState.need.opts.map(function (o) { return o.label; }), function (i) {
+      var o = qState.need.opts[i];
+      qa.push("Size: " + o.label);
+      qResult(o.ids);
+    });
+    qShow(w);
+  }
+  function qBack() {
+    if (qState.need && qState.place.needs.length > 1) { qa.pop(); qState.need = null; return qStep2(); }
+    qStep1();
+  }
+  function qResult(ids) {
+    quizNote = qa.join("; ");
+    ids.forEach(function (id) { add(id, { silent: true, openCard: true }); });
+    var w = el("div", "q-step q-result");
+    var h = el("h3", "q-q", "Here\u2019s what fits"); h.tabIndex = -1; h.id = "q-focus";
+    w.appendChild(h);
+    w.appendChild(el("p", "q-sub", "We added these to Your selections. You can change anything, or add more."));
+    var ul = el("ul", "q-picks");
+    ids.forEach(function (id) {
+      var li = el("li", "", items[id].label);
+      li.appendChild(el("span", "q-price", priceLine(items[id])));
+      ul.appendChild(li);
+    });
+    w.appendChild(ul);
+    var acts = el("div", "q-acts");
+    var go = el("button", "btn", "Continue to the booking form"); go.type = "button"; go.id = "quiz-go";
+    go.addEventListener("click", function () { scrollToEl($("#request"), $("#request-h")); });
+    var again = el("button", "btn-secondary", "Start over"); again.type = "button"; again.id = "quiz-again";
+    again.addEventListener("click", qStep1);
+    acts.appendChild(go); acts.appendChild(again);
+    w.appendChild(acts);
+    qShow(w);
+    say("Quiz done. Added " + ids.map(function (id) { return items[id].label; }).join(" and ") + ".");
+  }
+  quizStart.addEventListener("click", function () {
+    var open = quizBody.hidden;
+    quizBody.hidden = !open;
+    quizStart.setAttribute("aria-expanded", open ? "true" : "false");
+    quizStart.textContent = open ? "Close the quiz" : "Find my services";
+    if (open) qStep1();
+  });
+  quizBody.addEventListener("click", function (e) {
+    if (e.target.closest && e.target.closest("[data-q-back]")) qBack();
+  });
+
+  // ===== Submit =====
+  function showAlert(id, msg) { var a = $(id); a.textContent = msg; a.hidden = false; }
+  function hideAlerts() { $$(".form-alert").forEach(function (a) { a.hidden = true; }); }
+
+  var doneBox = $("#form-done");
+  var submitBtn = $("#submit-btn");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    hideAlerts();
+    if (!selected.length) {
+      showAlert("#services-error", "Please pick at least one service first. Tap Add on anything in the list, or take the quick quiz.");
+      scrollToEl($("#f-services"));
+      return;
+    }
+    if (!dateISO) {
+      showAlert("#date-error", "Please pick the date you\u2019d like on the calendar.");
+      scrollToEl($("#f-date"), $('.cal-day[tabindex="0"]', calBody));
+      return;
+    }
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    syncHidden();
+    submitBtn.disabled = true;
+    var oldLabel = submitBtn.textContent;
+    submitBtn.textContent = "Sending\u2026";
+    var snapshot = selected.slice();
+    // Leave out blank optional answers so the email stays short.
+    var data = new FormData(form);
+    Array.from(data.keys()).forEach(function (k) { if (k !== "_gotcha" && String(data.get(k)).trim() === "") data.delete(k); });
+    fetch(form.getAttribute("action"), {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    }).then(function (res) {
+      if (!res.ok) throw new Error("bad status");
+      showDone(snapshot, $("#name").value.trim(), $("#req-date").value);
+      form.reset();
+      selected = []; dateISO = ""; quizNote = "";
+      $("#req-date").value = "";
+      renderCal();
+      clearSaved();
+      render();
+      submitBtn.disabled = false; submitBtn.textContent = oldLabel;
+    }).catch(function () {
+      showAlert("#form-error", "Something went wrong sending your request, so nothing was sent. Your picks are still here. Please try again, or call 346-400-4656.");
+      submitBtn.disabled = false; submitBtn.textContent = oldLabel;
+    });
+  });
+
+  function showDone(ids, name, dateText) {
+    doneBox.innerHTML = "";
+    var check = el("p", "big-check", "\u2713"); check.setAttribute("aria-hidden", "true");
+    doneBox.appendChild(check);
+    var h = el("h3", "done-h", "Thank you" + (name ? ", " + name.split(" ")[0] : "") + ". Your request is in.");
+    doneBox.appendChild(h);
+    doneBox.appendChild(el("p", "", "We reply the same day to requests received by 5 PM. Later requests get a reply the following business day. The date you asked for is " + dateText + ". It\u2019s a request, and we\u2019ll confirm it with you."));
+    var ul = el("ul", "q-picks");
+    ids.forEach(function (id) { ul.appendChild(el("li", "", items[id].label)); });
+    doneBox.appendChild(ul);
+    var direct = ids.filter(function (id) { return !!items[id].pay; });
+    var simple = ids.filter(function (id) { return !!items[id].direct; });
+    if (simple.length < ids.length) {
+      doneBox.appendChild(el("p", "", "For the rest, we\u2019ll call to set up your free walkthrough. Your written quote comes from that walkthrough."));
+    }
+    if (!direct.length && simple.length) {
+      doneBox.appendChild(el("p", "", "For the simple jobs, Lucille will reply and send your booking confirmation with a secure link for the 20% deposit. Your date is held once the deposit is received."));
+    }
+    if (direct.length) {
+      var box = el("div", "pay-now");
+      box.appendChild(el("h4", "", "Pay your deposit now to hold your date"));
+      box.appendChild(el("p", "hint", "These simple jobs don\u2019t need a walkthrough. The deposit is 20% of the posted price, non-refundable, and paid on a secure checkout page. After you pay, you pick your date and time."));
+      var list = el("ul", "pay-list");
+      direct.forEach(function (id) {
+        var it = items[id];
+        var li = el("li", "pay-item");
+        var info = el("div", "pay-info");
+        info.appendChild(el("strong", "", it.label));
+        info.appendChild(el("span", "pay-price", priceLine(it) + " \u00b7 deposit $" + it.deposit));
+        li.appendChild(info);
+        var a = el("a", "btn", "Pay deposit now");
+        a.href = it.pay; a.rel = "noopener";
+        var sr = el("span", "sr-only", " for " + it.label);
+        a.appendChild(sr);
+        li.appendChild(a);
+        list.appendChild(li);
       });
-    })();
+      box.appendChild(list);
+      doneBox.appendChild(box);
+    }
+    var again = el("button", "btn-secondary", "Send another request"); again.type = "button";
+    again.addEventListener("click", function () { doneBox.hidden = true; form.hidden = false; scrollToEl($("#services")); });
+    doneBox.appendChild(again);
+    doneBox.hidden = false;
+    form.hidden = true;
+    scrollToEl(doneBox, doneBox);
+    say("Your request was sent.");
+  }
+
+  // ===== Service cards: closed on phones unless they hold a pick =====
+  var phone = window.matchMedia && window.matchMedia("(max-width: 719px)").matches;
+
+  // ===== Restore saved picks (after refresh) =====
+  var saved = load();
+  if (saved) {
+    if (Array.isArray(saved.ids)) {
+      saved.ids.forEach(function (id) { if (items[id]) add(id, { silent: true }); });
+    }
+    if (typeof saved.quiz === "string") quizNote = saved.quiz;
+    if (saved.win) { var tw = $("#time-window"); for (var oi = 0; oi < tw.options.length; oi++) if (tw.options[oi].value === saved.win) tw.value = saved.win; }
+    if (saved.date && /^\d{4}-\d{2}-\d{2}$/.test(saved.date) && pickable(parseISO(saved.date))) { setDate(saved.date, { silent: true }); }
+  }
+  if (!dateISO) renderCal();
+  render();
+  if (phone) {
+    $$("details.service").forEach(function (c) { c.open = c.classList.contains("has-sel"); });
+  }
+
+  // ===== Reveal on scroll =====
+  var reveals = $$(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    reveals.forEach(function (r) { r.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.04 });
+    reveals.forEach(function (r) { io.observe(r); });
+    window.addEventListener("beforeprint", function () { reveals.forEach(function (r) { r.classList.add("in"); }); });
+  }
+
+      // Review form: send in the background so the visitor stays on the page.
+      // Nothing submitted here is shown on the site. Approved reviews are added to the HTML by hand.
+      var reviewForm = document.getElementById("review-form");
+      if (reviewForm && window.fetch && window.FormData) {
+        reviewForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var status = document.getElementById("review-status");
+          var btn = document.getElementById("review-btn");
+          btn.disabled = true;
+          fetch(reviewForm.getAttribute("action"), {
+            method: "POST",
+            body: new FormData(reviewForm),
+            headers: { "Accept": "application/json" }
+          }).then(function (res) {
+            if (res.ok) {
+              reviewForm.reset();
+              status.textContent = "Thank you. Your review will appear once it\u2019s approved.";
+            } else {
+              status.textContent = "Something went wrong sending your review. Please try again, or call 346-400-4656.";
+            }
+            status.hidden = false;
+            btn.disabled = false;
+          }).catch(function () {
+            status.textContent = "Something went wrong sending your review. Please try again, or call 346-400-4656.";
+            status.hidden = false;
+            btn.disabled = false;
+          });
+        });
+      }
+})();
+
   </script>
 </body>
 </html>
