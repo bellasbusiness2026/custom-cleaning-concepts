@@ -1195,3 +1195,6 @@ fieldset { min-width: 0; }
 .sel-list, .form-sel-list { grid-template-columns: minmax(0, 1fr); }
 .tag-block { white-space: normal; }
 .sel-text .tag-block { align-self: flex-start; }
+.venmo-now { margin-top: 1rem; }
+.venmo-now .btn { display: inline-block; }
+.venmo-now .hint:last-child { margin: 0.7rem 0 0; }

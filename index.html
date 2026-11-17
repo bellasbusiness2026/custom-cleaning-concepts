@@ -385,7 +385,7 @@
     <section class="how" id="how-it-works">
       <div class="section-head">
         <h2>How booking works</h2>
-        <p>Pick your services and a date you&rsquo;d like. Most jobs start with a free walkthrough and a written quote. Simple jobs need no walkthrough. Lucille sends the secure deposit link with your written quote or booking confirmation, and this site never takes payment.</p>
+        <p>Pick your services and a date you&rsquo;d like. Most jobs start with a free walkthrough and a written quote. Simple jobs need no walkthrough. Lucille sends a secure card link for the deposit with your written quote or booking confirmation, or you can pay with Venmo. This site never takes payment.</p>
       </div>
 
       <h3 class="path-h">Most jobs: walkthrough, then a written quote</h3>
@@ -408,7 +408,7 @@
           <span class="step-num">3</span>
           <div>
             <h3>Written quote and deposit</h3>
-            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. Lucille sends a secure link for the 20% booking deposit with your written quote. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
+            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. Lucille sends a secure card link for the 20% booking deposit with your written quote, or you can pay it with Venmo. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
           </div>
         </li>
         <li class="reveal">
@@ -434,7 +434,7 @@
           <span class="step-num">2</span>
           <div>
             <h3>Booking confirmation and deposit</h3>
-            <p>Lucille sends your booking confirmation with a secure link for the 20% booking deposit. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
+            <p>Lucille sends your booking confirmation with a secure card link for the 20% booking deposit, or you can pay with Venmo. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
           </div>
         </li>
         <li class="reveal">
@@ -531,7 +531,11 @@
         </details>
         <details class="faq-item reveal">
           <summary>How do booking and payment work?</summary>
-          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a free walkthrough, with no fee. The quote comes from that walkthrough: you get it in writing and agree to it in writing before any work begins. Lucille sends a secure link for the 20% booking deposit with your written quote. Simple jobs can skip the walkthrough: she sends the deposit link with your booking confirmation instead. Either way, the deposit is non-refundable, and your date is held once we receive it. This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
+          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a free walkthrough, with no fee. The quote comes from that walkthrough: you get it in writing and agree to it in writing before any work begins. Lucille sends a secure card link for the 20% booking deposit with your written quote. Simple jobs can skip the walkthrough: she sends the deposit link with your booking confirmation instead. Either way, the deposit is non-refundable, and your date is held once we receive it. You can also pay the deposit with Venmo (see below). This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Can I pay the deposit with Venmo?</summary>
+          <div class="faq-a">Yes. You can pay the 20% deposit with the secure card link, or with <a href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Venmo @ccc_htxowner_lucy<span class="sr-only"> (opens in a new tab)</span></a>. Wait until Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your name or quote number in the Venmo note so we can match your payment. The deposit is non-refundable, and your date is held once we receive it.</div>
         </details>
         <details class="faq-item reveal">
           <summary>Is the date I pick on the form confirmed?</summary>
@@ -575,7 +579,7 @@
         <span class="footer-sep" aria-hidden="true"> · </span>
         <a class="footer-email" href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>
       </p>
-      <p class="footer-terms">Free walkthrough, then a written quote good for 14 days. Simple jobs need no walkthrough. 20% non-refundable booking deposit, paid through a secure link Lucille sends with your written quote or booking confirmation. Your date is held once we receive it. Balance due on completion. 1.5% a month on balances unpaid 15 days after completion. Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job. This site itself never takes your card details.</p>
+      <p class="footer-terms">Free walkthrough, then a written quote good for 14 days. Simple jobs need no walkthrough. 20% non-refundable booking deposit, paid through a secure card link Lucille sends with your written quote or booking confirmation, or with Venmo (@ccc_htxowner_lucy). Your date is held once we receive it. Balance due on completion. 1.5% a month on balances unpaid 15 days after completion. Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job. This site itself never takes your card details.</p>
     </div>
   </footer>
 
@@ -1251,7 +1255,7 @@
       doneBox.appendChild(el("p", "", "For the rest, we\u2019ll call to set up your free walkthrough. Your written quote comes from that walkthrough."));
     }
     if (!direct.length && simple.length) {
-      doneBox.appendChild(el("p", "", "For the simple jobs, Lucille will reply and send your booking confirmation with a secure link for the 20% deposit. Your date is held once the deposit is received."));
+      doneBox.appendChild(el("p", "", "For the simple jobs, Lucille will reply and send your booking confirmation with a secure card link for the 20% deposit, or you can pay with Venmo below. Your date is held once the deposit is received."));
     }
     if (direct.length) {
       var box = el("div", "pay-now");
@@ -1275,6 +1279,15 @@
       box.appendChild(list);
       doneBox.appendChild(box);
     }
+    var vbox = el("div", "pay-now venmo-now");
+    vbox.appendChild(el("h4", "", "Prefer to pay with Venmo?"));
+    vbox.appendChild(el("p", "hint", "Pay after Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your name or quote number in the Venmo note."));
+    var va = el("a", "btn", "Pay deposit with Venmo");
+    va.href = "https://www.venmo.com/u/ccc_htxowner_lucy"; va.target = "_blank"; va.rel = "noopener noreferrer";
+    va.appendChild(el("span", "sr-only", " (opens in a new tab)"));
+    vbox.appendChild(va);
+    vbox.appendChild(el("p", "hint", "Venmo Business: @ccc_htxowner_lucy"));
+    doneBox.appendChild(vbox);
     var again = el("button", "btn-secondary", "Send another request"); again.type = "button";
     again.addEventListener("click", function () { doneBox.hidden = true; form.hidden = false; scrollToEl($("#services")); });
     doneBox.appendChild(again);
