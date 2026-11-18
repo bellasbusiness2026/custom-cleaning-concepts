@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Deposit received — Custom Cleaning Concepts</title>
+  <meta name="theme-color" content="#14362c">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <rect x="4" y="4" width="32" height="32" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 4v32M4 20h32" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span class="wordmark-text">
+          <span class="wordmark-name">Custom Cleaning Concepts</span>
+          <span class="wordmark-area">Houston and nearby suburbs</span>
+        </span>
+      </a>
+      <a class="header-phone" href="tel:+13464004656" aria-label="Call 346-400-4656">346-400-4656</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-narrow">
+      <p class="big-check" aria-hidden="true">&#10003;</p>
+      <h1>Thank you. Your deposit was received.</h1>
+      <p class="lede">Your 20% booking deposit is in. Now we set your date.</p>
+
+      <div class="next-box" id="date-pick" hidden>
+        <p><a class="btn btn-big" id="pick-date-btn" href="#" rel="noopener">Pick your date</a></p>
+        <p class="hint">Opens Lucille&rsquo;s calendar with the times she has open. Your date is held once you choose a time.</p>
+      </div>
+
+      <div class="next-box date-fallback" id="date-fallback">
+        <p>Lucille will text or call within one business day to set the date.</p>
+      </div>
+
+      <div class="next-box">
+        <p><strong>What happens next</strong></p>
+        <ul class="terms-list">
+          <li>We do the work on the date you choose.</li>
+          <li>The deposit is non-refundable. The balance is due when the work is done.</li>
+          <li>Questions? Call or text <a href="tel:+13464004656">346-400-4656</a>.</li>
+        </ul>
+      </div>
+      <p><a href="index.html">Back to the main page</a></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-name">Custom Cleaning Concepts</p>
+      <p class="footer-owner">Owner-run by Lucille</p>
+      <p class="footer-area">Houston and nearby suburbs</p>
+      <p class="footer-contact">
+        <a href="tel:+13464004656">346-400-4656</a>
+        <span class="footer-sep" aria-hidden="true"> &middot; </span>
+        <a class="footer-email" href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // ================================================================
+      // CALENDAR BOOKING PAGE URL: the ONE place to set it.
+      // Paste the public booking-page link from Lucille's Google Calendar
+      // (appointment schedule) between the quotes, e.g.
+      //   "https://calendar.app.google/XXXXXXXX"
+      // Must start with https://. While this is empty (or not https), the
+      // "Pick your date" button stays hidden and the page shows
+      // "Lucille will text or call within one business day to set the date."
+      // ================================================================
+      var CALENDAR_BOOKING_URL = "";
+
+      var ok = typeof CALENDAR_BOOKING_URL === "string" && /^https:\/\/[^\s"'<>]+$/.test(CALENDAR_BOOKING_URL);
+      if (!ok) { return; }
+      document.getElementById("pick-date-btn").setAttribute("href", CALENDAR_BOOKING_URL);
+      document.getElementById("date-pick").hidden = false;
+      document.getElementById("date-fallback").hidden = true;
+    })();
+  </script>
+</body>
+</html>
