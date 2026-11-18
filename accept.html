@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Accept your quote — Custom Cleaning Concepts</title>
+  <meta name="theme-color" content="#14362c">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <rect x="4" y="4" width="32" height="32" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 4v32M4 20h32" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span class="wordmark-text">
+          <span class="wordmark-name">Custom Cleaning Concepts</span>
+          <span class="wordmark-area">Houston and nearby suburbs</span>
+        </span>
+      </a>
+      <a class="header-phone" href="tel:+13464004656" aria-label="Call 346-400-4656">346-400-4656</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-narrow">
+      <h1>Accept your quote</h1>
+      <p class="lede">Review your quote details, then sign below. After you sign, you&rsquo;ll go to the secure deposit payment page, then pick your date.</p>
+
+      <div id="bad-link" class="sign-error" hidden>This quote link looks incomplete. Please call or text Lucille at <a href="tel:+13464004656">346-400-4656</a> and she&rsquo;ll send you a new one.</div>
+
+      <dl class="quote-summary" id="quote-summary">
+        <div><dt>Quote number</dt><dd id="s-q">&mdash;</dd></div>
+        <div><dt>Quote total</dt><dd id="s-amt">&mdash;</dd></div>
+        <div><dt>20% booking deposit due now</dt><dd id="s-dep">&mdash;</dd></div>
+      </dl>
+
+      <div class="next-box">
+        <p><strong>Key terms</strong></p>
+        <ul class="terms-list">
+          <li>The 20% deposit is non-refundable and holds your date once received. You can pay it by card on the secure page after you sign, or with <a href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Venmo @ccc_htxowner_lucy</a> (put the quote number in the Venmo note).</li>
+          <li>The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</li>
+          <li>This quote is valid for 14 days.</li>
+          <li>Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job.</li>
+        </ul>
+        <p>Read the full <a href="index.html#terms" target="_blank" rel="noopener">terms</a> and <a href="index.html#faq" target="_blank" rel="noopener">common questions</a> on the main page (opens in a new tab).</p>
+      </div>
+
+      <form id="sign-form" class="sign-form" novalidate>
+        <p class="field">
+          <label for="f-name">Your full name <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-name" name="Typed name" type="text" class="sign-name" autocomplete="name" required>
+          <span class="hint">Typing your name here is your electronic signature.</span>
+        </p>
+        <p class="field">
+          <label for="f-date">Date <span class="req" aria-hidden="true">*</span></label>
+          <input id="f-date" name="Date" type="text" autocomplete="off" required>
+        </p>
+        <label class="agree" for="f-agree">
+          <input id="f-agree" name="Agreed" type="checkbox" required>
+          <span>I have read and agree to this quote and the service terms, and I agree that typing my name is my electronic signature.</span>
+        </label>
+        <p class="sign-error" id="sign-error" role="alert" hidden></p>
+        <button type="submit" class="btn" id="sign-btn">Sign and continue</button>
+      </form>
+
+      <div class="next-box" id="done-box" hidden>
+        <p><strong id="done-title">Thank you. Your signed quote was received.</strong></p>
+        <p id="done-text"></p>
+        <p><a class="btn btn-big" id="done-pay" href="#" hidden>Continue to deposit payment</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-name">Custom Cleaning Concepts</p>
+      <p class="footer-owner">Owner-run by Lucille</p>
+      <p class="footer-area">Houston and nearby suburbs</p>
+      <p class="footer-contact">
+        <a href="tel:+13464004656">346-400-4656</a>
+        <span class="footer-sep" aria-hidden="true"> &middot; </span>
+        <a class="footer-email" href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Where the signature is sent (same form service as the main page).
+      var SIGN_ENDPOINT = "https://formspree.io/f/moedjzqr";
+      // Only deposit links on this host are ever followed (blocks open redirects).
+      var PAY_PREFIX = "https://buy.stripe.com/";
+
+      var params = new URLSearchParams(window.location.search);
+      var q = (params.get("q") || "").trim().slice(0, 40);
+      var amtRaw = (params.get("amt") || "").trim();
+      var depRaw = (params.get("dep") || "").trim();
+      var pay = (params.get("pay") || "").trim();
+
+      var MONEY = /^\$?\d{1,3}(,?\d{3})*(\.\d{1,2})?$/;
+      function money(v) {
+        if (!MONEY.test(v)) { return null; }
+        var n = parseFloat(v.replace(/[$,]/g, ""));
+        return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+      var amt = money(amtRaw);
+      var dep = money(depRaw);
+
+      function validPay(u) {
+        if (u.indexOf(PAY_PREFIX) !== 0) { return false; }
+        try { var x = new URL(u); return x.protocol === "https:" && x.host === "buy.stripe.com" && !x.username && !x.password; }
+        catch (e) { return false; }
+      }
+      var payOk = validPay(pay);
+
+      var form = document.getElementById("sign-form");
+      var btn = document.getElementById("sign-btn");
+      var err = document.getElementById("sign-error");
+      if (payOk) { btn.textContent = "Sign and continue to deposit payment"; } else { btn.textContent = "Sign my quote"; }
+
+      document.getElementById("s-q").textContent = q || "\u2014";
+      document.getElementById("s-amt").textContent = amt || "\u2014";
+      document.getElementById("s-dep").textContent = dep || "\u2014";
+
+      if (!q || !amt || !dep) {
+        document.getElementById("bad-link").hidden = false;
+        form.hidden = true;
+        return;
+      }
+
+      // Date field starts with today's date; the client can retype it.
+      var t = new Date();
+      var p2 = function (n) { return (n < 10 ? "0" : "") + n; };
+      document.getElementById("f-date").value = p2(t.getMonth() + 1) + "/" + p2(t.getDate()) + "/" + t.getFullYear();
+
+      function showError(msg) { err.textContent = msg; err.hidden = false; }
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        err.hidden = true;
+        var name = document.getElementById("f-name").value.trim();
+        var date = document.getElementById("f-date").value.trim();
+        if (name.length < 3 || name.indexOf(" ") < 0) { showError("Please type your full name (first and last)."); document.getElementById("f-name").focus(); return; }
+        if (!date) { showError("Please type today\u2019s date."); document.getElementById("f-date").focus(); return; }
+        if (!document.getElementById("f-agree").checked) { showError("Please check the box to agree to the quote and terms."); return; }
+
+        btn.disabled = true;
+        btn.textContent = "Sending\u2026";
+        var fd = new FormData();
+        fd.append("_subject", "QUOTE SIGNED - " + q);
+        fd.append("Form type", "Quote signature");
+        fd.append("Quote number", q);
+        fd.append("Quote total", amt);
+        fd.append("Deposit amount", dep);
+        fd.append("Typed name", name);
+        fd.append("Date typed", date);
+        fd.append("Agreed to quote and terms", "Yes, typed name is the electronic signature");
+        fd.append("Signed at (timestamp)", new Date().toISOString());
+
+        fetch(SIGN_ENDPOINT, { method: "POST", body: fd, headers: { "Accept": "application/json" } })
+          .then(function (res) {
+            if (!res.ok) { throw new Error("bad status"); }
+            form.hidden = true;
+            var box = document.getElementById("done-box");
+            var link = document.getElementById("done-pay");
+            box.hidden = false;
+            if (payOk) {
+              document.getElementById("done-text").textContent = "Taking you to the secure deposit payment page now. If nothing happens, use the button below.";
+              link.setAttribute("href", pay);
+              link.hidden = false;
+              window.location.href = pay;
+            } else {
+              document.getElementById("done-text").textContent = "Lucille will send you the deposit link. Questions? Call or text 346-400-4656.";
+            }
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.textContent = payOk ? "Sign and continue to deposit payment" : "Sign my quote";
+            showError("Something went wrong sending your signature, so nothing was submitted. Please try again, or call 346-400-4656.");
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
