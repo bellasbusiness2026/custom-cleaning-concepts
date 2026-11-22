@@ -35,6 +35,7 @@
       <div class="next-box" id="date-pick" hidden>
         <p><a class="btn btn-big" id="pick-date-btn" href="#" rel="noopener">Pick your date</a></p>
         <p class="hint">Opens Lucille&rsquo;s calendar with the times she has open. Your date is held once you choose a time.</p>
+        <p class="hint">Lucille will confirm by text or call.</p>
       </div>
 
       <div class="next-box date-fallback" id="date-fallback">
@@ -70,14 +71,13 @@
     (function () {
       // ================================================================
       // CALENDAR BOOKING PAGE URL: the ONE place to set it.
-      // Paste the public booking-page link from Lucille's Google Calendar
-      // (appointment schedule) between the quotes, e.g.
-      //   "https://calendar.app.google/XXXXXXXX"
-      // Must start with https://. While this is empty (or not https), the
-      // "Pick your date" button stays hidden and the page shows
-      // "Lucille will text or call within one business day to set the date."
+      // Public booking-page link from Lucille's Google Calendar
+      // (CCC account, appointment schedule). Must start with https://.
+      // While this is empty (or not https), the "Pick your date" button
+      // stays hidden and the page shows "Lucille will text or call within
+      // one business day to set the date."
       // ================================================================
-      var CALENDAR_BOOKING_URL = "";
+      var CALENDAR_BOOKING_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2In7eGGzO8TA9wlgZ4W-rSbzWj5YMbFh8zi9TcIxqvcgQ_aN45w8GnxWGHyKjYFlJ8ouxOUSj2";
 
       var ok = typeof CALENDAR_BOOKING_URL === "string" && /^https:\/\/[^\s"'<>]+$/.test(CALENDAR_BOOKING_URL);
       if (!ok) { return; }
