@@ -34,7 +34,8 @@
 
       <p class="not-held" id="not-held">Your date is not held yet. After Lucille checks your receipt, she&rsquo;ll text or email you the link to pick your date.</p>
 
-      <div class="req-id-box" id="req-id-box">
+      <noscript><p class="not-held">Put your request ID (it starts with CCC-, or it&rsquo;s your quote number) in your email or text. Don&rsquo;t have it? Use the name and phone number you booked with.</p></noscript>
+      <div class="req-id-box" id="req-id-box" hidden>
         <p class="req-id-label">Your request ID</p>
         <p class="req-id" id="req-id">Not found on this device</p>
         <p class="id-missing" id="id-missing">We couldn&rsquo;t find your request ID on this phone or computer. If you have it (it starts with CCC-, or it&rsquo;s your quote number), type it below. If you don&rsquo;t, that&rsquo;s okay: confirm anyway with the name and phone number you booked with.</p>
@@ -63,7 +64,7 @@
           <li>Questions? Call or text <a href="tel:+13464004656">346-400-4656</a>.</li>
         </ul>
       </div>
-      <p><a href="index.html">Back to the main page</a></p>
+      <p><a class="back-link" href="index.html">Back to the main page</a></p>
     </div>
   </main>
 
@@ -119,6 +120,7 @@
         idText.textContent = cur || "Not found on this device";
       }
 
+      document.getElementById("req-id-box").hidden = false;
       if (id) {
         missing.hidden = true;
         field.hidden = true;

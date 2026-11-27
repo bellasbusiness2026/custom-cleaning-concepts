@@ -1344,8 +1344,15 @@
     var copy = el("button", "btn-secondary", "Copy ID"); copy.type = "button"; copy.id = "copy-req-id";
     copy.addEventListener("click", function () {
       var done = function () { copy.textContent = "Copied"; say("Request ID copied."); };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(rid).then(done, function () {});
-      else { try { var r = document.createRange(); r.selectNodeContents(idP); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy"); done(); } catch (e) {} }
+      var manual = function () {
+        var ok = false;
+        try { var r = document.createRange(); r.selectNodeContents(idP); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); ok = document.execCommand("copy"); } catch (e) {}
+        if (ok) { done(); return; }
+        copy.textContent = "Press and hold the ID to copy it";
+        say("Couldn\u2019t copy automatically. The ID is selected: press and hold it to copy, or take a screenshot.");
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(rid).then(done, manual);
+      else manual();
     });
     idBox.appendChild(copy);
     idBox.appendChild(el("p", "hint", "Save this ID (take a screenshot). Any deposit you pay must carry this exact ID: the card checkout attaches it for you, and with Venmo you type it in the note. Your date is not held until Lucille confirms your deposit receipt. Don\u2019t see an ID? Don\u2019t pay yet. Call or text " + PHONE + "."));
@@ -1395,7 +1402,7 @@
     var cbox = el("div", "confirm-now");
     cbox.appendChild(el("h4", "", "After you pay: confirm your receipt"));
     cbox.appendChild(el("p", "hint", "This step is required. Send Lucille your request ID and your payment receipt (a screenshot or the receipt number). Your date is held only after she confirms it, then she texts or emails you the link to pick your date. The card checkout brings you to this step when you finish paying."));
-    var ca = el("a", "btn", "Confirm my deposit receipt"); ca.href = confirmHref(rid); ca.id = "confirm-receipt-link";
+    var ca = el("a", "btn-secondary", "Confirm my deposit receipt"); ca.href = confirmHref(rid); ca.id = "confirm-receipt-link";
     cbox.appendChild(ca);
     cbox.appendChild(el("p", "hint", "Paid but can\u2019t get through? Call or text " + PHONE + " or email " + EMAIL + " with your request ID."));
     doneBox.appendChild(cbox);
