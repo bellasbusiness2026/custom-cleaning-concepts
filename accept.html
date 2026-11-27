@@ -29,7 +29,7 @@
   <main id="main">
     <div class="page-narrow">
       <h1>Accept your quote</h1>
-      <p class="lede">Review your quote details, then sign below. After you sign, you&rsquo;ll go to the secure deposit payment page, then pick your date.</p>
+      <p class="lede">Review your quote details, then sign below. After you sign, you&rsquo;ll see your request ID and go to the secure deposit payment page. After you pay, you confirm your receipt, and once Lucille confirms it, she sends you the link to pick your date.</p>
 
       <div id="bad-link" class="sign-error" hidden>This quote link looks incomplete. Please call or text Lucille at <a href="tel:+13464004656">346-400-4656</a> and she&rsquo;ll send you a new one.</div>
 
@@ -42,7 +42,7 @@
       <div class="next-box">
         <p><strong>Key terms</strong></p>
         <ul class="terms-list">
-          <li>The 20% deposit is non-refundable and holds your date once received. You can pay it by card on the secure page after you sign, or with <a href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Venmo @ccc_htxowner_lucy</a> (put the quote number in the Venmo note).</li>
+          <li>The 20% deposit is non-refundable and holds your date once Lucille confirms your deposit receipt. You can pay it by card on the secure page after you sign, or with <a href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Venmo @ccc_htxowner_lucy</a> (put the quote number in the Venmo note; it is your request ID).</li>
           <li>The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</li>
           <li>This quote is valid for 14 days.</li>
           <li>Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job.</li>
@@ -71,7 +71,13 @@
       <div class="next-box" id="done-box" hidden>
         <p><strong id="done-title">Thank you. Your signed quote was received.</strong></p>
         <p id="done-text"></p>
+        <div class="req-id-box" id="done-id" hidden>
+          <p class="req-id-label">Your request ID</p>
+          <p class="req-id" id="done-id-val"></p>
+          <p class="hint">Save this ID (take a screenshot). Your deposit must carry this exact ID: the card checkout attaches it for you, and with Venmo you type it in the note. After you pay, confirm your receipt with this ID. Your date is not held until Lucille confirms your deposit receipt.</p>
+        </div>
         <p><a class="btn btn-big" id="done-pay" href="#" hidden>Continue to deposit payment</a></p>
+        <p class="hint" id="done-help" hidden>Paid already, or something went wrong? <a id="done-confirm" href="deposit-received.html">Confirm your deposit receipt</a>, or call or text <a href="tel:+13464004656">346-400-4656</a>.</p>
       </div>
     </div>
   </main>
@@ -117,6 +123,13 @@
         catch (e) { return false; }
       }
       var payOk = validPay(pay);
+      // Request ID for a signed quote = the quote number (letters, numbers, dashes).
+      var REQ_KEY = "ccc-request-id";
+      var reqId = q.replace(/[^A-Za-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
+      function payWithId(u, id) {
+        try { var x = new URL(u); if (id) { x.searchParams.set("client_reference_id", id); } return x.toString(); }
+        catch (e) { return u; }
+      }
 
       var form = document.getElementById("sign-form");
       var btn = document.getElementById("sign-btn");
@@ -155,6 +168,7 @@
         fd.append("_subject", "QUOTE SIGNED - " + q);
         fd.append("Form type", "Quote signature");
         fd.append("Quote number", q);
+        fd.append("Request ID", reqId);
         fd.append("Quote total", amt);
         fd.append("Deposit amount", dep);
         fd.append("Typed name", name);
@@ -169,11 +183,19 @@
             var box = document.getElementById("done-box");
             var link = document.getElementById("done-pay");
             box.hidden = false;
+            if (reqId) {
+              var rv = JSON.stringify({ id: reqId, at: new Date().toISOString(), services: ["Quote " + q] });
+              try { localStorage.setItem(REQ_KEY, rv); } catch (e) {}
+              try { sessionStorage.setItem(REQ_KEY, rv); } catch (e) {}
+              document.getElementById("done-id-val").textContent = reqId;
+              document.getElementById("done-id").hidden = false;
+              document.getElementById("done-confirm").setAttribute("href", "deposit-received.html?id=" + encodeURIComponent(reqId));
+              document.getElementById("done-help").hidden = false;
+            }
             if (payOk) {
-              document.getElementById("done-text").textContent = "Taking you to the secure deposit payment page now. If nothing happens, use the button below.";
-              link.setAttribute("href", pay);
+              document.getElementById("done-text").textContent = "Next, pay your 20% deposit on the secure payment page. Your request ID goes with the payment automatically.";
+              link.setAttribute("href", payWithId(pay, reqId));
               link.hidden = false;
-              window.location.href = pay;
             } else {
               document.getElementById("done-text").textContent = "Lucille will send you the deposit link. Questions? Call or text 346-400-4656.";
             }

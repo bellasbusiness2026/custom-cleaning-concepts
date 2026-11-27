@@ -1198,3 +1198,25 @@ fieldset { min-width: 0; }
 .venmo-now { margin-top: 1rem; }
 .venmo-now .btn { display: inline-block; }
 .venmo-now .hint:last-child { margin: 0.7rem 0 0; }
+
+/* failproof booking (Nov 26): lifeline line, simple fallback form, request ID, confirm-receipt step */
+.form-lifeline { margin: 0 0 1rem; padding: 0.85rem 1rem; border: 2px solid var(--clay); border-radius: 10px; background: #fbf1ea; color: var(--ink); font-size: 1.05rem; }
+.form-lifeline strong a { color: var(--clay-deep); white-space: nowrap; }
+.lifeline-links { display: block; margin-top: 0.3rem; font-size: 0.95rem; }
+.fallback-form { margin-top: 1.2rem; border: 1.5px dashed var(--line-strong); border-radius: var(--radius); background: var(--paper); }
+.fallback-form > summary { padding: 0.9rem 1rem; font-weight: 700; cursor: pointer; color: var(--pine-deep); min-height: 2.75rem; }
+.fallback-body { padding: 0 1rem 1rem; }
+.fallback-fields { display: grid; gap: 0.85rem; margin: 0.6rem 0; }
+.fallback-fields input, .fallback-fields textarea { width: 100%; min-height: 2.85rem; padding: 0.5rem 0.6rem; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; color: var(--ink); font: inherit; }
+.fallback-fields label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+.req-id-box { margin: 1rem 0; padding: 1rem; border: 2px solid var(--pine); border-radius: 12px; background: #fff; }
+.req-id-label { margin: 0 0 0.2rem; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.85rem; }
+.req-id { margin: 0 0 0.6rem; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: clamp(1.5rem, 6.5vw, 2.1rem); font-weight: 800; letter-spacing: 0.04em; color: var(--pine-deep); user-select: all; -webkit-user-select: all; overflow-wrap: anywhere; }
+.req-id-box .hint { margin: 0.6rem 0 0; }
+.req-id-input { width: 100%; min-height: 2.85rem; padding: 0.5rem 0.6rem; border: 1px solid var(--line-strong); border-radius: 8px; background: #fff; font: inherit; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 1.1rem; }
+.confirm-now { margin: 1rem 0; padding: 1rem; background: #fbf1ea; border: 2px solid var(--clay); border-radius: 12px; }
+.confirm-now h4, .confirm-now h2 { margin: 0 0 0.3rem; font-size: 1.15rem; }
+.confirm-now .btn { display: inline-block; }
+.not-held { margin: 1rem 0; padding: 0.9rem 1rem; border-radius: 10px; background: var(--sage); border: 1px solid var(--line-strong); color: var(--pine-deep); font-weight: 700; }
+.id-missing { margin: 0.6rem 0 0; padding: 0.8rem 1rem; border-radius: 10px; background: #f6e6e6; border: 1px solid var(--error); color: var(--error); font-weight: 600; }
+.id-missing[hidden], .req-id-box [hidden] { display: none; }

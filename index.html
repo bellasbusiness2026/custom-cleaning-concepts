@@ -143,7 +143,8 @@
             <h2 id="request-h" tabindex="-1">Book your services</h2>
             <p>Your picks are at the top. Choose the date you&rsquo;d like, add your contact details, and send. We reply the same day to requests received by 5 PM.</p>
           </div>
-          <noscript><p class="form-alert">The booking form needs JavaScript. Please turn it on, or call <a href="tel:+13464004656">346-400-4656</a> and tell us what you need.</p></noscript>
+          <p class="form-lifeline" id="form-lifeline"><strong>Call or text <a href="tel:+13464004656">346-400-4656</a> if the form fails.</strong> <span class="lifeline-links"><a href="sms:+13464004656">Send a text</a> <span aria-hidden="true">&middot;</span> <a href="#fallback-form">Use the simple form</a> <span aria-hidden="true">&middot;</span> <a href="mailto:ccc.htx.ownerop.lucy@gmail.com">Email us</a></span></p>
+          <noscript><p class="form-alert">The booking form needs JavaScript. Please turn it on, or call <a href="tel:+13464004656">346-400-4656</a> and tell us what you need. You can also use the simple request form below this one: it works without JavaScript.</p></noscript>
 
           <div class="form-done" id="form-done" tabindex="-1" hidden></div>
 
@@ -199,7 +200,7 @@
                       <option>Evening</option>
                     </select>
                   </p>
-                  <p class="hint small-print" id="date-small">The date you pick here is a request. After you pay the 20% booking deposit, you choose your date on Lucille&rsquo;s booking page. Request-form dates stay as requests until we confirm them with you.</p>
+                  <p class="hint small-print" id="date-small">The date you pick here is a request. After you pay the 20% booking deposit, you confirm your receipt with your request ID. Once Lucille confirms your deposit, she sends you the link to choose your date on her booking page. Request-form dates stay as requests until we confirm them with you.</p>
                 </div>
               </div>
             </fieldset>
@@ -382,6 +383,35 @@
             </p>
             <p class="form-note">Your request goes straight to Custom Cleaning Concepts. We reply the same day to requests received by 5 PM. For most jobs, we then call to set up your free walkthrough, and the written quote comes from that walkthrough. Prefer to talk? Call <a href="tel:+13464004656">346-400-4656</a>.</p>
           </form>
+
+          <details class="fallback-form" id="fallback-form" open>
+            <summary>Form not working? Send a simple request instead</summary>
+            <div class="fallback-body">
+              <p>This short form works on any phone or computer, even if the booking form above won&rsquo;t load or send. It opens your email app with your request filled in, so you just press send. If that doesn&rsquo;t work either, call or text <a href="tel:+13464004656">346-400-4656</a>, or email <a href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>.</p>
+              <form class="fallback-fields" id="fallback-fields" action="mailto:ccc.htx.ownerop.lucy@gmail.com?subject=Booking%20request%20from%20the%20website" method="post" enctype="text/plain">
+                <p class="field">
+                  <label for="fb-name">Name</label>
+                  <input id="fb-name" name="Name" type="text" autocomplete="name" required>
+                </p>
+                <p class="field">
+                  <label for="fb-phone">Phone</label>
+                  <input id="fb-phone" name="Phone" type="tel" autocomplete="tel" required>
+                </p>
+                <p class="field field-span">
+                  <label for="fb-services">Services you need</label>
+                  <textarea id="fb-services" name="Services" rows="3" required></textarea>
+                  <span class="hint">For example, Airbnb turnover for 2 bedrooms, or a half-load cleanout.</span>
+                </p>
+                <p class="field">
+                  <label for="fb-date">Preferred date</label>
+                  <input id="fb-date" name="Preferred date" type="date">
+                </p>
+                <p class="form-actions"><button type="submit" class="btn-secondary">Email my request</button></p>
+              </form>
+              <p class="hint">Lucille replies with your request ID before you pay any deposit. Please don&rsquo;t pay a deposit until you have that ID.</p>
+            </div>
+          </details>
+          <script>document.getElementById("fallback-form").open = false;</script>
         </section>
       </div>
 
@@ -426,7 +456,7 @@
           <span class="step-num">3</span>
           <div>
             <h3>Written quote and deposit</h3>
-            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. After you sign your quote online, you go to a secure deposit payment page for the 20% booking deposit (or pay it with Venmo), then pick your date from Lucille&rsquo;s calendar. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
+            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. After you sign your quote online, you see your request ID and go to a secure deposit payment page for the 20% booking deposit (or pay it with Venmo). Then you confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to pick your date from her calendar. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.</p>
           </div>
         </li>
         <li class="reveal">
@@ -445,14 +475,14 @@
           <span class="step-num">1</span>
           <div>
             <h3>Pick the job and send your request</h3>
-            <p>Tap Add on a job marked Book directly, choose the date you&rsquo;d like, and send the form. When it goes through, you&rsquo;ll see a button to pay the 20% booking deposit on a secure checkout page, or you can pay with Venmo. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>
+            <p>Tap Add on a job marked Book directly, choose the date you&rsquo;d like, and send the form. When it goes through, you&rsquo;ll see your request ID and a button to pay the 20% booking deposit on a secure checkout page, or you can pay with Venmo. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.</p>
           </div>
         </li>
         <li class="reveal">
           <span class="step-num">2</span>
           <div>
             <h3>Pick your date and time</h3>
-            <p>After you pay, you go to Lucille&rsquo;s calendar and choose from the times she has open.</p>
+            <p>After you pay, you confirm your receipt with your request ID. Once Lucille checks it, she texts or emails you the link to her calendar, and you choose from the times she has open.</p>
           </div>
         </li>
         <li class="reveal">
@@ -550,19 +580,23 @@
         </details>
         <details class="faq-item reveal">
           <summary>How do booking and payment work?</summary>
-          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a free walkthrough, with no fee. The quote comes from that walkthrough: you get it in writing and sign it online before any work begins. After you sign, you go to a secure deposit payment page for the 20% booking deposit, then pick your date from Lucille&rsquo;s calendar. Simple jobs can be booked directly instead: after you send your request, you can pay the deposit right away on a secure checkout page, then choose your date and time. Either way, the deposit is non-refundable, and your date is held once we receive it. You can also pay the deposit with Venmo (see below). This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
+          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a free walkthrough, with no fee. The quote comes from that walkthrough: you get it in writing and sign it online before any work begins. After you sign, you go to a secure deposit payment page for the 20% booking deposit. Simple jobs can be booked directly instead: after you send your request, you get a request ID and can pay the deposit right away on a secure checkout page. Either way, you then confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to choose your date and time. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt. You can also pay the deposit with Venmo (see below). This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
         </details>
         <details class="faq-item reveal">
           <summary>Can I pay the deposit with Venmo?</summary>
-          <div class="faq-a">Yes. You can pay the 20% deposit with the secure card link, or with <a href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Venmo @ccc_htxowner_lucy<span class="sr-only"> (opens in a new tab)</span></a>. Wait until Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your name or quote number in the Venmo note so we can match your payment. The deposit is non-refundable, and your date is held once we receive it.</div>
+          <div class="faq-a">Yes. You can pay the 20% deposit with the secure card link, or with <a href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Venmo @ccc_htxowner_lucy<span class="sr-only"> (opens in a new tab)</span></a>. Wait until Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your request ID in the Venmo note, along with your name or quote number, so we can match your payment. Then confirm your receipt: email or text Lucille your request ID and a screenshot of your Venmo payment. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.</div>
         </details>
         <details class="faq-item reveal">
           <summary>Is the date I pick on the form confirmed?</summary>
-          <div class="faq-a">No. It&rsquo;s the date you&rsquo;d like. We confirm your date with you, and it&rsquo;s held once your deposit is received.</div>
+          <div class="faq-a">No. It&rsquo;s the date you&rsquo;d like. We confirm your date with you, and it&rsquo;s held once Lucille confirms your deposit receipt.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What if something goes wrong with my booking or deposit?</summary>
+          <div class="faq-a"><strong>The form won&rsquo;t send:</strong> use the simple request form under the booking form, or call or text <a href="tel:+13464004656">346-400-4656</a>. <strong>You don&rsquo;t see a request ID:</strong> don&rsquo;t pay yet. Call or text and Lucille will give you one. <strong>You paid but lost your request ID:</strong> confirm your receipt anyway with the name and phone number you booked with. <strong>You paid but haven&rsquo;t heard back:</strong> your date isn&rsquo;t held until Lucille confirms your receipt, so if you haven&rsquo;t heard from her within one business day, call or text <a href="tel:+13464004656">346-400-4656</a> or email <a href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a> with your request ID and a screenshot of your receipt.</div>
         </details>
         <details class="faq-item reveal">
           <summary>Which jobs can I book directly?</summary>
-          <div class="faq-a">Single-item pickup, Airbnb turnovers, a lawn base visit (lots up to 3,000 sq ft), and handyman repair at $70 an hour with a 2-hour minimum ($140). These have a fixed posted rate. Everything else starts with a walkthrough and a written quote. For a direct booking, you pay the 20% deposit on a secure checkout page and then pick your date and time.</div>
+          <div class="faq-a">Single-item pickup, Airbnb turnovers, a lawn base visit (lots up to 3,000 sq ft), and handyman repair at $70 an hour with a 2-hour minimum ($140). These have a fixed posted rate. Everything else starts with a walkthrough and a written quote. For a direct booking, you pay the 20% deposit on a secure checkout page, confirm your receipt with your request ID, and then pick your date and time once Lucille confirms it.</div>
         </details>
         <details class="faq-item reveal">
           <summary>Is the walkthrough free?</summary>
@@ -598,7 +632,7 @@
         <span class="footer-sep" aria-hidden="true"> · </span>
         <a class="footer-email" href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>
       </p>
-      <p class="footer-terms">Free walkthrough, then a written quote good for 14 days. Simple jobs can be booked directly. 20% non-refundable booking deposit, paid on a secure checkout page after you sign your quote or choose a simple job, or with Venmo (@ccc_htxowner_lucy). Your date is held once we receive it. Balance due on completion. 1.5% a month on balances unpaid 15 days after completion. Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job. This site itself never takes your card details.</p>
+      <p class="footer-terms">Free walkthrough, then a written quote good for 14 days. Simple jobs can be booked directly. 20% non-refundable booking deposit, paid on a secure checkout page after you sign your quote or choose a simple job, or with Venmo (@ccc_htxowner_lucy). Your date is held once Lucille confirms your deposit receipt. Balance due on completion. 1.5% a month on balances unpaid 15 days after completion. Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job. This site itself never takes your card details.</p>
     </div>
   </footer>
 
@@ -620,6 +654,11 @@
   var STORE_KEY = "ccc-booking-v1";
   // Calendar: how far ahead a date can be requested (days).
   var CAL_DAYS_AHEAD = 180;
+  // The request ID shown before payment (CCC-YYMMDD-XXXX) is kept here so the
+  // deposit-received page can show it again for the "Confirm receipt" step.
+  var REQ_KEY = "ccc-request-id";
+  var PHONE = "346-400-4656";
+  var EMAIL = "ccc.htx.ownerop.lucy@gmail.com";
   // ---------------------------------------------------------------
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -1211,6 +1250,30 @@
     if (e.target.closest && e.target.closest("[data-q-back]")) qBack();
   });
 
+  // ===== Request ID (shown before payment, rides on the deposit) =====
+  var reqId = "";             // made once per request; kept for a retry after a failed send
+  function makeReqId() {
+    var A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    var n = new Uint8Array(4), s = "";
+    try { (window.crypto || window.msCrypto).getRandomValues(n); } catch (e) { for (var i = 0; i < 4; i++) n[i] = Math.floor(Math.random() * 256); }
+    for (var j = 0; j < 4; j++) s += A.charAt(n[j] % A.length);
+    var d = new Date(), p2 = function (x) { return (x < 10 ? "0" : "") + x; };
+    return "CCC-" + String(d.getFullYear()).slice(2) + p2(d.getMonth() + 1) + p2(d.getDate()) + "-" + s;
+  }
+  function keepReqId(id, labels) {
+    var v = JSON.stringify({ id: id, at: new Date().toISOString(), services: labels || [] });
+    try { localStorage.setItem(REQ_KEY, v); } catch (e) {}
+    try { sessionStorage.setItem(REQ_KEY, v); } catch (e) {}
+  }
+  function payHref(base, id) { return base + (base.indexOf("?") === -1 ? "?" : "&") + "client_reference_id=" + encodeURIComponent(id); }
+  function confirmHref(id) { return "deposit-received.html?id=" + encodeURIComponent(id); }
+
+  // "Use the simple form" links open the fallback form.
+  var fbForm = $("#fallback-form");
+  function openFallback() { if (fbForm) fbForm.open = true; }
+  $$('a[href="#fallback-form"]').forEach(function (a) { a.addEventListener("click", openFallback); });
+  if (location.hash === "#fallback-form") openFallback();
+
   // ===== Submit =====
   function showAlert(id, msg) { var a = $(id); a.textContent = msg; a.hidden = false; }
   function hideAlerts() { $$(".form-alert").forEach(function (a) { a.hidden = true; }); }
@@ -1240,13 +1303,19 @@
     // Leave out blank optional answers so the email stays short.
     var data = new FormData(form);
     Array.from(data.keys()).forEach(function (k) { if (k !== "_gotcha" && String(data.get(k)).trim() === "") data.delete(k); });
+    if (!reqId) reqId = makeReqId();
+    var sentId = reqId;
+    data.set("Request ID", sentId);
+    data.set("_subject", "New booking request - Custom Cleaning Concepts - " + sentId);
     fetch(form.getAttribute("action"), {
       method: "POST",
       body: data,
       headers: { "Accept": "application/json" }
     }).then(function (res) {
       if (!res.ok) throw new Error("bad status");
-      showDone(snapshot, $("#name").value.trim(), $("#req-date").value);
+      keepReqId(sentId, snapshot.map(function (id) { return items[id].label; }));
+      reqId = "";
+      showDone(snapshot, $("#name").value.trim(), $("#req-date").value, sentId);
       form.reset();
       selected = []; dateISO = ""; quizNote = "";
       $("#req-date").value = "";
@@ -1255,18 +1324,32 @@
       render();
       submitBtn.disabled = false; submitBtn.textContent = oldLabel;
     }).catch(function () {
-      showAlert("#form-error", "Something went wrong sending your request, so nothing was sent. Your picks are still here. Please try again, or call 346-400-4656.");
+      showAlert("#form-error", "Something went wrong sending your request, so nothing was sent. Your picks are still here. Please try again, or call or text 346-400-4656, or use the simple request form just below.");
+      openFallback();
       submitBtn.disabled = false; submitBtn.textContent = oldLabel;
     });
   });
 
-  function showDone(ids, name, dateText) {
+  function showDone(ids, name, dateText, rid) {
     doneBox.innerHTML = "";
     var check = el("p", "big-check", "\u2713"); check.setAttribute("aria-hidden", "true");
     doneBox.appendChild(check);
     var h = el("h3", "done-h", "Thank you" + (name ? ", " + name.split(" ")[0] : "") + ". Your request is in.");
     doneBox.appendChild(h);
     doneBox.appendChild(el("p", "", "We reply the same day to requests received by 5 PM. Later requests get a reply the following business day. The date you asked for is " + dateText + ". It\u2019s a request, and we\u2019ll confirm it with you."));
+    var idBox = el("div", "req-id-box");
+    idBox.appendChild(el("p", "req-id-label", "Your request ID"));
+    var idP = el("p", "req-id", rid); idP.id = "req-id";
+    idBox.appendChild(idP);
+    var copy = el("button", "btn-secondary", "Copy ID"); copy.type = "button"; copy.id = "copy-req-id";
+    copy.addEventListener("click", function () {
+      var done = function () { copy.textContent = "Copied"; say("Request ID copied."); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(rid).then(done, function () {});
+      else { try { var r = document.createRange(); r.selectNodeContents(idP); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy"); done(); } catch (e) {} }
+    });
+    idBox.appendChild(copy);
+    idBox.appendChild(el("p", "hint", "Save this ID (take a screenshot). Any deposit you pay must carry this exact ID: the card checkout attaches it for you, and with Venmo you type it in the note. Your date is not held until Lucille confirms your deposit receipt. Don\u2019t see an ID? Don\u2019t pay yet. Call or text " + PHONE + "."));
+    doneBox.appendChild(idBox);
     var ul = el("ul", "q-picks");
     ids.forEach(function (id) { ul.appendChild(el("li", "", items[id].label)); });
     doneBox.appendChild(ul);
@@ -1276,12 +1359,12 @@
       doneBox.appendChild(el("p", "", "For the rest, we\u2019ll call to set up your free walkthrough. Your written quote comes from that walkthrough."));
     }
     if (!direct.length && simple.length) {
-      doneBox.appendChild(el("p", "", "For the simple jobs, Lucille will reply and send your booking confirmation with a secure card link for the 20% deposit, or you can pay with Venmo below. Your date is held once the deposit is received."));
+      doneBox.appendChild(el("p", "", "For the simple jobs, Lucille will reply and send your booking confirmation with a secure card link for the 20% deposit, or you can pay with Venmo below. Your date is held once Lucille confirms your deposit receipt."));
     }
     if (direct.length) {
       var box = el("div", "pay-now");
-      box.appendChild(el("h4", "", "Pay your deposit now to hold your date"));
-      box.appendChild(el("p", "hint", "These simple jobs don\u2019t need a walkthrough. The deposit is 20% of the posted price, non-refundable, and paid on a secure checkout page. After you pay, you pick your date and time."));
+      box.appendChild(el("h4", "", "Pay your deposit now"));
+      box.appendChild(el("p", "hint", "These simple jobs don\u2019t need a walkthrough. The deposit is 20% of the posted price, non-refundable, and paid on a secure checkout page. Your request ID " + rid + " goes with the payment automatically. After you pay, you confirm your receipt, and once Lucille confirms it she sends you the link to pick your date and time."));
       var list = el("ul", "pay-list");
       direct.forEach(function (id) {
         var it = items[id];
@@ -1291,7 +1374,7 @@
         info.appendChild(el("span", "pay-price", priceLine(it) + " \u00b7 deposit $" + it.deposit));
         li.appendChild(info);
         var a = el("a", "btn", "Pay deposit now");
-        a.href = it.pay; a.rel = "noopener";
+        a.href = payHref(it.pay, rid); a.rel = "noopener";
         var sr = el("span", "sr-only", " for " + it.label);
         a.appendChild(sr);
         li.appendChild(a);
@@ -1302,13 +1385,20 @@
     }
     var vbox = el("div", "pay-now venmo-now");
     vbox.appendChild(el("h4", "", "Prefer to pay with Venmo?"));
-    vbox.appendChild(el("p", "hint", "Pay after Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your name or quote number in the Venmo note."));
+    vbox.appendChild(el("p", "hint", "Pay after Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your request ID (" + rid + ") and your name or quote number in the Venmo note."));
     var va = el("a", "btn", "Pay deposit with Venmo");
     va.href = "https://www.venmo.com/u/ccc_htxowner_lucy"; va.target = "_blank"; va.rel = "noopener noreferrer";
     va.appendChild(el("span", "sr-only", " (opens in a new tab)"));
     vbox.appendChild(va);
     vbox.appendChild(el("p", "hint", "Venmo Business: @ccc_htxowner_lucy"));
     doneBox.appendChild(vbox);
+    var cbox = el("div", "confirm-now");
+    cbox.appendChild(el("h4", "", "After you pay: confirm your receipt"));
+    cbox.appendChild(el("p", "hint", "This step is required. Send Lucille your request ID and your payment receipt (a screenshot or the receipt number). Your date is held only after she confirms it, then she texts or emails you the link to pick your date. The card checkout brings you to this step when you finish paying."));
+    var ca = el("a", "btn", "Confirm my deposit receipt"); ca.href = confirmHref(rid); ca.id = "confirm-receipt-link";
+    cbox.appendChild(ca);
+    cbox.appendChild(el("p", "hint", "Paid but can\u2019t get through? Call or text " + PHONE + " or email " + EMAIL + " with your request ID."));
+    doneBox.appendChild(cbox);
     var again = el("button", "btn-secondary", "Send another request"); again.type = "button";
     again.addEventListener("click", function () { doneBox.hidden = true; form.hidden = false; scrollToEl($("#services")); });
     doneBox.appendChild(again);
