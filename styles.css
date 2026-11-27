@@ -1202,7 +1202,9 @@ fieldset { min-width: 0; }
 /* failproof booking (Nov 26): lifeline line, simple fallback form, request ID, confirm-receipt step */
 .form-lifeline { margin: 0 0 1rem; padding: 0.85rem 1rem; border: 2px solid var(--clay); border-radius: 10px; background: #fbf1ea; color: var(--ink); font-size: 1.05rem; }
 .form-lifeline strong a { color: var(--clay-deep); white-space: nowrap; }
-.lifeline-links { display: block; margin-top: 0.3rem; font-size: 0.95rem; }
+.lifeline-links { display: block; margin-top: 0.15rem; font-size: 0.95rem; }
+.lifeline-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.1rem; }
+.back-link { display: inline-flex; align-items: center; min-height: 44px; }
 .fallback-form { margin-top: 1.2rem; border: 1.5px dashed var(--line-strong); border-radius: var(--radius); background: var(--paper); }
 .fallback-form > summary { padding: 0.9rem 1rem; font-weight: 700; cursor: pointer; color: var(--pine-deep); min-height: 2.75rem; }
 .fallback-body { padding: 0 1rem 1rem; }
