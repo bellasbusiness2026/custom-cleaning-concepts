@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Custom Cleaning Concepts serves Houston and nearby suburbs. Pick your services, choose a date, and send. Cleanouts, make-ready deep cleans, Airbnb turnovers, after-hours commercial cleaning, handyman and painting, power washing, and lawn care. Owner-run. @@IFPAY@@Free video walkthrough, or in person (a mileage fee may apply depending on distance), then a written quote good for 14 days. Simple jobs can be booked directly.">@@ELSE@@Free video walkthrough, or in person (a mileage fee may apply depending on distance), then a written quote good for 14 days. Simple jobs need no walkthrough.">@@ENDIF@@
+  <title>Custom Cleaning Concepts — Houston and nearby suburbs</title>
+  <meta name="theme-color" content="#14362c">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.className += " js";</script>
+  <!--
+    FORM CONFIG: booking requests go to the form service address set as FORM_ACTION
+    in the script at the bottom. Selected services are sent as one readable
+    "Services selected" field plus one hidden field per service.
+  -->
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="#top">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <rect x="4" y="4" width="32" height="32" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 4v32M4 20h32" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span class="wordmark-text">
+          <span class="wordmark-name">Custom Cleaning Concepts</span>
+          <span class="wordmark-area">Houston and nearby suburbs</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#quiz">Not sure?</a>
+        <a href="#request">Book now</a>
+        <a href="#how-it-works">How booking works</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#terms">Terms</a>
+      </nav>
+      <a class="header-phone" href="tel:+13464004656" aria-label="Call 346-400-4656">346-400-4656</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <p class="eyebrow">Owner-run · Houston and nearby suburbs</p>
+      <h1>Cleaning and property care in Houston. Price agreed first, work second.</h1>
+      <p class="lede">Cleanouts, make-ready deep cleans, Airbnb turnovers, after-hours commercial cleaning, handyman and painting, power washing, and lawn care. For real estate agents, property managers, attorneys, Airbnb hosts, offices, med spas, and homeowners in Houston and nearby suburbs.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#services">Pick your services</a>
+        <a class="btn-secondary" href="tel:+13464004656">Call 346-400-4656</a>
+      </div>
+      <p class="hero-direct">Not sure what you need? <a href="#quiz">Take the 20-second quiz.</a></p>
+      <ul class="trust" aria-label="How we work">
+        <li>Tap the services you want, then choose a date</li>
+        <li>Free video walkthrough, or in person (a mileage fee may apply depending on distance), then a written quote</li>
+        @@IFPAY@@<li>Simple jobs: book directly, no walkthrough</li>@@ELSE@@<li>Simple jobs: no walkthrough needed</li>@@ENDIF@@
+        <li>Same-day reply to requests received by 5 PM</li>
+      </ul>
+    </section>
+
+    <section class="quiz" id="quiz" aria-labelledby="quiz-h">
+      <div class="quiz-card reveal">
+        <div class="quiz-intro">
+          <h2 id="quiz-h">Not sure what to pick?</h2>
+          <p>Answer a few quick taps and we&rsquo;ll pick the matching services for you. You can change them afterward.</p>
+          <button type="button" class="btn" id="quiz-start" aria-expanded="false" aria-controls="quiz-body">Find my services</button>
+        </div>
+        <div class="quiz-body" id="quiz-body" hidden></div>
+      </div>
+    </section>
+
+    <div class="pick-layout">
+      <div class="pick-main">
+
+        <section class="services" id="services" aria-labelledby="services-h">
+          <div class="section-head">
+            <h2 id="services-h" tabindex="-1">Pick your services</h2>
+            <p>Tap <strong>Add</strong> on everything you need. Your picks collect in <strong>Your selections</strong> and go straight into the booking form, along with the date you&rsquo;d like. Prices are starting prices, not the final job price. For most jobs a walkthrough comes first (free by video, or in person, where a mileage fee may apply depending on distance), then a written quote, and nothing starts until you agree to it in writing. @@IFPAY@@Jobs marked <span class="tag">Book directly</span> can skip the walkthrough.@@ELSE@@Jobs marked <span class="tag">No walkthrough needed</span> can skip it.@@ENDIF@@</p>
+          </div>
+@@SERVICES@@
+        </section>
+
+        <section class="request" id="request" aria-labelledby="request-h">
+          <div class="section-head">
+            <h2 id="request-h" tabindex="-1">Book your services</h2>
+            <p>Your picks are at the top. Choose the date you&rsquo;d like, add your contact details, and send. We reply the same day to requests received by 5 PM.</p>
+          </div>
+          <p class="form-lifeline" id="form-lifeline"><strong>Call or text <a href="tel:+13464004656">346-400-4656</a> if the form fails.</strong> <span class="lifeline-links"><a href="sms:+13464004656">Send a text</a> <span aria-hidden="true">&middot;</span> <a href="#fallback-form">Use the simple form</a> <span aria-hidden="true">&middot;</span> <a href="mailto:ccc.htx.ownerop.lucy@gmail.com">Email us</a></span></p>
+          <noscript><p class="form-alert">The booking form needs JavaScript. Please turn it on, or call <a href="tel:+13464004656">346-400-4656</a> and tell us what you need. You can also use the simple request form below this one: it works without JavaScript.</p></noscript>
+
+          <div class="form-done" id="form-done" tabindex="-1" hidden></div>
+
+          <form id="booking-form" class="booking-form" method="post" action="https://formspree.io/f/moedjzqr" novalidate>
+            <input type="hidden" name="_subject" value="New booking request - Custom Cleaning Concepts">
+            <input type="text" name="_gotcha" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div id="synced-fields" hidden></div>
+
+            <fieldset class="f-services" id="f-services">
+              <legend>1. Your services <span class="req" aria-hidden="true">*</span></legend>
+              <p class="form-alert" id="services-error" role="alert" hidden></p>
+              <ul class="form-sel-list" id="form-sel-list"></ul>
+              <p class="form-empty" id="form-sel-empty">You haven&rsquo;t picked any services yet. <a href="#services">Pick your services</a> or <a href="#quiz">take the quick quiz</a>.</p>
+              <div class="add-more">
+                <label for="add-select">Add a service</label>
+                <div class="add-more-row">
+                  <select id="add-select"><option value="">Choose a service</option></select>
+                  <button type="button" class="btn-secondary" id="add-select-btn">Add</button>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="f-date" id="f-date">
+              <legend>2. Date you&rsquo;d like <span class="req" aria-hidden="true">*</span></legend>
+              <div class="date-grid">
+                <div class="cal" id="cal">
+                  <div class="cal-head">
+                    <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month"><span aria-hidden="true">&lsaquo;</span></button>
+                    <p class="cal-title" id="cal-title" aria-live="polite"></p>
+                    <button type="button" class="cal-nav" id="cal-next" aria-label="Next month"><span aria-hidden="true">&rsaquo;</span></button>
+                  </div>
+                  <table class="cal-table" aria-labelledby="cal-title">
+                    <thead><tr>
+                      <th scope="col"><abbr title="Sunday">Sun</abbr></th><th scope="col"><abbr title="Monday">Mon</abbr></th><th scope="col"><abbr title="Tuesday">Tue</abbr></th><th scope="col"><abbr title="Wednesday">Wed</abbr></th><th scope="col"><abbr title="Thursday">Thu</abbr></th><th scope="col"><abbr title="Friday">Fri</abbr></th><th scope="col"><abbr title="Saturday">Sat</abbr></th>
+                    </tr></thead>
+                    <tbody id="cal-body"></tbody>
+                  </table>
+                  <p class="hint cal-key">Past days and Sundays can&rsquo;t be picked. Use the arrow keys to move between days.</p>
+                </div>
+                <div class="date-side">
+                  <p class="field">
+                    <label for="req-date">Requested date <span class="req" aria-hidden="true">*</span></label>
+                    <input id="req-date" name="Requested date" type="text" readonly aria-required="true" aria-describedby="date-small date-error" placeholder="Pick a day on the calendar">
+                  </p>
+                  <p class="form-alert" id="date-error" role="alert" hidden></p>
+                  <p class="field">
+                    <label for="time-window">Time window</label>
+                    <select id="time-window" name="Time window">
+                      <option>Flexible, any time</option>
+                      <option>Morning</option>
+                      <option>Midday</option>
+                      <option>Afternoon</option>
+                      <option>Evening</option>
+                    </select>
+                  </p>
+                  <p class="hint small-print" id="date-small">The date you pick here is a request. After you pay the 20% booking deposit, you confirm your receipt with your request ID. Once Lucille confirms your deposit, she sends you the link to choose your date on her booking page. Request-form dates stay as requests until we confirm them with you.</p>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="quick" id="f-contact">
+              <legend>3. How to reach you</legend>
+              <p class="field">
+                <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+                <input id="name" name="Name" type="text" autocomplete="name" required>
+              </p>
+              <p class="field">
+                <label for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                <input id="phone" name="Phone" type="tel" autocomplete="tel" required>
+              </p>
+              <p class="field">
+                <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input id="email" name="Email" type="email" autocomplete="email" required>
+              </p>
+              <p class="field">
+                <label for="address">Property address <span class="req" aria-hidden="true">*</span></label>
+                <input id="address" name="Address" type="text" autocomplete="street-address" required>
+              </p>
+              <p class="field">
+                <label for="city">City <span class="req" aria-hidden="true">*</span></label>
+                <input id="city" name="City" type="text" autocomplete="address-level2" required>
+              </p>
+              <p class="field field-span">
+                <label for="job-notes">Anything we should know?</label>
+                <textarea id="job-notes" name="Job details" rows="3"></textarea>
+                <span class="hint">Optional. A sentence or two is plenty.</span>
+              </p>
+            </fieldset>
+
+            <fieldset class="service-details" id="service-details" hidden>
+              <legend>About your job (optional)</legend>
+              <p class="hint details-note">These match the services you picked. Answer what you know and skip the rest.</p>
+
+              <p class="field" data-for="ab-1 ab-2 ab-3 ab-linen">
+                <label for="checkout">Airbnb: guest checkout time</label>
+                <input id="checkout" name="Airbnb checkout time" type="text" autocomplete="off">
+              </p>
+              <p class="field" data-for="ab-1 ab-2 ab-3 ab-linen">
+                <label for="checkin">Airbnb: next check-in time</label>
+                <input id="checkin" name="Airbnb next check-in" type="text" autocomplete="off">
+              </p>
+              <p class="field" data-for="ab-1 ab-2 ab-3 ab-linen">
+                <label for="linens">Airbnb: should we wash linens?</label>
+                <select id="linens" name="Airbnb linens">
+                  <option value="">Choose one</option>
+                  <option>Yes, wash linens</option>
+                  <option>No, linens are handled</option>
+                  <option>Not sure</option>
+                </select>
+              </p>
+
+              <p class="field" data-for="co-single co-quarter co-half co-full co-sort">
+                <label for="dump">Cleanout: do you need a dump run?</label>
+                <select id="dump" name="Dump run">
+                  <option value="">Choose one</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                  <option>Not sure</option>
+                </select>
+              </p>
+              <p class="field field-span" data-for="co-single co-quarter co-half co-full co-sort">
+                <label for="valuables">Cleanout: any valuables or papers we should set aside and log?</label>
+                <input id="valuables" name="Valuables or papers to log" type="text" autocomplete="off">
+              </p>
+
+              <p class="field field-span" data-for="hm-repair">
+                <label for="repairs">Handyman: what needs fixing?</label>
+                <textarea id="repairs" name="Handyman repairs" rows="3"></textarea>
+              </p>
+              <p class="field" data-for="hm-repair">
+                <label for="hours">Handyman: about how many hours?</label>
+                <input id="hours" name="Handyman hours expected" type="text" autocomplete="off">
+              </p>
+              <p class="field" data-for="hm-paint">
+                <label for="walls">Painting: wall square footage</label>
+                <input id="walls" name="Painting wall sq ft" type="text" autocomplete="off">
+              </p>
+
+              <p class="field" data-for="pw-flat">
+                <label for="pwsq">Power washing: about how many square feet of concrete?</label>
+                <input id="pwsq" name="Power washing sq ft" type="text" autocomplete="off">
+                <span class="hint">A rough number is fine. There&rsquo;s a $150 minimum.</span>
+              </p>
+              <p class="field" data-for="pw-house">
+                <label for="pwstories">House wash: one or two stories, and about how many square feet?</label>
+                <input id="pwstories" name="House wash size" type="text" autocomplete="off">
+                <span class="hint">Up to 3,000 sq ft is $425. Larger houses are quoted.</span>
+              </p>
+
+              <p class="field" data-for="ln-base ln-over">
+                <label for="lot">Lawn: lot size</label>
+                <input id="lot" name="Lawn lot size" type="text" autocomplete="off">
+                <span class="hint">For example, 6,000 sq ft or a quarter acre.</span>
+              </p>
+            </fieldset>
+
+            <details class="more">
+              <summary>Add more details (optional, helps us quote faster)</summary>
+              <div class="more-body">
+                <fieldset>
+                  <legend>The job</legend>
+                  <p class="field">
+                    <label for="call-time">Best time to reach you</label>
+                    <input id="call-time" name="Best time to reach" type="text" autocomplete="off">
+                    <span class="hint">For example, weekdays after 3 PM.</span>
+                  </p>
+                  <p class="field">
+                    <label for="frequency">How often</label>
+                    <input id="frequency" name="Frequency" type="text" autocomplete="off">
+                    <span class="hint">For example, one-time, weekly, or each turnover.</span>
+                  </p>
+                  <p class="field">
+                    <label for="deadline">Listing or move-out date, if any</label>
+                    <input id="deadline" name="Listing or move-out date" type="date">
+                  </p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>The property</legend>
+                  <p class="field">
+                    <label for="size">Square footage</label>
+                    <input id="size" name="Square footage" type="text" autocomplete="off" inputmode="numeric">
+                    <span class="hint">A rough number is fine.</span>
+                  </p>
+                  <p class="field">
+                    <label for="rooms">Bedrooms and bathrooms</label>
+                    <input id="rooms" name="Bedrooms and bathrooms" type="text" autocomplete="off">
+                    <span class="hint">For example, 3 bed / 2 bath.</span>
+                  </p>
+                  <p class="field">
+                    <label for="appliances">Appliances to clean</label>
+                    <input id="appliances" name="Appliances to clean" type="text" autocomplete="off">
+                    <span class="hint">For example, oven, fridge, dishwasher.</span>
+                  </p>
+                  <p class="field">
+                    <label for="condition">How empty or full is it?</label>
+                    <input id="condition" name="Condition" type="text" autocomplete="off">
+                    <span class="hint">For example, empty, lived-in, or heavy.</span>
+                  </p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Getting in</legend>
+                  <p class="field field-span">
+                    <label for="access">Gate or door code, lockbox, and parking</label>
+                    <textarea id="access" name="Access and parking" rows="3"></textarea>
+                  </p>
+                  <p class="field">
+                    <label for="pets">Pets or alarms</label>
+                    <input id="pets" name="Pets or alarms" type="text" autocomplete="off">
+                  </p>
+                  <p class="field">
+                    <label for="present">Who will be there that day?</label>
+                    <input id="present" name="Who will be home" type="text" autocomplete="off">
+                  </p>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Care notes</legend>
+                  <p class="field field-span">
+                    <label for="surfaces">Surfaces that need special care</label>
+                    <input id="surfaces" name="Special surfaces" type="text" autocomplete="off">
+                    <span class="hint">For example, marble, quartz, hardwood, or stainless steel.</span>
+                  </p>
+                  <p class="field field-span">
+                    <label for="priorities">Priority rooms, and anything we shouldn't touch</label>
+                    <textarea id="priorities" name="Priorities and do-not-touch" rows="3"></textarea>
+                  </p>
+                </fieldset>
+              </div>
+            </details>
+
+            <p class="form-alert" id="form-error" role="alert" hidden></p>
+            <p class="form-actions">
+              <button type="submit" class="btn" id="submit-btn">Send my booking request</button>
+            </p>
+            <p class="form-note">Your request goes straight to Custom Cleaning Concepts. We reply the same day to requests received by 5 PM. For most jobs, we then call to set up your walkthrough (free by video, or in person, where a mileage fee may apply depending on distance), and the written quote comes from that walkthrough. Prefer to talk? Call <a href="tel:+13464004656">346-400-4656</a>.</p>
+          </form>
+
+          <details class="fallback-form" id="fallback-form" open>
+            <summary>Form not working? Send a simple request instead</summary>
+            <div class="fallback-body">
+              <p>This short form works on any phone or computer, even if the booking form above won&rsquo;t load or send. It opens your email app with your request filled in, so you just press send. If that doesn&rsquo;t work either, call or text <a href="tel:+13464004656">346-400-4656</a>, or email <a href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>.</p>
+              <form class="fallback-fields" id="fallback-fields" action="mailto:ccc.htx.ownerop.lucy@gmail.com?subject=Booking%20request%20from%20the%20website" method="post" enctype="text/plain">
+                <p class="field">
+                  <label for="fb-name">Name</label>
+                  <input id="fb-name" name="Name" type="text" autocomplete="name" required>
+                </p>
+                <p class="field">
+                  <label for="fb-phone">Phone</label>
+                  <input id="fb-phone" name="Phone" type="tel" autocomplete="tel" required>
+                </p>
+                <p class="field field-span">
+                  <label for="fb-services">Services you need</label>
+                  <textarea id="fb-services" name="Services" rows="3" required></textarea>
+                  <span class="hint">For example, Airbnb turnover for 2 bedrooms, or a half-load cleanout.</span>
+                </p>
+                <p class="field">
+                  <label for="fb-date">Preferred date</label>
+                  <input id="fb-date" name="Preferred date" type="date">
+                </p>
+                <p class="form-actions"><button type="submit" class="btn-secondary">Email my request</button></p>
+              </form>
+              <p class="hint">Lucille replies with your request ID before you pay any deposit. Please don&rsquo;t pay a deposit until you have that ID.</p>
+            </div>
+          </details>
+          <script>document.getElementById("fallback-form").open = false;</script>
+        </section>
+      </div>
+
+      <aside class="selections" id="selections" aria-labelledby="sel-h">
+        <div class="sel-head">
+          <h2 id="sel-h">Your selections <span class="sel-count" id="sel-count">0</span></h2>
+          <button type="button" class="sel-close" id="sel-close" aria-label="Close your selections"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <p class="sel-empty" id="sel-empty">Nothing yet. Tap <strong>Add</strong> on any service and it shows up here.</p>
+        <ul class="sel-list" id="sel-list"></ul>
+        <p class="sel-note" id="sel-note" hidden>Starting prices, not final. Your price is agreed in your written quote or booking confirmation.</p>
+        <div class="sel-actions">
+          <a class="btn" href="#request" id="sel-book">Book these</a>
+          <button type="button" class="link-btn" id="sel-clear">Clear all</button>
+        </div>
+      </aside>
+    </div>
+
+    <section class="how" id="how-it-works">
+      <div class="section-head">
+        <h2>How booking works</h2>
+        <p>Pick your services and a date you&rsquo;d like. Most jobs start with a walkthrough (free by video, or in person, where a mileage fee may apply depending on distance) and a written quote. @@IFPAY@@Simple jobs can be booked directly. Deposits are paid on a separate secure checkout page or with Venmo, never on this site.</p>@@ELSE@@Simple jobs need no walkthrough. Lucille sends a secure card link for the deposit with your written quote or booking confirmation, or you can pay with Venmo. This site never takes payment.</p>@@ENDIF@@
+      </div>
+
+      <h3 class="path-h">Most jobs: walkthrough, then a written quote</h3>
+      <ol class="steps">
+        <li class="reveal">
+          <span class="step-num">1</span>
+          <div>
+            <h3>Pick your services and a date</h3>
+            <p>Tap Add on what you need, choose the date you&rsquo;d like, and send the form. Or call or email. We reply the same day to requests received by 5 PM; later requests get a reply the following business day.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">2</span>
+          <div>
+            <h3>Walkthrough: free by video</h3>
+            <p>A video walkthrough is free. In person, a mileage fee may apply depending on distance. Your quote comes from it, so the quote matches the actual work.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">3</span>
+          <div>
+            <h3>Written quote and deposit</h3>
+            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. @@IFPAY@@After you sign your quote online, you see your request ID and go to a secure deposit payment page for the 20% booking deposit (or pay it with Venmo). Then you confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to pick your date from her calendar. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.@@ELSE@@Lucille sends a secure card link for the 20% booking deposit with your written quote, or you can pay it with Venmo. The deposit is non-refundable, and your date is held once it&rsquo;s received.@@ENDIF@@</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">4</span>
+          <div>
+            <h3>The work</h3>
+            <p>We do the work on the scheduled date. The balance is due when the work is done.</p>
+          </div>
+        </li>
+      </ol>
+
+      @@IFPAY@@<h3 class="path-h">Simple jobs: book directly, no walkthrough</h3>@@ELSE@@<h3 class="path-h">Simple jobs: no walkthrough needed</h3>@@ENDIF@@
+      <p class="path-note">@@IFPAY@@Direct booking fits single-item pickup, Airbnb turnovers, a lawn base visit, and handyman work ($70 an hour, 2-hour minimum). Anything else starts with a walkthrough (free by video, or in person, where a mileage fee may apply depending on distance) and a written quote.@@ELSE@@Single-item pickup, Airbnb turnovers, a lawn base visit, and handyman work ($70 an hour, 2-hour minimum) have a posted rate, so we can book them without a walkthrough. Anything else starts with a walkthrough (free by video, or in person, where a mileage fee may apply depending on distance) and a written quote.@@ENDIF@@</p>
+      <ol class="steps">
+        <li class="reveal">
+          <span class="step-num">1</span>
+          <div>
+            <h3>Pick the job and send your request</h3>
+            <p>@@IFPAY@@Tap Add on a job marked Book directly, choose the date you&rsquo;d like, and send the form. When it goes through, you&rsquo;ll see your request ID and a button to pay the 20% booking deposit on a secure checkout page, or you can pay with Venmo. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.@@ELSE@@Tap Add on a job marked No walkthrough needed, choose the date you&rsquo;d like, and send the form. We reply the same day to requests received by 5 PM.@@ENDIF@@</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">2</span>
+          <div>
+            @@IFPAY@@<h3>Pick your date and time</h3>
+            <p>After you pay, you confirm your receipt with your request ID. Once Lucille checks it, she texts or emails you the link to her calendar, and you choose from the times she has open.</p>@@ELSE@@<h3>Booking confirmation and deposit</h3>
+            <p>Lucille sends your booking confirmation with a secure card link for the 20% booking deposit, or you can pay with Venmo. The deposit is non-refundable, and your date is held once it&rsquo;s received.</p>@@ENDIF@@
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="step-num">3</span>
+          <div>
+            <h3>The work</h3>
+            <p>We do the work on your booked date. The balance is due when the work is done.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+@@REVIEWS@@
+
+    <section class="terms" id="terms">
+      <div class="section-head">
+        <h2>Terms and common questions</h2>
+      </div>
+      <div class="faq" id="faq">
+        <details class="faq-item reveal">
+          <summary>What area do you serve?</summary>
+          <div class="faq-a">Houston, Pasadena, Webster, Clear Lake, Baybrook, Friendswood, the Heights, Downtown, Memorial, and Katy.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Are the prices on this page the final job price?</summary>
+          <div class="faq-a">No. Posted prices are starting points. The price you agree to is the price for the job: your written quote, or @@IFPAY@@the posted rate for the simple job you book directly.@@ELSE@@the posted rate for a simple job with no walkthrough.@@ENDIF@@ Handyman work is $70 an hour with a 2-hour minimum ($140).</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How do booking and payment work?</summary>
+          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a walkthrough: a video walkthrough is free, and in person a mileage fee may apply depending on distance. The quote comes from that walkthrough: @@IFPAY@@you get it in writing and sign it online before any work begins. After you sign, you go to a secure deposit payment page for the 20% booking deposit. Simple jobs can be booked directly instead: after you send your request, you get a request ID and can pay the deposit right away on a secure checkout page. Either way, you then confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to choose your date and time. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt. You can also pay the deposit with Venmo (see below).@@ELSE@@you get it in writing and agree to it in writing before any work begins. Lucille sends a secure card link for the 20% booking deposit with your written quote. Simple jobs can skip the walkthrough: she sends the deposit link with your booking confirmation instead. Either way, the deposit is non-refundable, and your date is held once we receive it. You can also pay the deposit with Venmo (see below).@@ENDIF@@ This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Can I pay the deposit with Venmo?</summary>
+          <div class="faq-a">Yes. You can pay the 20% deposit with the secure card link, or with <a href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Venmo @ccc_htxowner_lucy<span class="sr-only"> (opens in a new tab)</span></a>. Wait until Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your request ID in the Venmo note, along with your name or quote number, so we can match your payment. Then confirm your receipt: email or text Lucille your request ID and a screenshot of your Venmo payment. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Is the date I pick on the form confirmed?</summary>
+          <div class="faq-a">No. It&rsquo;s the date you&rsquo;d like. We confirm your date with you, and it&rsquo;s held once Lucille confirms your deposit receipt.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What if something goes wrong with my booking or deposit?</summary>
+          <div class="faq-a"><strong>The form won&rsquo;t send:</strong> use the simple request form under the booking form, or call or text <a href="tel:+13464004656">346-400-4656</a>. <strong>You don&rsquo;t see a request ID:</strong> don&rsquo;t pay yet. Call or text and Lucille will give you one. <strong>You paid but lost your request ID:</strong> confirm your receipt anyway with the name and phone number you booked with. <strong>You paid but haven&rsquo;t heard back:</strong> your date isn&rsquo;t held until Lucille confirms your receipt, so if you haven&rsquo;t heard from her within one business day, call or text <a href="tel:+13464004656">346-400-4656</a> or email <a href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a> with your request ID and a screenshot of your receipt.</div>
+        </details>
+        <details class="faq-item reveal">
+          @@IFPAY@@<summary>Which jobs can I book directly?</summary>@@ELSE@@<summary>Which jobs need no walkthrough?</summary>@@ENDIF@@
+          <div class="faq-a">Single-item pickup, Airbnb turnovers, a lawn base visit (lots up to 3,000 sq ft), and handyman repair at $70 an hour with a 2-hour minimum ($140). These have a fixed posted rate. Everything else starts with a walkthrough and a written quote. @@IFPAY@@For a direct booking, you pay the 20% deposit on a secure checkout page, confirm your receipt with your request ID, and then pick your date and time once Lucille confirms it.@@ELSE@@For these, Lucille replies and sends your booking confirmation with the secure deposit link.@@ENDIF@@</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Is the walkthrough free?</summary>
+          <div class="faq-a">A video walkthrough is free. In person, a mileage fee may apply depending on distance. After it, you get a written quote that is good for 14 days.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What work do you not take on?</summary>
+          <div class="faq-a">Whether we take on mold, sewage, needles, hoarding, or chemical spills depends on what we see at the walkthrough. If we find a hazard we can safely handle, it's $150 per hazard, added to your bill. If a hazard means we have to stop the job, the deposit is not refunded, and you pay a prorated fee for the work already done.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How long is a quote valid?</summary>
+          <div class="faq-a">Quotes are valid for 14 days.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How are dump fees billed on a cleanout?</summary>
+          <div class="faq-a">Dump fees are a pass-through: the dump receipt plus 10%. We can&rsquo;t give a fixed dump price ahead of time because it comes from the receipt, so it&rsquo;s added to your bill after the dump run.</div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What if I cancel or you can&rsquo;t get in?</summary>
+          <div class="faq-a">If you cancel with less than 24 hours&rsquo; notice, the charge is 50% of the job. If our crew arrives and can&rsquo;t get in (a lockout), the charge is 100% of the job.</div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <p class="footer-name">Custom Cleaning Concepts</p>
+      <p class="footer-owner">Owner-run by Lucille</p>
+      <p class="footer-area">Houston and nearby suburbs</p>
+      <p class="footer-contact">
+        <a href="tel:+13464004656">346-400-4656</a>
+        <span class="footer-sep" aria-hidden="true"> · </span>
+        <a class="footer-email" href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>
+      </p>
+      <p class="footer-terms">Free video walkthrough, or in person (a mileage fee may apply depending on distance), then a written quote good for 14 days. @@IFPAY@@Simple jobs can be booked directly. 20% non-refundable booking deposit, paid on a secure checkout page after you sign your quote or choose a simple job, or with Venmo (@ccc_htxowner_lucy).@@ELSE@@Simple jobs need no walkthrough. 20% non-refundable booking deposit, paid through a secure card link Lucille sends with your written quote or booking confirmation, or with Venmo (@ccc_htxowner_lucy).@@ENDIF@@ Your date is held once Lucille confirms your deposit receipt. Balance due on completion. 1.5% a month on balances unpaid 15 days after completion. Cancel with less than 24 hours&rsquo; notice: 50% of the job. Lockout (our crew arrives and can&rsquo;t get in): 100% of the job. This site itself never takes your card details.</p>
+    </div>
+  </footer>
+
+  <p class="sr-only" id="live" role="status" aria-live="polite"></p>
+
+  <div class="sticky-bar" id="sticky-bar">
+    <a class="btn-secondary bar-call" href="tel:+13464004656" aria-label="Call 346-400-4656">Call</a>
+    <button type="button" class="btn-secondary bar-sel" id="bar-sel" aria-expanded="false" aria-controls="selections" hidden><span class="bar-count" id="bar-count">0</span><span class="bar-sel-t">selected</span><span aria-hidden="true" class="bar-up">&#9652;</span></button>
+    <a class="btn bar-book" id="bar-book" href="#services">Pick your services</a>
+  </div>
+
+  <script>
+@@APP@@
+  </script>
+</body>
+</html>
