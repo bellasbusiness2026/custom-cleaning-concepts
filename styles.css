@@ -1222,3 +1222,18 @@ fieldset { min-width: 0; }
 .not-held { margin: 1rem 0; padding: 0.9rem 1rem; border-radius: 10px; background: var(--sage); border: 1px solid var(--line-strong); color: var(--pine-deep); font-weight: 700; }
 .id-missing { margin: 0.6rem 0 0; padding: 0.8rem 1rem; border-radius: 10px; background: #f6e6e6; border: 1px solid var(--error); color: var(--error); font-weight: 600; }
 .id-missing[hidden], .req-id-box [hidden] { display: none; }
+
+/* pinned "Pay deposit now" (phones, Nov 26): shown by app.js only after the request ID panel, while its own Pay button is off screen */
+.pay-pin { display: none; }
+@media (max-width: 640px) {
+  .pay-pin {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 16;
+    padding: 0.6rem var(--space) calc(0.6rem + env(safe-area-inset-bottom));
+    background: rgba(252, 251, 248, 0.97); border-top: 1px solid var(--line-strong);
+    box-shadow: 0 -6px 18px rgba(20, 54, 44, 0.12);
+    transform: translateY(110%); visibility: hidden; transition: transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+  .pay-pin.is-on { transform: none; visibility: visible; transition: transform 0.2s ease; }
+  .pay-pin .btn { display: flex; width: 100%; min-height: 3rem; }
+  .form-done.has-pay-pin { padding-bottom: calc(5.4rem + env(safe-area-inset-bottom)); }
+}
