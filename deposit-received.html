@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Deposit received — Custom Cleaning Concepts</title>
+  <title>Confirm your deposit — Custom Cleaning Concepts</title>
   <meta name="theme-color" content="#14362c">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -29,22 +29,35 @@
   <main id="main">
     <div class="page-narrow">
       <p class="big-check" aria-hidden="true">&#10003;</p>
-      <h1>Thank you. Your deposit was received.</h1>
-      <p class="lede">Your 20% booking deposit is in. Now we set your date.</p>
+      <h1>Thank you. Your deposit payment went through.</h1>
+      <p class="lede">One more step: confirm your receipt so Lucille can match your payment and hold your date.</p>
 
-      <div class="next-box" id="date-pick" hidden>
-        <p><a class="btn btn-big" id="pick-date-btn" href="#" rel="noopener">Pick your date</a></p>
-        <p class="hint">Opens Lucille&rsquo;s calendar with the times she has open. Your date is held once you choose a time.</p>
-        <p class="hint">Lucille will confirm by text or call.</p>
+      <p class="not-held" id="not-held">Your date is not held yet. After Lucille checks your receipt, she&rsquo;ll text or email you the link to pick your date.</p>
+
+      <div class="req-id-box" id="req-id-box">
+        <p class="req-id-label">Your request ID</p>
+        <p class="req-id" id="req-id">Not found on this device</p>
+        <p class="id-missing" id="id-missing">We couldn&rsquo;t find your request ID on this phone or computer. If you have it (it starts with CCC-, or it&rsquo;s your quote number), type it below. If you don&rsquo;t, that&rsquo;s okay: confirm anyway with the name and phone number you booked with.</p>
+        <p class="field" id="id-field">
+          <label for="id-input">Request ID</label>
+          <input id="id-input" class="req-id-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40" placeholder="CCC-">
+        </p>
       </div>
 
-      <div class="next-box date-fallback" id="date-fallback">
-        <p>Lucille will text or call within one business day to set the date.</p>
+      <div class="confirm-now" id="confirm-step">
+        <h2>Confirm receipt (required)</h2>
+        <p>Send Lucille your request ID and proof of payment: a screenshot of your receipt or the receipt number from your email.</p>
+        <p><a class="btn btn-big" id="confirm-email" href="mailto:ccc.htx.ownerop.lucy@gmail.com?subject=Deposit%20confirmation&amp;body=Request%20ID%3A%20%0AName%3A%20%0APhone%3A%20%0APayment%20proof%20(attach%20a%20screenshot%20of%20your%20receipt%2C%20or%20type%20the%20receipt%20number)%3A%20%0A">Confirm receipt by email</a></p>
+        <p class="hint">Your email app opens with your request ID filled in. Attach a screenshot of your receipt (or type the receipt number), then press send.</p>
+        <p><a class="btn-secondary" id="confirm-text" href="sms:+13464004656">Or confirm by text</a></p>
+        <p class="hint">Text your request ID and a screenshot of your receipt to <a href="sms:+13464004656">346-400-4656</a>. Can&rsquo;t send either one? Call <a href="tel:+13464004656">346-400-4656</a> or email <a href="mailto:ccc.htx.ownerop.lucy@gmail.com">ccc.htx.ownerop.lucy@gmail.com</a>.</p>
       </div>
 
       <div class="next-box">
         <p><strong>What happens next</strong></p>
         <ul class="terms-list">
+          <li>Lucille checks your receipt against your request ID, then texts or emails you the link to pick your date. Your date is held once she confirms it.</li>
+          <li>Haven&rsquo;t heard from her within one business day? Call or text <a href="tel:+13464004656">346-400-4656</a> with your request ID.</li>
           <li>We do the work on the date you choose.</li>
           <li>The deposit is non-refundable. The balance is due when the work is done.</li>
           <li>Questions? Call or text <a href="tel:+13464004656">346-400-4656</a>.</li>
@@ -69,21 +82,53 @@
 
   <script>
     (function () {
-      // ================================================================
-      // CALENDAR BOOKING PAGE URL: the ONE place to set it.
-      // Public booking-page link from Lucille's Google Calendar
-      // (CCC account, appointment schedule). Must start with https://.
-      // While this is empty (or not https), the "Pick your date" button
-      // stays hidden and the page shows "Lucille will text or call within
-      // one business day to set the date."
-      // ================================================================
-      var CALENDAR_BOOKING_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2In7eGGzO8TA9wlgZ4W-rSbzWj5YMbFh8zi9TcIxqvcgQ_aN45w8GnxWGHyKjYFlJ8ouxOUSj2";
+      // The date is NOT picked from this page. Lucille checks the receipt first,
+      // then sends the client her booking-page link herself (see booking/HOW-IT-WORKS.md).
+      var EMAIL = "ccc.htx.ownerop.lucy@gmail.com";
+      var SMS = "+13464004656";
+      var KEY = "ccc-request-id";
+      var ID_OK = /^[A-Za-z0-9][A-Za-z0-9_-]{2,39}$/;
 
-      var ok = typeof CALENDAR_BOOKING_URL === "string" && /^https:\/\/[^\s"'<>]+$/.test(CALENDAR_BOOKING_URL);
-      if (!ok) { return; }
-      document.getElementById("pick-date-btn").setAttribute("href", CALENDAR_BOOKING_URL);
-      document.getElementById("date-pick").hidden = false;
-      document.getElementById("date-fallback").hidden = true;
+      function clean(v) { return String(v || "").trim().replace(/\s+/g, "-").slice(0, 40); }
+      function fromStore(s) {
+        try { var raw = s.getItem(KEY); if (!raw) { return ""; } var o = JSON.parse(raw); return o && o.id ? String(o.id) : ""; } catch (e) { return ""; }
+      }
+      var params = new URLSearchParams(window.location.search);
+      var id = clean(params.get("id") || params.get("ref") || params.get("client_reference_id"));
+      if (!ID_OK.test(id)) { id = ""; }
+      if (!id) { id = fromStore(window.sessionStorage) || fromStore(window.localStorage); }
+      if (!ID_OK.test(id)) { id = ""; }
+
+      var idText = document.getElementById("req-id");
+      var missing = document.getElementById("id-missing");
+      var field = document.getElementById("id-field");
+      var input = document.getElementById("id-input");
+      var mail = document.getElementById("confirm-email");
+      var text = document.getElementById("confirm-text");
+
+      function update(cur) {
+        var shown = cur || "(no request ID: use your name and phone)";
+        var subject = "Deposit confirmation " + (cur || "(no request ID)");
+        var body = "Request ID: " + (cur || "I don't have it") + "\n" +
+          "Name: \n" +
+          "Phone: \n" +
+          "Payment proof (attach a screenshot of your receipt, or type the receipt number): \n";
+        mail.setAttribute("href", "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body));
+        var sms = "Deposit confirmation " + (cur || "(no request ID)") + ". My name: . Receipt screenshot attached.";
+        text.setAttribute("href", "sms:" + SMS + "?&body=" + encodeURIComponent(sms));
+        idText.textContent = cur || "Not found on this device";
+      }
+
+      if (id) {
+        missing.hidden = true;
+        field.hidden = true;
+      } else {
+        input.addEventListener("input", function () {
+          var v = clean(input.value).toUpperCase();
+          update(ID_OK.test(v) ? v : "");
+        });
+      }
+      update(id);
     })();
   </script>
 </body>
