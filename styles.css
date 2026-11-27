@@ -1319,3 +1319,38 @@ body[data-path="simple"] .rate[data-direct] .rate-name, body[data-path="walk"] .
 .hint, .small-print, .form-note, .tag, .rate-unit, .cal-key, .sel-price, .wordmark-area, .footer-terms, .req-id-label { font-size: max(0.875rem, 1em * 0.875); }
 .tag { font-size: 0.875rem; }
 .group-label, .rate-dep, .cal-table abbr, .svc-from small { font-size: 0.875rem; }
+
+/* ===== (i) What's included (service-scopes.json, built in) ===== */
+.info-btn {
+  display: inline-flex; align-items: center; justify-content: center; vertical-align: middle;
+  width: 44px; height: 44px; margin: -10px -6px -10px -2px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--pine-deep);
+  -webkit-tap-highlight-color: transparent;
+}
+.info-btn[hidden] { display: none; }
+.info-i {
+  display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%;
+  border: 1.5px solid var(--pine); background: #fff; font: italic 700 0.875rem/1 Georgia, serif;
+}
+.info-btn:hover .info-i, .info-btn[aria-expanded="true"] .info-i { background: var(--pine); color: #fff; }
+.info-btn:focus-visible { outline: none; }
+.info-btn:focus-visible .info-i { outline: 3px solid var(--focus); outline-offset: 2px; }
+.rate { grid-template-areas: "name btn" "price btn" "unit btn" "dep btn" "scope scope"; }
+.rate.rate-info { grid-template-areas: "name price" "unit price" "scope scope"; }
+.scope {
+  grid-area: scope; margin: 0.6rem 0 0.2rem; padding: 0.8rem 0.9rem 0.4rem; background: #fff;
+  border: 1px solid var(--field-line); border-left: 4px solid var(--pine); border-radius: 10px; font-size: 0.95rem; color: var(--ink);
+}
+.scope[hidden] { display: none; }
+.scope-sum { margin: 0 0 0.5rem; font-weight: 600; }
+.scope-h { margin: 0.5rem 0 0.15rem; font-weight: 700; color: var(--pine-deep); font-size: 0.9rem; }
+.scope ul { margin: 0 0 0.4rem; padding-left: 1.15rem; }
+.scope li { margin: 0.15rem 0; }
+@media (prefers-reduced-motion: no-preference) { .scope:not([hidden]) { animation: fade-up 0.2s ease both; } }
+/* accept.html: services on this quote */
+.q-services { margin: 1.2rem 0; }
+.q-services h2 { font-size: 1.2rem; margin: 0 0 0.3rem; }
+.q-svc-list { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+.q-svc { padding: 0.55rem 0; border-top: 1px solid var(--line); }
+.q-svc-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-height: 44px; }
+.q-svc-name { font-weight: 600; }
+.q-svc .info-btn { margin: 0; flex: 0 0 auto; }
