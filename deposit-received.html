@@ -43,6 +43,8 @@
           <label for="id-input">Request ID</label>
           <input id="id-input" class="req-id-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="40" placeholder="CCC-">
         </p>
+        <p class="hint" id="save-id">Save this ID: take a screenshot of this page, or tap Email me a copy and press send to keep it in your inbox. We don&rsquo;t send an automatic email.</p>
+        <p class="copy-me"><a class="btn-secondary" id="email-me-copy" href="mailto:?subject=My%20Custom%20Cleaning%20Concepts%20deposit">Email me a copy</a></p>
       </div>
 
       <div class="confirm-now" id="confirm-step">
@@ -88,9 +90,13 @@
       var EMAIL = "ccc.htx.ownerop.lucy@gmail.com";
       var SMS = "+13464004656";
       var KEY = "ccc-request-id";
+      // Optional request log (Google Apps Script web app). Empty = off. See booking/request-log/DEPLOY.md.
+      var LOG_ENDPOINT = "";
       var ID_OK = /^[A-Za-z0-9][A-Za-z0-9_-]{2,39}$/;
 
       function clean(v) { return String(v || "").trim().replace(/\s+/g, "-").slice(0, 40); }
+      function saved(s) { try { return JSON.parse(s.getItem(KEY) || "{}") || {}; } catch (e) { return {}; } }
+      var who = saved(window.sessionStorage); if (!who.id) { who = saved(window.localStorage); }
       function fromStore(s) {
         try { var raw = s.getItem(KEY); if (!raw) { return ""; } var o = JSON.parse(raw); return o && o.id ? String(o.id) : ""; } catch (e) { return ""; }
       }
@@ -111,13 +117,19 @@
         var shown = cur || "(no request ID: use your name and phone)";
         var subject = "Deposit confirmation " + (cur || "(no request ID)");
         var body = "Request ID: " + (cur || "I don't have it") + "\n" +
-          "Name: \n" +
+          "Name: " + (who.name || "") + "\n" +
           "Phone: \n" +
           "Payment proof (attach a screenshot of your receipt, or type the receipt number): \n";
         mail.setAttribute("href", "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body));
-        var sms = "Deposit confirmation " + (cur || "(no request ID)") + ". My name: . Receipt screenshot attached.";
+        var sms = "Deposit confirmation " + (cur || "(no request ID)") + ". My name: " + (who.name || "") + ". Receipt screenshot attached.";
         text.setAttribute("href", "sms:" + SMS + "?&body=" + encodeURIComponent(sms));
         idText.textContent = cur || "Not found on this device";
+        var copyBody = "My Custom Cleaning Concepts deposit\n" +
+          "Request ID: " + (cur || "(not found: use the name and phone I booked with)") + "\n" +
+          "My date is held only after Lucille confirms my deposit receipt.\n" +
+          "Confirm receipt: email " + EMAIL + " or text 346-400-4656 with the request ID and a receipt screenshot.\n" +
+          "Confirm page: " + location.origin + location.pathname + (cur ? "?id=" + encodeURIComponent(cur) : "") + "\n";
+        document.getElementById("email-me-copy").setAttribute("href", "mailto:" + encodeURIComponent(who.email || "") + "?subject=" + encodeURIComponent("My Custom Cleaning Concepts deposit " + (cur || "")) + "&body=" + encodeURIComponent(copyBody));
       }
 
       document.getElementById("req-id-box").hidden = false;
@@ -131,6 +143,12 @@
         });
       }
       update(id);
+      function logConfirm(how) {
+        if (!LOG_ENDPOINT) { return; }
+        try { var b = new URLSearchParams({ type: "confirm_receipt_started", request_id: (idText.textContent || "").indexOf("Not found") === 0 ? "" : idText.textContent, how: how, at: new Date().toISOString() }); fetch(LOG_ENDPOINT, { method: "POST", mode: "no-cors", body: b }); } catch (e) {}
+      }
+      mail.addEventListener("click", function () { logConfirm("email"); });
+      text.addEventListener("click", function () { logConfirm("text"); });
     })();
   </script>
 </body>

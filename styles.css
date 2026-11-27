@@ -1237,3 +1237,31 @@ fieldset { min-width: 0; }
   .pay-pin .btn { display: flex; width: 100%; min-height: 3rem; }
   .form-done.has-pay-pin { padding-bottom: calc(5.4rem + env(safe-area-inset-bottom)); }
 }
+
+/* ===== Signing page: service agreement + waiver (contract.html) ===== */
+.contract-doc { margin: 1.5rem 0; padding: 1rem 1.1rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
+.c-doc-title { font-weight: 600; color: var(--ink); margin-top: 0; }
+.c-form h2 { font-size: 1.25rem; margin: 1.5rem 0 0.4rem; }
+.c-form h3 { font-size: 1.05rem; margin: 1.1rem 0 0.35rem; }
+.c-form h4 { font-size: 1rem; margin: 0.9rem 0 0.3rem; }
+.c-form p, .c-form li { color: var(--ink); }
+.c-table { width: 100%; border-collapse: collapse; margin: 0.6rem 0 1rem; font-size: 0.95rem; }
+.c-table th, .c-table td { border: 1px solid var(--line); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
+.c-table th { width: 42%; font-weight: 600; background: var(--cream); }
+.c-fill { font-weight: 600; color: var(--pine-deep); }
+.c-checks { list-style: none; padding-left: 0; }
+.c-checks label { display: flex; gap: 0.6rem; align-items: flex-start; min-height: 44px; padding: 0.35rem 0; cursor: pointer; }
+.c-checks input { width: 1.25rem; height: 1.25rem; margin-top: 0.15rem; flex: 0 0 auto; accent-color: var(--pine); }
+.c-which { border: 1px solid var(--line); border-radius: var(--radius); padding: 0.75rem 1rem; margin: 1rem 0; }
+.c-which legend { font-weight: 600; padding: 0 0.3rem; }
+.c-record { border-top: 2px solid var(--pine); margin-top: 1.25rem; padding-top: 0.5rem; }
+.c-copy-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.c-copy-row .btn-secondary { min-height: 44px; display: inline-flex; align-items: center; }
+.copy-me { margin-top: 0.6rem; }
+.copy-me .btn-secondary { min-height: 44px; display: inline-flex; align-items: center; }
+@media print {
+  .contract-page .site-header, .contract-page .site-footer, .contract-page .skip, .contract-page .lede,
+  .contract-page #sign-form, .contract-page #done-box, .contract-page .quote-summary, .contract-page noscript { display: none !important; }
+  .contract-page .contract-doc { max-height: none; overflow: visible; border: 0; padding: 0; }
+  .contract-page .c-form[hidden] { display: none !important; }
+}

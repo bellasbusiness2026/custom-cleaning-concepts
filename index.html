@@ -456,7 +456,7 @@
           <span class="step-num">3</span>
           <div>
             <h3>Written quote and deposit</h3>
-            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. After you sign your quote online, you see your request ID and go to a secure deposit payment page for the 20% booking deposit (or pay it with Venmo). Then you confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to pick your date from her calendar. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.</p>
+            <p>The quote comes from your walkthrough. You receive it in writing and agree to it in writing before the work begins. Quotes are valid for 14 days. After you sign your quote online, you see your request ID, sign your service agreement and client waiver online (you get a copy to print or save), and go to a secure deposit payment page for the 20% booking deposit (or pay it with Venmo). Then you confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to pick your date from her calendar. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt.</p>
           </div>
         </li>
         <li class="reveal">
@@ -580,7 +580,7 @@
         </details>
         <details class="faq-item reveal">
           <summary>How do booking and payment work?</summary>
-          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a walkthrough: a video walkthrough is free, and in person a mileage fee may apply depending on distance. The quote comes from that walkthrough: you get it in writing and sign it online before any work begins. After you sign, you go to a secure deposit payment page for the 20% booking deposit. Simple jobs can be booked directly instead: after you send your request, you get a request ID and can pay the deposit right away on a secure checkout page. Either way, you then confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to choose your date and time. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt. You can also pay the deposit with Venmo (see below). This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
+          <div class="faq-a">Pick your services on this page, choose the date you&rsquo;d like, and send your request. Requests received by 5 PM get a reply the same day. Later requests get a reply the following business day. For most jobs, we then do a walkthrough: a video walkthrough is free, and in person a mileage fee may apply depending on distance. The quote comes from that walkthrough: you get it in writing and sign it online, along with your service agreement and client waiver, before any work begins. After you sign, you go to a secure deposit payment page for the 20% booking deposit. Simple jobs can be booked directly instead: after you send your request, you get a request ID and can pay the deposit right away on a secure checkout page. Either way, you then confirm your receipt with your request ID, and once Lucille confirms your deposit, she sends you the link to choose your date and time. The deposit is non-refundable, and your date is held once Lucille confirms your deposit receipt. You can also pay the deposit with Venmo (see below). This site itself never takes your card details. The balance is due on completion. Balances unpaid 15 days after completion are charged 1.5% a month.</div>
         </details>
         <details class="faq-item reveal">
           <summary>Can I pay the deposit with Venmo?</summary>
@@ -650,6 +650,9 @@
   // ---------------------------------------------------------------
   // Where booking requests go. (Form service address.)
   var FORM_ACTION = "https://formspree.io/f/moedjzqr";
+  // Optional request log (Google Apps Script web app that appends to a Sheet). Empty = off.
+  // Lucille deploys it with her own Google sign-in, then pastes the /exec URL here. See booking/request-log/DEPLOY.md.
+  var LOG_ENDPOINT = "";
   // Saved picks survive a refresh.
   var STORE_KEY = "ccc-booking-v1";
   // Calendar: how far ahead a date can be requested (days).
@@ -1260,8 +1263,9 @@
     var d = new Date(), p2 = function (x) { return (x < 10 ? "0" : "") + x; };
     return "CCC-" + String(d.getFullYear()).slice(2) + p2(d.getMonth() + 1) + p2(d.getDate()) + "-" + s;
   }
-  function keepReqId(id, labels) {
-    var v = JSON.stringify({ id: id, at: new Date().toISOString(), services: labels || [] });
+  function keepReqId(id, labels, who) {
+    who = who || {};
+    var v = JSON.stringify({ id: id, at: new Date().toISOString(), services: labels || [], name: who.name || "", email: who.email || "" });
     try { localStorage.setItem(REQ_KEY, v); } catch (e) {}
     try { sessionStorage.setItem(REQ_KEY, v); } catch (e) {}
   }
@@ -1307,15 +1311,25 @@
     var sentId = reqId;
     data.set("Request ID", sentId);
     data.set("_subject", "New booking request - Custom Cleaning Concepts - " + sentId);
+    // Lucille can hit Reply in her email and it goes to the customer.
+    var custEmail = String(data.get("Email") || "").trim();
+    if (custEmail) data.set("_replyto", custEmail);
+    var who = { name: $("#name").value.trim(), email: custEmail, phone: $("#phone") ? $("#phone").value.trim() : "" };
     fetch(form.getAttribute("action"), {
       method: "POST",
       body: data,
       headers: { "Accept": "application/json" }
     }).then(function (res) {
       if (!res.ok) throw new Error("bad status");
-      keepReqId(sentId, snapshot.map(function (id) { return items[id].label; }));
+      keepReqId(sentId, snapshot.map(function (id) { return items[id].label; }), who);
+      if (LOG_ENDPOINT) {
+        try {
+          var lb = new URLSearchParams({ type: "request", request_id: sentId, name: who.name, phone: who.phone, email: who.email, services: snapshot.map(function (id) { return items[id].label; }).join("; "), date_asked: $("#req-date").value, at: new Date().toISOString() });
+          fetch(LOG_ENDPOINT, { method: "POST", mode: "no-cors", body: lb });
+        } catch (e) {}
+      }
       reqId = "";
-      showDone(snapshot, $("#name").value.trim(), $("#req-date").value, sentId);
+      showDone(snapshot, who.name, $("#req-date").value, sentId, who.email);
       form.reset();
       selected = []; dateISO = ""; quizNote = "";
       $("#req-date").value = "";
@@ -1381,7 +1395,21 @@
     if (pinMQ) { if (pinMQ.addEventListener) pinMQ.addEventListener("change", pinUpdate); else if (pinMQ.addListener) pinMQ.addListener(pinUpdate); }
   }
 
-  function showDone(ids, name, dateText, rid) {
+  function copyMailto(rid, ids, dateText, toEmail) {
+    var lines = [
+      "My Custom Cleaning Concepts request",
+      "Request ID: " + rid,
+      "Services: " + ids.map(function (id) { return items[id].label; }).join("; "),
+      "Date I asked for: " + dateText + " (a request, not held yet)",
+      "",
+      "Any deposit I pay must carry this request ID. My date is held only after Lucille confirms my deposit receipt.",
+      "After paying, confirm the receipt here: " + location.origin + location.pathname.replace(/[^\/]*$/, "") + confirmHref(rid),
+      "Questions: call or text " + PHONE + " or email " + EMAIL + "."
+    ];
+    return "mailto:" + encodeURIComponent(toEmail || "") + "?subject=" + encodeURIComponent("My Custom Cleaning Concepts request " + rid) + "&body=" + encodeURIComponent(lines.join("\n"));
+  }
+
+  function showDone(ids, name, dateText, rid, custEmail) {
     removePayPin();
     doneBox.innerHTML = "";
     var check = el("p", "big-check", "\u2713"); check.setAttribute("aria-hidden", "true");
@@ -1407,7 +1435,11 @@
       else manual();
     });
     idBox.appendChild(copy);
-    idBox.appendChild(el("p", "hint", "Save this ID (take a screenshot). Any deposit you pay must carry this exact ID: the card checkout attaches it for you, and with Venmo you type it in the note. Your date is not held until Lucille confirms your deposit receipt. Don\u2019t see an ID? Don\u2019t pay yet. Call or text " + PHONE + "."));
+    var me = el("p", "copy-me");
+    var meA = el("a", "btn-secondary", "Email me a copy"); meA.id = "email-me-copy"; meA.href = copyMailto(rid, ids, dateText, custEmail);
+    me.appendChild(meA);
+    idBox.appendChild(me);
+    idBox.appendChild(el("p", "hint", "We don’t send an automatic email, so save this ID now: take a screenshot, or tap Email me a copy and press send to keep it in your inbox. Any deposit you pay must carry this exact ID: the card checkout attaches it for you, and with Venmo you type it in the note. Your date is not held until Lucille confirms your deposit receipt. Don\u2019t see an ID? Don\u2019t pay yet. Call or text " + PHONE + "."));
     doneBox.appendChild(idBox);
     var ul = el("ul", "q-picks");
     ids.forEach(function (id) { ul.appendChild(el("li", "", items[id].label)); });
