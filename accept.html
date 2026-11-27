@@ -29,7 +29,7 @@
   <main id="main">
     <div class="page-narrow">
       <h1>Accept your quote</h1>
-      <p class="lede">Review your quote details, then sign below. After you sign, you&rsquo;ll see your request ID and go to the secure deposit payment page. After you pay, you confirm your receipt, and once Lucille confirms it, she sends you the link to pick your date.</p>
+      <p class="lede">Review your quote details, then sign below. After you sign, you&rsquo;ll see your request ID, sign your service agreement and client waiver, and go to the secure deposit payment page. After you pay, you confirm your receipt, and once Lucille confirms it, she sends you the link to pick your date.</p>
 
       <noscript><p class="sign-error">Signing your quote needs JavaScript. Please turn it on, or call or text Lucille at <a href="tel:+13464004656">346-400-4656</a> and she&rsquo;ll help you finish.</p></noscript>
 
@@ -78,7 +78,10 @@
           <p class="req-id" id="done-id-val"></p>
           <p class="hint">Save this ID (take a screenshot). Your deposit must carry this exact ID: the card checkout attaches it for you, and with Venmo you type it in the note. After you pay, confirm your receipt with this ID. Your date is not held until Lucille confirms your deposit receipt.</p>
         </div>
-        <p><a class="btn btn-big" id="done-pay" href="#" hidden>Continue to deposit payment</a></p>
+        <p id="done-contract-text">Next, sign your service agreement and the client waiver. It takes a few minutes, and you get a copy to keep.</p>
+        <p><a class="btn btn-big" id="done-contract" href="contract.html">Sign your service agreement</a></p>
+        <p class="hint" id="done-pay-note" hidden>Already signed your agreement with Lucille?</p>
+        <p><a class="btn-secondary" id="done-pay" href="#" hidden>Continue to deposit payment</a></p>
         <p class="hint" id="done-help" hidden>Paid already, or something went wrong? <a id="done-confirm" href="deposit-received.html">Confirm your deposit receipt</a>, or call or text <a href="tel:+13464004656">346-400-4656</a>.</p>
       </div>
     </div>
@@ -109,6 +112,11 @@
       var amtRaw = (params.get("amt") || "").trim();
       var depRaw = (params.get("dep") || "").trim();
       var pay = (params.get("pay") || "").trim();
+      var formLetter = (params.get("form") || "").trim().toUpperCase();
+      if (formLetter !== "A" && formLetter !== "B") { formLetter = ""; }
+      var rate = (params.get("rate") || "").trim();
+      // Optional request log (Google Apps Script web app). Empty = off. See booking/request-log/DEPLOY.md.
+      var LOG_ENDPOINT = "";
 
       var MONEY = /^\$?\d{1,3}(,?\d{3})*(\.\d{1,2})?$/;
       function money(v) {
@@ -194,10 +202,20 @@
               document.getElementById("done-confirm").setAttribute("href", "deposit-received.html?id=" + encodeURIComponent(reqId));
               document.getElementById("done-help").hidden = false;
             }
+            var cp = new URLSearchParams();
+            cp.set("q", q); cp.set("id", reqId); cp.set("amt", amt); cp.set("dep", dep);
+            if (formLetter) { cp.set("form", formLetter); }
+            if (rate && MONEY.test(rate)) { cp.set("rate", rate); }
+            if (payOk) { cp.set("pay", pay); }
+            document.getElementById("done-contract").setAttribute("href", "contract.html?" + cp.toString());
+            if (LOG_ENDPOINT) {
+              try { var lb = new URLSearchParams({ type: "quote_signed", request_id: reqId, quote: q, name: name, total: amt, deposit: dep, at: new Date().toISOString() }); fetch(LOG_ENDPOINT, { method: "POST", mode: "no-cors", body: lb }); } catch (e) {}
+            }
             if (payOk) {
-              document.getElementById("done-text").textContent = "Next, pay your 20% deposit on the secure payment page. Your request ID goes with the payment automatically.";
+              document.getElementById("done-text").textContent = "After you sign your agreement, you pay your 20% deposit on the secure payment page. Your request ID goes with the payment automatically.";
               link.setAttribute("href", payWithId(pay, reqId));
               link.hidden = false;
+              document.getElementById("done-pay-note").hidden = false;
             } else {
               document.getElementById("done-text").textContent = "Lucille will send you the deposit link. Questions? Call or text 346-400-4656.";
             }
