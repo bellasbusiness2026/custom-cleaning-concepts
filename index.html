@@ -1330,7 +1330,59 @@
     });
   });
 
+  // ===== Pinned "Pay deposit now" (phones only, after the request ID is shown) =====
+  var payPin = null, pinIO = null, pinUpdate = null;
+  var pinMQ = window.matchMedia ? window.matchMedia("(max-width: 640px)") : null;
+  function removePayPin() {
+    if (pinIO) { pinIO.disconnect(); pinIO = null; }
+    if (pinMQ && pinUpdate) { if (pinMQ.removeEventListener) pinMQ.removeEventListener("change", pinUpdate); else if (pinMQ.removeListener) pinMQ.removeListener(pinUpdate); }
+    pinUpdate = null;
+    if (payPin && payPin.parentNode) payPin.parentNode.removeChild(payPin);
+    payPin = null;
+    doneBox.classList.remove("has-pay-pin");
+  }
+  function setupPayPin(direct, rid, list) {
+    removePayPin();
+    if (!direct.length || !list || !("IntersectionObserver" in window)) return;
+    var btns = $$("a.btn", list);
+    if (!btns.length) return;
+    list.id = "pay-list";
+    payPin = el("div", "pay-pin"); payPin.id = "pay-pin"; payPin.setAttribute("aria-hidden", "true");
+    var a = el("a", "btn", "Pay deposit now"); a.id = "pay-pin-link";
+    if (direct.length === 1) {
+      a.href = payHref(items[direct[0]].pay, rid); a.rel = "noopener";
+      a.appendChild(el("span", "sr-only", " for " + items[direct[0]].label));
+    } else {
+      // More than one deposit: take them to their deposit buttons.
+      a.href = "#pay-list";
+      a.appendChild(el("span", "sr-only", ": go to your deposit buttons"));
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        list.scrollIntoView({ behavior: behavior, block: "center" });
+        setTimeout(function () { btns[0].focus({ preventScroll: true }); }, reduceMotion ? 0 : 450);
+      });
+    }
+    payPin.appendChild(a);
+    document.body.appendChild(payPin);
+    doneBox.classList.add("has-pay-pin");
+    var seen = btns.map(function () { return false; });
+    pinUpdate = function () {
+      var on = !!payPin && !doneBox.hidden && seen.indexOf(true) === -1 && (!pinMQ || pinMQ.matches);
+      if (!payPin) return;
+      payPin.classList.toggle("is-on", on);
+      payPin.setAttribute("aria-hidden", on ? "false" : "true");
+    };
+    // The bottom 88px are where the pinned bar sits, so a button under it doesn't count as visible.
+    pinIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { seen[btns.indexOf(en.target)] = en.isIntersecting; });
+      pinUpdate();
+    }, { rootMargin: "0px 0px -88px 0px", threshold: 0.6 });
+    btns.forEach(function (b) { pinIO.observe(b); });
+    if (pinMQ) { if (pinMQ.addEventListener) pinMQ.addEventListener("change", pinUpdate); else if (pinMQ.addListener) pinMQ.addListener(pinUpdate); }
+  }
+
   function showDone(ids, name, dateText, rid) {
+    removePayPin();
     doneBox.innerHTML = "";
     var check = el("p", "big-check", "\u2713"); check.setAttribute("aria-hidden", "true");
     doneBox.appendChild(check);
@@ -1390,6 +1442,7 @@
       box.appendChild(list);
       doneBox.appendChild(box);
     }
+    var payListForPin = direct.length ? list : null;
     var vbox = el("div", "pay-now venmo-now");
     vbox.appendChild(el("h4", "", "Prefer to pay with Venmo?"));
     vbox.appendChild(el("p", "hint", "Pay after Lucille sends your quote or booking confirmation, because the deposit amount comes from it. Put your request ID (" + rid + ") and your name or quote number in the Venmo note."));
@@ -1407,10 +1460,11 @@
     cbox.appendChild(el("p", "hint", "Paid but can\u2019t get through? Call or text " + PHONE + " or email " + EMAIL + " with your request ID."));
     doneBox.appendChild(cbox);
     var again = el("button", "btn-secondary", "Send another request"); again.type = "button";
-    again.addEventListener("click", function () { doneBox.hidden = true; form.hidden = false; scrollToEl($("#services")); });
+    again.addEventListener("click", function () { removePayPin(); doneBox.hidden = true; form.hidden = false; scrollToEl($("#services")); });
     doneBox.appendChild(again);
     doneBox.hidden = false;
     form.hidden = true;
+    setupPayPin(direct, rid, payListForPin);
     scrollToEl(doneBox, doneBox);
     say("Your request was sent.");
   }
