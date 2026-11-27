@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Quote sheet from a request — Custom Cleaning Concepts</title>
+  <meta name="theme-color" content="#14362c">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .qs-table { width: 100%; border-collapse: collapse; margin: 0.4rem 0 1rem; font-size: 0.95rem; }
+    .qs-table th, .qs-table td { text-align: left; vertical-align: top; padding: 0.5rem 0.45rem; border-bottom: 1px solid var(--line); }
+    .qs-table th { color: var(--ink-soft); font-weight: 600; }
+    .qs-table td.num { white-space: nowrap; }
+    .qs-block { margin: 1.2rem 0; padding: 1rem 1rem 0.4rem; background: #fff; border: 1px solid var(--line-strong); border-radius: var(--radius); }
+    .qs-block h2 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+    .qs-copy { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 0.8rem; }
+    .qs-copy button { min-height: 44px; }
+    .qs-k { width: 38%; color: var(--ink-soft); }
+    @media print { .qs-copy, .site-header, .skip { display: none; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html">
+        <span class="wordmark-text"><span class="wordmark-name">Custom Cleaning Concepts</span><span class="wordmark-area">Quote sheet helper</span></span>
+      </a>
+    </div>
+  </header>
+  <main id="main">
+    <div class="page-narrow">
+      <h1 id="qs-h">Quote sheet from a request</h1>
+      <p class="lede" id="qs-lede">Everything the client typed, laid out like your Client Quote Sheet. Nothing here is sent or saved anywhere: the details come from the link itself.</p>
+      <noscript><p class="form-alert">This page needs JavaScript to read the request from the link.</p></noscript>
+      <p class="form-empty" id="qs-empty" hidden>No request details in this link. Open this page from the &ldquo;Open the quote sheet&rdquo; link in a booking request email.</p>
+
+      <div id="qs-body" hidden>
+        <section class="qs-block" aria-labelledby="qs-client-h">
+          <h2 id="qs-client-h">Client &amp; property information</h2>
+          <table class="qs-table"><tbody id="qs-client"></tbody></table>
+          <p class="qs-copy"><button type="button" class="btn-secondary" data-copy="client">Copy client details</button></p>
+        </section>
+        <section class="qs-block" aria-labelledby="qs-lines-h">
+          <h2 id="qs-lines-h">Service lines</h2>
+          <p class="hint">Column A of your quote tab takes the code, column E the quantity. Your formulas fill in the rest. Quantities start at the code&rsquo;s default; check the client&rsquo;s sizes below.</p>
+          <div style="overflow-x:auto"><table class="qs-table">
+            <thead><tr><th scope="col">Service Code</th><th scope="col">Service Description</th><th scope="col">Billing Unit</th><th scope="col">Unit Rate</th><th scope="col">Quantity</th></tr></thead>
+            <tbody id="qs-lines"></tbody>
+          </table></div>
+          <p class="qs-copy">
+            <button type="button" class="btn-secondary" data-copy="codes">Copy codes (column A)</button>
+            <button type="button" class="btn-secondary" data-copy="qty">Copy quantities (column E)</button>
+          </p>
+        </section>
+        <section class="qs-block" aria-labelledby="qs-more-h">
+          <h2 id="qs-more-h">From the request</h2>
+          <table class="qs-table"><tbody id="qs-more"></tbody></table>
+          <p class="qs-copy"><button type="button" class="btn-secondary" data-copy="all">Copy everything</button> <button type="button" class="btn-secondary" id="qs-print">Print</button></p>
+        </section>
+        <p class="hint" id="qs-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var CAT = {"CO-ITEM":{"d":"Cleanout: Single Item Pickup (Mattress, Couch, Appliance)","u":"Per Item","r":100.0,"q":1},"CO-QTR":{"d":"Cleanout: Quarter Truck/Trailer Load","u":"Per Load","r":195.0,"q":1},"CO-HALF":{"d":"Cleanout: Half Truck/Trailer Load","u":"Per Load","r":315.0,"q":1},"CO-FULL":{"d":"Cleanout: Full Truck/Trailer Load","u":"Per Load","r":525.0,"q":1},"CO-SORT":{"d":"White-Glove Estate & Valuables Sorting","u":"Per Hour","r":65.0,"q":1},"CO-DUMP":{"d":"Landfill / Dump Fee Pass-Through (+10% Admin)","u":"Receipt + 10%","r":0.0,"q":1},"MR-SQFT":{"d":"Make-Ready Deep Clean (Vacant Property)","u":"Per Sq Ft","r":0.24,"q":1500},"MR-APPL":{"d":"Extra Appliance Deep Clean (Freezer / Wine Fridge)","u":"Per Appliance","r":45.0,"q":1},"MR-SURC":{"d":"Heavy / Excessive Condition Surcharge","u":"Flat Fee","r":150.0,"q":1},"HZ-HAND":{"d":"Hazard CCC Can Safely Handle","u":"Per Hazard","r":150.0,"q":1},"AB-1BR":{"d":"Airbnb / STR Turnover (1 Bed / 1 Bath)","u":"Flat Turn","r":95.0,"q":1},"AB-2BR":{"d":"Airbnb / STR Turnover (2 Bed / 2 Bath)","u":"Flat Turn","r":130.0,"q":1},"AB-3BR":{"d":"Airbnb / STR Turnover (3+ Bed / 2+ Bath)","u":"Flat Turn","r":170.0,"q":1},"AB-LIN":{"d":"Off-Site Linen Laundering Service","u":"Per Turn","r":25.0,"q":1},"CM-OFF":{"d":"After-Hours Commercial: Boutique Office / Salon (Monthly)","u":"Per Month","r":500.0,"q":1},"CM-MED":{"d":"After-Hours Commercial: Medical Spa / Clinic (Monthly)","u":"Per Month","r":900.0,"q":1},"HM-REP":{"d":"Handyman Patch, Trim & Fixture Repair","u":"Per Hour","r":70.0,"q":1},"PT-WALL":{"d":"Fresh Interior Wall Painting","u":"Per Wall Sq Ft","r":0.3,"q":500},"LN-BASE":{"d":"Lawn Care: Base Mowing, Edging & Blow-Off","u":"Flat Visit","r":45.0,"q":1},"LN-OVER":{"d":"Lawn Care: Overgrowth / Large Yard Trim","u":"Per Lawn Sq Ft","r":0.03,"q":1000},"PW-FLAT":{"d":"Power Washing: Driveways, Patios & Walks (Concrete)","u":"Per Sq Ft","r":0.22,"q":681.8182},"PW-HOUSE":{"d":"Power Washing: House Exterior Wash (1-2 Story, up to 3,000 Sq Ft)","u":"Per House","r":425.0,"q":1}};
+      var raw = (location.hash || "").replace(/^#/, "");
+      var p = new URLSearchParams(raw);
+      if (!raw || !p.get("Name")) { document.getElementById("qs-empty").hidden = false; return; }
+      function g(k) { return (p.get(k) || "").trim(); }
+      function cell(tr, text, cls) { var td = document.createElement("td"); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; }
+      function row(tbody, k, v) {
+        var tr = document.createElement("tr"); var th = document.createElement("th"); th.scope = "row"; th.className = "qs-k"; th.textContent = k; tr.appendChild(th); cell(tr, v); tbody.appendChild(tr);
+      }
+      var id = g("Request ID");
+      if (id) { document.getElementById("qs-h").textContent = "Quote sheet: " + id; document.title = "Quote sheet " + id + " — Custom Cleaning Concepts"; }
+      var addr = g("Address"), city = g("City");
+      var full = addr ? (city && addr.toLowerCase().indexOf(city.toLowerCase()) < 0 ? addr + ", " + city : addr) : city;
+      var phone = g("Phone"), email = g("Email");
+      var date = g("Requested date");
+      var client = [
+        ["Client name", g("Name")],
+        ["Property address", full || "Not given"],
+        ["Phone / email", (phone && email) ? phone + " / " + email : (phone || email || "Not given")],
+        ["Target service date", date ? date + (g("Time window") ? " (" + g("Time window") + ")" : "") + " (requested, not yet confirmed)" : "Not asked (book-directly job: client picks on the calendar)"],
+        ["Request ID", id || "None"],
+        ["Request type", g("Request type") || ""]
+      ];
+      var tb = document.getElementById("qs-client");
+      client.forEach(function (c) { row(tb, c[0], c[1]); });
+      var lines = [];
+      for (var n = 1; n <= 40; n++) {
+        var code = g("Service " + n + " code"), name = g("Service " + n + " name");
+        if (!code && !name) continue;
+        var c = CAT[code] || null;
+        lines.push({ code: code || "(no code)", d: c ? c.d : name, u: c ? c.u : "", r: c ? (typeof c.r === "number" ? "$" + c.r.toFixed(2) : String(c.r)) : "", q: c ? String(c.q) : "1", site: name });
+      }
+      var lb = document.getElementById("qs-lines");
+      lines.forEach(function (l) {
+        var tr = document.createElement("tr");
+        cell(tr, l.code); cell(tr, l.d + (l.site && l.site !== l.d ? " (site: " + l.site + ")" : "")); cell(tr, l.u); cell(tr, l.r, "num"); cell(tr, l.q, "num");
+        lb.appendChild(tr);
+      });
+      var skip = { "Name": 1, "Phone": 1, "Email": 1, "Address": 1, "City": 1, "Requested date": 1, "Requested date (YYYY-MM-DD)": 1, "Time window": 1, "Request ID": 1, "Request type": 1 };
+      var more = [];
+      p.forEach(function (v, k) { if (!skip[k] && !/^Service \d+ (code|name)$/.test(k) && v.trim()) more.push([k, v.trim()]); });
+      var mb = document.getElementById("qs-more");
+      if (!more.length) row(mb, "Notes", "Nothing else was filled in.");
+      more.forEach(function (m) { row(mb, m[0], m[1]); });
+      document.getElementById("qs-body").hidden = false;
+
+      var texts = {
+        client: client.map(function (c) { return c[0] + "\t" + c[1]; }).join("\n"),
+        codes: lines.map(function (l) { return l.code; }).join("\n"),
+        qty: lines.map(function (l) { return l.q; }).join("\n")
+      };
+      texts.all = texts.client + "\n\nService lines:\n" + lines.map(function (l) { return l.code + "\t" + l.d + "\t" + l.q; }).join("\n") + "\n\nFrom the request:\n" + more.map(function (m) { return m[0] + ": " + m[1]; }).join("\n");
+      var status = document.getElementById("qs-status");
+      document.querySelectorAll("[data-copy]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var t = texts[b.getAttribute("data-copy")];
+          var ok = function () { status.textContent = "Copied. Tap the first cell in your quote tab and paste."; };
+          var no = function () { status.textContent = "Couldn\u2019t copy automatically. Press and hold the text above to copy it."; };
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, no); else no();
+        });
+      });
+      document.getElementById("qs-print").addEventListener("click", function () { window.print(); });
+    })();
+  </script>
+</body>
+</html>
