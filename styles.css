@@ -1241,8 +1241,8 @@ fieldset { min-width: 0; }
 /* ===== Signing page: service agreement + waiver (contract.html) ===== */
 .contract-doc { margin: 1.5rem 0; padding: 1rem 1.1rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); }
 .c-doc-title { font-weight: 600; color: var(--ink); margin-top: 0; }
-.c-form h2 { font-size: 1.25rem; margin: 1.5rem 0 0.4rem; }
-.c-form h3 { font-size: 1.05rem; margin: 1.1rem 0 0.35rem; }
+.c-form h2 { font-size: 1.45rem; margin: 1.5rem 0 0.4rem; }
+.c-form h3 { font-size: 1.25rem; margin: 1.1rem 0 0.35rem; }
 .c-form h4 { font-size: 1rem; margin: 0.9rem 0 0.3rem; }
 .c-form p, .c-form li { color: var(--ink); }
 .c-table { width: 100%; border-collapse: collapse; margin: 0.6rem 0 1rem; font-size: 0.95rem; }
@@ -1265,3 +1265,57 @@ fieldset { min-width: 0; }
   .contract-page .contract-doc { max-height: none; overflow: visible; border: 0; padding: 0; }
   .contract-page .c-form[hidden] { display: none !important; }
 }
+
+/* ===== Design pass 2 (Nov 27) ===== */
+:root { --field-line: #857c6e; }   /* form field borders: 3.4:1 or better on white, paper, cream and sage */
+.field input:not([type="checkbox"]):not([type="radio"]),
+.field select, .field textarea, .add-more-row select, .req-id-input { border-color: var(--field-line); }
+.field input:focus, .field select:focus, .field textarea:focus, .add-more-row select:focus { border-color: var(--focus); }
+
+/* Phone and email links: 44px tap targets */
+.header-phone { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.25rem; }
+.footer-contact a { display: inline-flex; align-items: center; min-height: 44px; }
+.lifeline-links a, .form-note a, .next-box a, .faq-a a[href^="tel:"], .faq-a a[href^="mailto:"] { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* "Call or text if the form fails": only after a failed send. Without JS it always shows. */
+.js .form-lifeline:not(.is-on) { display: none; }
+
+/* Hero: two paths */
+.hero-paths { display: grid; gap: 0.8rem; margin: 1.1rem 0 0.9rem; }
+.hero-path { padding: 1rem 1.05rem 1.1rem; background: #fff; border: 1px solid var(--line-strong); border-radius: var(--radius); }
+.hero-path:first-child { border: 2px solid var(--pine); }
+.hero-path-h { margin: 0 0 0.3rem; font-size: 1.15rem; line-height: 1.25; }
+.hero-path p { margin: 0 0 0.8rem; color: var(--ink-soft); font-size: 0.96rem; }
+.hero-path .btn, .hero-path .btn-secondary { width: 100%; min-height: 3rem; justify-content: center; text-align: center; }
+@media (min-width: 720px) {
+  .hero-paths { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .hero-path { display: flex; flex-direction: column; }
+  .hero-path p { flex: 1 1 auto; }
+  .hero-path .btn, .hero-path .btn-secondary { width: auto; align-self: flex-start; }
+}
+
+/* Service rows: the deposit shows on bookable rows; walkthrough rows say so */
+.rate { grid-template-areas: "name btn" "price btn" "unit btn" "dep btn"; }
+.rate-dep { grid-area: dep; font-size: 0.86rem; font-weight: 700; color: var(--pine-deep); }
+.tag-walk { background: var(--cream); color: var(--clay-deep); border-color: var(--line-strong); }
+body[data-path="simple"] .rate[data-direct] .rate-name, body[data-path="walk"] .rate[data-id]:not([data-direct]) .rate-name { text-decoration: underline; text-decoration-color: var(--pine); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+/* After the deposit: the calendar step */
+.cal-step { margin: 1.2rem 0; padding: 1.1rem 1.1rem 0.6rem; border: 2px solid var(--pine); border-radius: var(--radius); background: var(--sage); }
+.cal-step .btn-big { width: 100%; justify-content: center; text-align: center; }
+.checks-note { margin: 0.6rem 0 0.5rem; font-size: 0.95rem; color: var(--ink); }
+
+/* Review form states */
+.review-status.is-ok { background: var(--sage); border-color: var(--pine); color: var(--pine-deep); }
+.review-status.is-error { background: #fbeeee; border-color: var(--error); color: var(--error); }
+.reviews-empty { padding: 0.9rem 1rem; border: 1px dashed var(--line-strong); border-radius: 10px; background: var(--cream); color: var(--ink-soft); }
+.rate.rate-info { grid-template-areas: "name price" "unit price"; }
+.c-counter { font-style: italic; color: var(--ink-soft); }
+.sel-dep { display: block; font-size: 0.875rem; font-weight: 700; color: var(--pine-deep); }
+/* Content never waits on the scroll script: sections stay visible, only a light rise when they arrive */
+.js .reveal { opacity: 1; transform: translateY(10px); }
+.js .reveal.in { transform: none; }
+/* Small text: nothing under 14px */
+.hint, .small-print, .form-note, .tag, .rate-unit, .cal-key, .sel-price, .wordmark-area, .footer-terms, .req-id-label { font-size: max(0.875rem, 1em * 0.875); }
+.tag { font-size: 0.875rem; }
+.group-label, .rate-dep, .cal-table abbr, .svc-from small { font-size: 0.875rem; }
