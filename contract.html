@@ -261,7 +261,7 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
           <p class="req-id-label">Your request ID</p>
           <p class="req-id" id="done-id-val"></p>
           <button type="button" class="btn-secondary" id="done-id-copy">Copy ID</button>
-          <p class="hint">Save this ID and a copy of your signed agreement. Print it, save it as a PDF, or download it below. On the secure payment page, paste this ID into the Request ID field.</p>
+          <p class="hint">Save this ID and a copy of your signed agreement. Print it, save it as a PDF, or download it below. Your request ID goes with a card payment automatically.</p>
         </div>
         <p class="c-copy-row">
           <button type="button" class="btn-secondary" id="print-copy">Print or save as PDF</button>
@@ -275,7 +275,7 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
             <span class="pay-id-val" id="done-pay-id"></span>
             <button type="button" class="btn-secondary pay-id-copy" id="done-pay-copy">Copy ID</button>
           </div>
-          <p class="hint">On the next page, paste this request ID into the Request ID field.</p>
+          <p class="hint">Your request ID goes with this payment automatically.</p>
         </div>
         <div class="pay-now venmo-now" id="done-venmo" hidden>
           <p><strong>Prefer to pay with Venmo?</strong></p>
@@ -322,17 +322,14 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
       var amtN = num((params.get("amt") || "").trim());
       var depN = num((params.get("dep") || "").trim());
       var rateN = num((params.get("rate") || "").trim());
+      var PAY_PREFIX = "https://buy.stripe.com/";
       function validPay(u) {
-        try {
-          var x = new URL(u);
-          if (x.protocol !== "https:" || x.username || x.password) { return false; }
-          if (x.host === "square.link") { return /^\/u\/[A-Za-z0-9]+\/?$/.test(x.pathname); }
-          if (x.host === "checkout.square.site") { return /^\/merchant\/[A-Za-z0-9]+\/order\/[A-Za-z0-9]+\/?$/.test(x.pathname); }
-          return false;
-        } catch (e) { return false; }
+        if (u.indexOf(PAY_PREFIX) !== 0) { return false; }
+        try { var x = new URL(u); return x.protocol === "https:" && x.host === "buy.stripe.com" && !x.username && !x.password; }
+        catch (e) { return false; }
       }
       var payOk = validPay(pay);
-      function payHref(u) { return u; }
+      function payHref(u) { try { var x = new URL(u); if (reqId) { x.searchParams.set("client_reference_id", reqId); } return x.toString(); } catch (e) { return u; } }
       function copyRequestId(btn, id) {
         var done = function () { btn.textContent = "Copied"; };
         var manual = function () {
@@ -489,7 +486,7 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
             dl.setAttribute("download", "CCC-signed-agreement-" + reqId + ".html");
             var box = $("done-box"); box.hidden = false;
             if (payOk) {
-              $("done-text").textContent = "Next, pay your 20% deposit on the secure payment page. Paste your request ID into the Request ID field there. Right after you pay, you pick your date on Lucille\u2019s calendar. Your date is held once Lucille confirms receipt of your deposit.";
+              $("done-text").textContent = "Next, pay your 20% deposit on the secure payment page. Your request ID goes with the payment automatically. Right after you pay, you pick your date on Lucille\u2019s calendar. Your date is held once Lucille confirms receipt of your deposit.";
               $("done-pay").setAttribute("href", payHref(pay));
               $("done-pay").hidden = false;
               $("done-pay-wrap").hidden = false;

@@ -84,7 +84,7 @@
           <p class="req-id-label">Your request ID</p>
           <p class="req-id" id="done-id-val"></p>
           <button type="button" class="btn-secondary" id="done-id-copy">Copy ID</button>
-          <p class="hint">Save this ID (take a screenshot). On the secure payment page, paste this ID into the Request ID field. With Venmo, type it in the note. Right after you pay, you pick your date on Lucille&rsquo;s calendar. Your date is held once Lucille confirms receipt of your deposit.</p>
+          <p class="hint">Save this ID (take a screenshot). Your request ID goes with a card payment automatically. With Venmo, type it in the note. Right after you pay, you pick your date on Lucille&rsquo;s calendar. Your date is held once Lucille confirms receipt of your deposit.</p>
         </div>
         <p id="done-contract-text">Next, sign your service agreement and the client waiver. It takes a few minutes, and you get a copy to keep.</p>
         <p><a class="btn btn-big" id="done-contract" href="contract.html">Sign your service agreement</a></p>
@@ -96,7 +96,7 @@
             <span class="pay-id-val" id="done-pay-id"></span>
             <button type="button" class="btn-secondary pay-id-copy" id="done-pay-copy">Copy ID</button>
           </div>
-          <p class="hint">On the next page, paste this request ID into the Request ID field.</p>
+          <p class="hint">Your request ID goes with this payment automatically.</p>
         </div>
         <div class="pay-now venmo-now" id="done-venmo" hidden>
           <p><strong>Prefer to pay with Venmo?</strong></p>
@@ -206,20 +206,17 @@
       var amt = money(amtRaw);
       var dep = money(depRaw);
 
+      var PAY_PREFIX = "https://buy.stripe.com/";
       function validPay(u) {
-        try {
-          var x = new URL(u);
-          if (x.protocol !== "https:" || x.username || x.password) { return false; }
-          if (x.host === "square.link") { return /^\/u\/[A-Za-z0-9]+\/?$/.test(x.pathname); }
-          if (x.host === "checkout.square.site") { return /^\/merchant\/[A-Za-z0-9]+\/order\/[A-Za-z0-9]+\/?$/.test(x.pathname); }
-          return false;
-        } catch (e) { return false; }
+        if (u.indexOf(PAY_PREFIX) !== 0) { return false; }
+        try { var x = new URL(u); return x.protocol === "https:" && x.host === "buy.stripe.com" && !x.username && !x.password; }
+        catch (e) { return false; }
       }
       var payOk = validPay(pay);
       // Request ID for a signed quote = the quote number (letters, numbers, dashes).
       var REQ_KEY = "ccc-request-id";
       var reqId = q.replace(/[^A-Za-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
-      function payHref(u) { return u; }
+      function payHref(u) { try { var x = new URL(u); if (reqId) { x.searchParams.set("client_reference_id", reqId); } return x.toString(); } catch (e) { return u; } }
       function copyRequestId(btn, id) {
         var done = function () { btn.textContent = "Copied"; };
         var manual = function () {
@@ -307,7 +304,7 @@
               try { var lb = new URLSearchParams({ type: "quote_signed", request_id: reqId, quote: q, name: name, total: amt, deposit: dep, at: new Date().toISOString() }); fetch(LOG_ENDPOINT, { method: "POST", mode: "no-cors", body: lb }); } catch (e) {}
             }
             if (payOk) {
-              document.getElementById("done-text").textContent = "After you sign your agreement, you pay your 20% deposit on the secure payment page. Paste your request ID into the Request ID field there.";
+              document.getElementById("done-text").textContent = "After you sign your agreement, you pay your 20% deposit on the secure payment page. Your request ID goes with the payment automatically.";
               link.setAttribute("href", payHref(pay));
               link.hidden = false;
               document.getElementById("done-pay-note").hidden = false;
