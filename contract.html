@@ -260,14 +260,29 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
         <div class="req-id-box">
           <p class="req-id-label">Your request ID</p>
           <p class="req-id" id="done-id-val"></p>
-          <p class="hint">Save this ID and a copy of your signed agreement. Print it, save it as a PDF, or download it below.</p>
+          <button type="button" class="btn-secondary" id="done-id-copy">Copy ID</button>
+          <p class="hint">Save this ID and a copy of your signed agreement. Print it, save it as a PDF, or download it below. On the secure payment page, paste this ID into the Request ID field.</p>
         </div>
         <p class="c-copy-row">
           <button type="button" class="btn-secondary" id="print-copy">Print or save as PDF</button>
           <a class="btn-secondary" id="download-copy" href="#" download>Download a copy</a>
         </p>
         <p id="done-text"></p>
-        <p><a class="btn btn-big" id="done-pay" href="#" hidden>Continue to deposit payment</a></p>
+        <div class="pay-actions" id="done-pay-wrap" hidden>
+          <a class="btn btn-big" id="done-pay" href="#">Continue to deposit payment</a>
+          <div class="pay-id-row">
+            <span class="pay-id-label">Your request ID</span>
+            <span class="pay-id-val" id="done-pay-id"></span>
+            <button type="button" class="btn-secondary pay-id-copy" id="done-pay-copy">Copy ID</button>
+          </div>
+          <p class="hint">On the next page, paste this request ID into the Request ID field.</p>
+        </div>
+        <div class="pay-now venmo-now" id="done-venmo" hidden>
+          <p><strong>Prefer to pay with Venmo?</strong></p>
+          <p class="hint" id="done-venmo-hint"></p>
+          <p><a class="btn-secondary" id="done-venmo-btn" href="https://www.venmo.com/u/ccc_htxowner_lucy" target="_blank" rel="noopener noreferrer">Pay deposit with Venmo<span class="sr-only"> (opens in a new tab)</span></a></p>
+          <p class="hint">Venmo Business: @ccc_htxowner_lucy</p>
+        </div>
         <p class="hint" id="done-help">Paid already? <a id="done-confirm" href="deposit-received.html">Pick your date</a>, or call or text <a href="tel:+13464004656">346-400-4656</a>.</p>
       </div>
     </div>
@@ -292,7 +307,6 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
       var SIGN_ENDPOINT = "https://formspree.io/f/moedjzqr";
       // Optional request log (Google Apps Script web app). Empty = off. See booking/request-log/DEPLOY.md.
       var LOG_ENDPOINT = "";
-      var PAY_PREFIX = "https://buy.stripe.com/";
       var DOC_VERSION = "CCC Service Contracts & Liability Release Forms (Drive doc, version of Nov 17, 2026)";
       var REQ_KEY = "ccc-request-id";
 
@@ -309,14 +323,30 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
       var depN = num((params.get("dep") || "").trim());
       var rateN = num((params.get("rate") || "").trim());
       function validPay(u) {
-        if (u.indexOf(PAY_PREFIX) !== 0) { return false; }
-        try { var x = new URL(u); return x.protocol === "https:" && x.host === "buy.stripe.com" && !x.username && !x.password; }
-        catch (e) { return false; }
+        try {
+          var x = new URL(u);
+          if (x.protocol !== "https:" || x.username || x.password) { return false; }
+          if (x.host === "square.link") { return /^\/u\/[A-Za-z0-9]+\/?$/.test(x.pathname); }
+          if (x.host === "checkout.square.site") { return /^\/merchant\/[A-Za-z0-9]+\/order\/[A-Za-z0-9]+\/?$/.test(x.pathname); }
+          return false;
+        } catch (e) { return false; }
       }
       var payOk = validPay(pay);
-      function payWithId(u, id) {
-        try { var x = new URL(u); if (id) { x.searchParams.set("client_reference_id", id); } return x.toString(); }
-        catch (e) { return u; }
+      function payHref(u) { return u; }
+      function copyRequestId(btn, id) {
+        var done = function () { btn.textContent = "Copied"; };
+        var manual = function () {
+          var ok = false;
+          try {
+            var ta = document.createElement("textarea"); ta.value = id; ta.setAttribute("readonly", "");
+            ta.style.position = "fixed"; ta.style.left = "-9999px"; document.body.appendChild(ta); ta.select();
+            ok = document.execCommand("copy"); document.body.removeChild(ta);
+          } catch (e) {}
+          if (ok) { done(); return; }
+          btn.textContent = "Press and hold the ID to copy it";
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(id).then(done, manual);
+        else manual();
       }
       function $(id) { return document.getElementById(id); }
 
@@ -459,12 +489,20 @@ Walkthrough. A video walkthrough is free. In person, a mileage fee may apply dep
             dl.setAttribute("download", "CCC-signed-agreement-" + reqId + ".html");
             var box = $("done-box"); box.hidden = false;
             if (payOk) {
-              $("done-text").textContent = "Next, pay your 20% deposit on the secure payment page. Your request ID goes with the payment automatically. Right after you pay, you pick your date on Lucille\u2019s calendar. Your date is held once Lucille confirms receipt of your deposit.";
-              $("done-pay").setAttribute("href", payWithId(pay, reqId));
+              $("done-text").textContent = "Next, pay your 20% deposit on the secure payment page. Paste your request ID into the Request ID field there. Right after you pay, you pick your date on Lucille\u2019s calendar. Your date is held once Lucille confirms receipt of your deposit.";
+              $("done-pay").setAttribute("href", payHref(pay));
               $("done-pay").hidden = false;
+              $("done-pay-wrap").hidden = false;
+              $("done-pay-id").textContent = reqId;
             } else {
-              $("done-text").textContent = "Lucille will send you the deposit link. Questions? Call or text 346-400-4656.";
+              $("done-text").textContent = "Lucille will text you your deposit link.";
             }
+            $("done-venmo").hidden = false;
+            $("done-venmo-hint").textContent = "Put your request ID (" + reqId + ") in the Venmo note.";
+            ["done-id-copy", "done-pay-copy"].forEach(function (cid) {
+              var b = $(cid);
+              if (b) { b.addEventListener("click", function () { copyRequestId(b, reqId); }); }
+            });
             box.scrollIntoView();
           })
           .catch(function () {
